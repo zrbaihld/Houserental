@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!--view_top_bar-->
+    <dimen name="view_top_bar_title">20sp</dimen>
+    <dimen name="view_top_bar_right">18sp</dimen>
+    <!-- 自定义控件TextView的dimens -->
+    <dimen name="mtv_rl_height">118.2605px</dimen>
+    <dimen name="mtv_iv_wight">114.3333px</dimen>
+    <dimen name="mtv_stv_wight">534px</dimen>
+    <dimen name="mtv_stv_height">54px</dimen>
+    <dimen name="mtv_tv_to_left">45px</dimen>
+</resources>

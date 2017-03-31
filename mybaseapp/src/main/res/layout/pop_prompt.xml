@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pop_all_ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+ >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pop_prompt_title"
+            android:layout_width="match_parent"
+            android:layout_height="101px"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textColor="#222222"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:id="@+id/pop_top_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            >
+
+            <TextView
+                android:id="@+id/pop_prompt_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/pop_prompt_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/pop_prompt_confirm"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/textColor"
+                android:textSize="14sp"  />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/view_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/null_data"
+        android:scaleType="center"
+        android:visibility="gone" />
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/view_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+</com.zhy.autolayout.AutoLinearLayout>
