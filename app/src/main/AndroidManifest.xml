@@ -3,19 +3,83 @@
           package="com.zrb.houserental">
 
     <application
+        android:name="com.zrb.baseapp.base.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name="com.zrb.baseapp.base.App"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
+        </activity>
+        <activity android:name=".activity.SplashActivity">
+        </activity>
+        <activity
+            android:name=".activity.SettingActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
+        <activity
+            android:name=".activity.TenantQueryActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.ResultTenantQueryActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.TenantDetailActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.RoomQuertActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.ResultRoomQuertActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.ExpireQuertActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.ResultExpireQuertActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
+        <activity
+            android:name=".activity.TenantStartRentActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.TenantContinueRentActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.TenantStopRentActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
+        <activity
+            android:name=".activity.AddTenantActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.ChangeTenantMoneyActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.ShotMessageQuertActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
     </application>
 </manifest>

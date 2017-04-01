@@ -1,13 +1,41 @@
 <resources>
 
     <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+
+    <!--</style>-->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+
         <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- 状态栏颜色 -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <!--按钮选中或者点击获得焦点后的颜色-->
         <item name="colorAccent">@color/colorAccent</item>
 
+        <!--控制searchView的icon颜色的设置-->
+        <item name="colorControlNormal">#FB8C00</item>
+        <!--Button按钮正常状态颜色-->
+        <item name="colorButtonNormal">#43A047</item>
+        <!--EditText 输入框中字体的颜色-->
+        <item name="editTextColor">@android:color/white</item>
+        <!-- 窗口的背景颜色 -->
+        <item name="android:windowBackground">@android:color/white</item>
+        <!--导航栏上的标题颜色-->
+        <item name="android:textColorPrimary">#000</item>
+
+        <!--<item name="android:listDivider">#757575</item>-->
+
+        <!--<item name="textAppearanceLargePopupMenu">#00E676</item>-->
+        <!--<item name="textAppearanceSmallPopupMenu">@style/splashPopUpMenuStyle</item>-->
+
     </style>
+
+
     <!-- Base application theme. -->
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
