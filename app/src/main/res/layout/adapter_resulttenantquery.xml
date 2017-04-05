@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/adapter_resulttenantquery_ll"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/adapter_resulttenantquery_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="房客:周桐同"
+        android:textColor="#000"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/adapter_resulttenantquery_phone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="手机号码:15659810000"
+        android:textColor="#000"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/adapter_resulttenantquery_state"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:text="状态:以退房"
+        android:textColor="#000"
+        android:textSize="16sp"
+        />
+
+    <View
+        style="@style/line_1px"></View>
+</LinearLayout>

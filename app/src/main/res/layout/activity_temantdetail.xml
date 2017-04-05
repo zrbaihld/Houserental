@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/activity_tenantdetail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="name"
+                android:textColor="#000"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/activity_tenantdetail_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="30dp"
+                android:text="name"
+                android:textColor="#000"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_state"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_idcare"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_phone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_floor"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_room"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_permitday"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_startday"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+        <TextView
+            android:id="@+id/activity_tenantdetail_stopday"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="16sp"/>
+
+        <View style="@style/line_1px"></View>
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/activity_roomquert_confirm"
+            style="@style/myButton"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="24dp"
+            android:text="查询"/>
+    </LinearLayout>
+</ScrollView>

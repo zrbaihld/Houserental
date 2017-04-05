@@ -17,6 +17,10 @@
             android:name=".activity.SettingActivity"
             android:windowSoftInputMode="stateHidden">
         </activity>
+        <activity
+            android:name=".activity.ChangePassWordActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
 
         <activity
             android:name=".activity.TenantQueryActivity"
