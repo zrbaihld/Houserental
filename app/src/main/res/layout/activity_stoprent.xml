@@ -26,9 +26,9 @@
 
         <TextView
             android:id="@+id/activity_stoprent_floor_tv"
+            style="@style/myRentDetail"
             android:layout_toLeftOf="@+id/next"
             android:text="请选择楼号"
-            style="@style/myRentDetail"
             />
     </RelativeLayout>
 
@@ -55,9 +55,9 @@
 
         <TextView
             android:id="@+id/activity_stoprent_room_tv"
+            style="@style/myRentDetail"
             android:layout_toLeftOf="@+id/next"
             android:text="请选择房号"
-            style="@style/myRentDetail"
             />
     </RelativeLayout>
 
@@ -75,10 +75,10 @@
 
         <TextView
             android:id="@+id/activity_stoprent_name_tv"
+            style="@style/myRentDetail"
             android:layout_alignParentRight="true"
-            android:text="张冬冬"
             android:paddingRight="20dp"
-             style="@style/myRentDetail"
+            android:text="张冬冬"
             />
     </RelativeLayout>
 
@@ -112,10 +112,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_no_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:text="20111500"
                     android:paddingRight="20dp"
-                     style="@style/myRentDetail"
+                    android:text="20111500"
                     />
             </RelativeLayout>
 
@@ -134,10 +134,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_deposit_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:text="100"
                     android:paddingRight="20dp"
-                     style="@style/myRentDetail"
+                    android:text="100"
                     />
             </RelativeLayout>
 
@@ -156,10 +156,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_unit_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
                     android:text="100"
-                     style="@style/myRentDetail"
                     />
             </RelativeLayout>
 
@@ -178,10 +178,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_water_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="水费费率"
-                     style="@style/myRentDetail"
+                    android:text="100"
                     />
             </RelativeLayout>
 
@@ -200,10 +200,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_power_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="电费费率"
-                     style="@style/myRentDetail"
+                    android:text="100"
                     />
             </RelativeLayout>
 
@@ -221,15 +221,14 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_startday_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="2015-15-10"
-                     style="@style/myRentDetail"
+                    android:text="2015年10月10日"
                     />
             </RelativeLayout>
 
             <View style="@style/line_1px"></View>
-
 
 
             <RelativeLayout
@@ -245,10 +244,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_endday_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
-                     style="@style/myRentDetail"
+                    android:text="2017年4月1日"
                     />
             </RelativeLayout>
 
@@ -267,10 +266,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_beforewater_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
-                     style="@style/myRentDetail"
+                    android:text="100"
                     />
             </RelativeLayout>
 
@@ -289,10 +288,10 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_beforewpower_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
-                     style="@style/myRentDetail"
+                    android:text="100"
                     />
             </RelativeLayout>
 
@@ -310,10 +309,11 @@
 
                 <EditText
                     android:id="@+id/activity_stoprent_nowwater_tv"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:inputType="number"
                     android:hint="请输入本月水表"
                     android:paddingRight="20dp"
-                     style="@style/myEditText"
                     />
             </RelativeLayout>
 
@@ -331,14 +331,16 @@
 
                 <EditText
                     android:id="@+id/activity_stoprent_nowpower_tv"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:inputType="number"
                     android:hint="请输入本月电表"
                     android:paddingRight="20dp"
-                     style="@style/myEditText"
                     />
             </RelativeLayout>
 
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
@@ -352,13 +354,15 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_userwater_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
                     android:text=""
-                    style="@style/myRentDetail"
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
@@ -372,13 +376,15 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_userpower_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
                     android:text=""
-                    style="@style/myRentDetail"
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
@@ -392,13 +398,15 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_waterprice_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
-                    style="@style/myRentDetail"
+                    android:text=""
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
@@ -412,13 +420,15 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_powerprice_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
-                    style="@style/myRentDetail"
+                    android:text=""
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 >
@@ -431,10 +441,11 @@
 
                 <EditText
                     android:id="@+id/activity_stoprent_otherin_tv"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
                     android:hint="其他应收"
+                    android:inputType="number"
                     android:paddingRight="20dp"
-                     style="@style/myEditText"
                     />
             </RelativeLayout>
 
@@ -452,12 +463,14 @@
 
                 <EditText
                     android:id="@+id/activity_stoprent_otherout_tv"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
                     android:hint="其他应付"
+                    android:inputType="number"
                     android:paddingRight="20dp"
-                     style="@style/myEditText"
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
 
             <RelativeLayout
@@ -470,17 +483,17 @@
                     android:text="超期天数:"
                     />
 
-
-                <EditText
+                <TextView
                     android:id="@+id/activity_stoprent_outtime_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:hint=""
                     android:paddingRight="20dp"
-                    style="@style/myEditText"
+                    android:text=""
                     />
             </RelativeLayout>
 
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
@@ -494,18 +507,20 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_needin_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
                     android:text=""
-                    style="@style/myRentDetail"
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
                 >
+
                 <TextView
                     style="@style/myRentTitle"
                     android:text="合计应收:"
@@ -513,37 +528,16 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_allneedin_tv"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
                     android:text=""
-                    style="@style/myRentDetail"
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
-
             <RelativeLayout
-                android:id="@+id/activity_stoprent_remark"
-                style="@style/myRelativeLayout"
-                >
-
-                <TextView
-                    android:text="备注:"
-                     style="@style/myRentTitle"
-                    />
-
-
-                <TextView
-                    android:id="@+id/activity_stoprent_remark_tv"
-                    android:layout_alignParentRight="true"
-                    android:paddingRight="20dp"
-                    android:text="退租"
-                     style="@style/myRentDetail"
-                    />
-            </RelativeLayout>
-            <View style="@style/line_1px"></View>
-
-            <RelativeLayout
-                android:id="@+id/activity_startrent_key"
+                android:background="#E0E0E0"
                 style="@style/myRelativeLayout">
 
 
@@ -551,16 +545,40 @@
                     style="@style/myRentTitle"
                     android:text="钥匙卡个数:"
                     />
-
-                <EditText
+                <TextView
                     android:id="@+id/activity_startrent_key_tv"
-                    style="@style/myEditText"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:hint="请输入钥匙卡个数"
                     android:paddingRight="20dp"
+                    android:text=""
                     />
             </RelativeLayout>
+
             <View style="@style/line_1px"></View>
+            <RelativeLayout
+                android:id="@+id/activity_stoprent_remark"
+                style="@style/myRelativeLayout"
+                >
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="备注:"
+                    />
+
+
+                <EditText
+                    android:id="@+id/activity_stoprent_remark_tv"
+                    style="@style/myEditText"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="20dp"
+                    android:text="退租"
+                    />
+            </RelativeLayout>
+
+            <View style="@style/line_1px"></View>
+
+
+
             <RelativeLayout
                 android:id="@+id/activity_stoprent_receverphone"
                 style="@style/myRelativeLayout"
@@ -582,13 +600,14 @@
 
                 <TextView
                     android:id="@+id/activity_stoprent_receverphone_tv"
+                    style="@style/myRentDetail"
                     android:layout_toLeftOf="@id/next"
                     android:text=""
-                    style="@style/myRentDetail"
                     />
             </RelativeLayout>
 
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 >
@@ -601,10 +620,11 @@
 
                 <EditText
                     android:id="@+id/activity_stoprent_otherphone_tv"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
                     android:hint="请输入其他手机"
+                    android:inputType="phone"
                     android:paddingRight="20dp"
-                    style="@style/myEditText"
                     />
             </RelativeLayout>
 

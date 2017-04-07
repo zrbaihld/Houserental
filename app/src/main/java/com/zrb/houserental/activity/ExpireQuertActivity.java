@@ -1,20 +1,15 @@
 package com.zrb.houserental.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
-import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
 import com.zrb.houserental.Entity.FloorEntity;
 import com.zrb.houserental.R;
-import com.zrb.houserental.dialog.SelectFloorDialog;
+import com.zrb.houserental.dialog.DialogUntil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +32,6 @@ public class ExpireQuertActivity extends BaseActivity {
     TextView activityRoomquertFloorTv;
 
     private List<FloorEntity> itemEntities;
-    private MyAdapter myAdapter;
-    private SelectFloorDialog selectFloorDialog;
 
     @Override
     public void init() {
@@ -47,7 +40,6 @@ public class ExpireQuertActivity extends BaseActivity {
         titleTV.setText("到期查询");
 
         itemEntities = new ArrayList<>();
-        myAdapter = new MyAdapter(itemEntities);
     }
 
     @Override
@@ -70,13 +62,15 @@ public class ExpireQuertActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.activity_roomquert_floor:
-                selectFloorDialog = new SelectFloorDialog(this, "选择楼号", new SelectFloorDialog.RecyclerViewInterface() {
+                for (int i = 0; i < 10; i++) {
+                    FloorEntity itemEntity = new FloorEntity();
+                    itemEntity.setName("测试数据" + i);
+                    itemEntities.add(itemEntity);
+                }
+                DialogUntil.getInstance().selectString(this, 0, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
-                    public void initRecycleView(XRecyclerView xRecyclerView) {
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(ExpireQuertActivity.this);
-                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        xRecyclerView.setLayoutManager(layoutManager);
-                        xRecyclerView.setAdapter(myAdapter);
+                    public void onPositiveActionClicked(FloorEntity entity) {
+                        activityRoomquertFloorTv.setText(entity.getName());
                     }
                 });
                 break;
@@ -88,41 +82,4 @@ public class ExpireQuertActivity extends BaseActivity {
     }
 
 
-    private class MyViewHolder extends BaseRecyclerViewAdapter.SparseArrayViewHolder {
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
-
-    private class MyAdapter extends BaseRecyclerViewAdapter<FloorEntity, MyViewHolder> {
-
-        /**
-         * @param list the datas to attach the adapter
-         */
-        public MyAdapter(List<FloorEntity> list) {
-            super(list);
-        }
-
-        @Override
-        protected void bindDataToItemView(MyViewHolder myViewHolder, FloorEntity item) {
-            myViewHolder.setText(R.id.adapter_tenantquery_item_title, item.getName())
-                    .setTag(R.id.adapter_tenantquery_item_title, item)
-                    .setOnClickListener(R.id.adapter_tenantquery_item_title, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (selectFloorDialog != null) {
-                                FloorEntity item = (FloorEntity) view.getTag();
-                                activityRoomquertFloorTv.setText(item.getName());
-                                selectFloorDialog.dismiss();
-                            }
-                        }
-                    });
-        }
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new MyViewHolder(inflateItemView(parent, R.layout.adapter_tenantquery_item));
-        }
-    }
 }

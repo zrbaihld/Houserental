@@ -1,5 +1,8 @@
 package com.zrb.baseapp.tools;
 
+import com.zrb.baseapp.constant.URL_Constant;
+import com.zrb.baseapp.constant.URL_Constant;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +17,7 @@ public class JsonParsing {
 		JSONObject jso;
 		try {
 			jso = new JSONObject(json);
-			String okStauts = jso.getString("state");
+			String okStauts = jso.getString(URL_Constant.HTTPSTATE);
 			if("200".equals(okStauts)){
 				return true;
 			}else{
@@ -35,7 +38,7 @@ public class JsonParsing {
 		JSONObject jso;
 		try {
 			jso = new JSONObject(json);
-			String okStauts = jso.getString("state");
+			String okStauts = jso.getString(URL_Constant.HTTPSTATE);
 			if(okStauts == null || "".equals(okStauts)){
 				return true;
 			}else{
@@ -57,7 +60,7 @@ public class JsonParsing {
 		JSONObject jso;
 		try {
 			jso = new JSONObject(json);
-			String okStauts = jso.getString("state");
+			String okStauts = jso.getString(URL_Constant.HTTPSTATE);
 			if("90006".equals(okStauts)){
 				return true;
 			}else{
@@ -80,7 +83,7 @@ public class JsonParsing {
 		String message = "";
 		try {
 			jso = new JSONObject(json);
-			message = jso.getString("msg");
+			message = jso.getString(URL_Constant.HTTPMSG);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +99,7 @@ public class JsonParsing {
 		String message = "";
 		try {
 			jso = new JSONObject(json);
-			message = jso.getString("data");
+			message = jso.getString(URL_Constant.HTTPBODY);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

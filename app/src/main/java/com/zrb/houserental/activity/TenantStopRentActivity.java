@@ -3,6 +3,8 @@ package com.zrb.houserental.activity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -12,11 +14,17 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.tools.MyLogUtils;
+import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.FloorEntity;
 import com.zrb.houserental.R;
+import com.zrb.houserental.dialog.DialogUntil;
 import com.zrb.houserental.dialog.SelectFloorDialog;
+import com.zrb.houserental.util.MyTextUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -71,23 +79,21 @@ public class TenantStopRentActivity extends BaseActivity {
     @BindView(R.id.activity_stoprent_otherout_tv)
     EditText activityStoprentOtheroutTv;
     @BindView(R.id.activity_stoprent_outtime_tv)
-    EditText activityStoprentOuttimeTv;
+    TextView activityStoprentOuttimeTv;
     @BindView(R.id.activity_stoprent_needin_tv)
     TextView activityStoprentNeedinTv;
     @BindView(R.id.activity_stoprent_allneedin_tv)
     TextView activityStoprentAllneedinTv;
     @BindView(R.id.activity_stoprent_remark_tv)
-    TextView activityStoprentRemarkTv;
+    EditText activityStoprentRemarkTv;
     @BindView(R.id.activity_startrent_key_tv)
-    EditText activityStartrentKeyTv;
+    TextView activityStartrentKeyTv;
     @BindView(R.id.activity_stoprent_receverphone_tv)
     TextView activityStoprentReceverphoneTv;
     @BindView(R.id.activity_stoprent_otherphone_tv)
     EditText activityStoprentOtherphoneTv;
 
     private List<FloorEntity> itemEntities;
-    private FloorAdapter floorAdapter;
-    private SelectFloorDialog selectFloorDialog;
     private int type = -1;//0 楼号 1房号 2  3电话
 
     @Override
@@ -97,12 +103,82 @@ public class TenantStopRentActivity extends BaseActivity {
 
         titleTV.setText("房客退租");
         itemEntities = new ArrayList<>();
-        floorAdapter = new FloorAdapter(itemEntities);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        activityStoprentNoTv.setText(simpleDateFormat.format(new Date()));
+
+        activityStoprentOuttimeTv.setText(
+                MyTextUtil.getOutOfMoth(activityStoprentEnddayTv.getText().toString())
+        );
+
+        double i_needin = Integer.parseInt(MyTextUtil.getNumberFromString(activityStoprentOuttimeTv.getText().toString()));
+        if (i_needin > 0) {
+            double i_unit = Integer.parseInt(MyTextUtil.getNumberFromString(activityStoprentUnitTv.getText().toString()));
+            double all = i_unit * i_needin / 30 + i_unit * i_needin % 30 / 30;
+            activityStoprentNeedinTv.setText(String.format("￥ %s元", all));
+        } else {
+            activityStoprentNeedinTv.setText("￥ 0元");
+        }
+
     }
 
     @Override
     public void setListenner() {
+        activityStoprentNowwaterTv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                activityStoprentUserwaterTv.setText(
+                        MyTextUtil.useNum(editable.toString(),
+                                activityStoprentBeforewpowerTv.getText().toString(),
+                                "本月用电少于上月用电")
+                );
+                activityStoprentWaterpriceTv.setText(String.format("￥%s",
+                        MyTextUtil.totlePrice(activityStoprentUserwaterTv.getText().toString(),
+                                activityStoprentWaterTv.getText().toString()))
+
+                );
+                totleGetPrice();
+            }
+        });
+        activityStoprentNowpowerTv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                activityStoprentUserpowerTv.setText(
+                        MyTextUtil.useNum(editable.toString(),
+                                activityStoprentBeforewpowerTv.getText().toString(),
+                                "本月用电少于上月用电")
+                );
+                activityStoprentPowerpriceTv.setText(String.format("￥%s",
+                        MyTextUtil.totlePrice(activityStoprentUserpowerTv.getText().toString(),
+                                activityStoprentPowerTv.getText().toString()))
+
+                );
+                totleGetPrice();
+            }
+        });
+
+        activityStoprentOtherinTv.addTextChangedListener(new MyTextWatcher());
+        activityStoprentOtheroutTv.addTextChangedListener(new MyTextWatcher());
     }
 
     @Override
@@ -127,7 +203,12 @@ public class TenantStopRentActivity extends BaseActivity {
                     itemEntities.add(itemEntity);
                 }
                 type = 0;
-                showSelectFloorDialog();
+                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
+                    @Override
+                    public void onPositiveActionClicked(FloorEntity entity) {
+                        activityStoprentFloorTv.setText(entity.getName());
+                    }
+                });
                 break;
             case R.id.activity_stoprent_room:
                 itemEntities.clear();
@@ -137,7 +218,12 @@ public class TenantStopRentActivity extends BaseActivity {
                     itemEntities.add(itemEntity);
                 }
                 type = 1;
-                showSelectFloorDialog();
+                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
+                    @Override
+                    public void onPositiveActionClicked(FloorEntity entity) {
+                        activityStoprentRoomTv.setText(entity.getName());
+                    }
+                });
                 break;
             case R.id.activity_stoprent_receverphone:
                 itemEntities.clear();
@@ -147,116 +233,111 @@ public class TenantStopRentActivity extends BaseActivity {
                     itemEntities.add(itemEntity);
                 }
                 type = 3;
-                showSelectFloorDialog();
+                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
+                    @Override
+                    public void onPositiveActionClicked(FloorEntity entity) {
+                        activityStoprentReceverphoneTv.setText(entity.getName());
+                    }
+                });
                 break;
             case R.id.activity_roomquert_confirm:
+                sandmessage();
                 break;
         }
     }
 
-    private void showSelectFloorDialog() {
-        switch (type) {
-            case 0:
-                selectFloorDialog = new SelectFloorDialog(this, "选择楼号", new SelectFloorDialog.RecyclerViewInterface() {
-                    @Override
-                    public void initRecycleView(XRecyclerView xRecyclerView) {
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(TenantStopRentActivity.this);
-                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        xRecyclerView.setLayoutManager(layoutManager);
-                        xRecyclerView.setAdapter(floorAdapter);
-                    }
-                });
-                break;
-            case 1:
-                selectFloorDialog = new SelectFloorDialog(this, "选择房号", new SelectFloorDialog.RecyclerViewInterface() {
-                    @Override
-                    public void initRecycleView(XRecyclerView xRecyclerView) {
-                        GridLayoutManager gridLayoutManager = new GridLayoutManager(TenantStopRentActivity.this, 4);
-                        xRecyclerView.setLayoutManager(gridLayoutManager);
-                        xRecyclerView.setAdapter(floorAdapter);
-                    }
-                });
-                break;
-            case 2:
-                selectFloorDialog = new SelectFloorDialog(this, "选择预付月数", new SelectFloorDialog.RecyclerViewInterface() {
-                    @Override
-                    public void initRecycleView(XRecyclerView xRecyclerView) {
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(TenantStopRentActivity.this);
-                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        xRecyclerView.setLayoutManager(layoutManager);
-                        xRecyclerView.setAdapter(floorAdapter);
-                    }
-                });
-                break;
-            case 3:
-                selectFloorDialog = new SelectFloorDialog(this, "选择接收手机", new SelectFloorDialog.RecyclerViewInterface() {
-                    @Override
-                    public void initRecycleView(XRecyclerView xRecyclerView) {
-                        LinearLayoutManager layoutManager = new LinearLayoutManager(TenantStopRentActivity.this);
-                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        xRecyclerView.setLayoutManager(layoutManager);
-                        xRecyclerView.setAdapter(floorAdapter);
-                    }
-                });
-                break;
-            default:
-                selectFloorDialog = null;
-                break;
+    private String totleGetPrice() {
+        String userW = activityStoprentWaterpriceTv.getText().toString();
+        String userP = activityStoprentPowerpriceTv.getText().toString();
+        String otherin = activityStoprentOtherinTv.getText().toString();
+        String otherout = activityStoprentOtheroutTv.getText().toString();
+        String needin = activityStoprentNeedinTv.getText().toString();
+
+        MyLogUtils.e(userW + "  " +
+                userP + "  " +
+                otherin + "  " +
+                otherout + "  " +
+                needin + "  ");
+        try {
+            double d_userW = Double.parseDouble(MyTextUtil.getNumberFromString(userW));
+            double d_userP = Double.parseDouble(MyTextUtil.getNumberFromString(userP));
+            double d_needin = Double.parseDouble(MyTextUtil.getNumberFromString(needin));
+
+            double d_otherin = 0;
+            if (!TextUtil.isEmptyString(MyTextUtil.getNumberFromString(otherin)))
+                d_otherin = Double.parseDouble(otherin);
+            double d_otherout = 0;
+            if (!TextUtil.isEmptyString(MyTextUtil.getNumberFromString(otherout)))
+                d_otherout = Double.parseDouble(otherout);
+
+            String totleprice = d_userW + d_userP + d_otherin - d_otherout + d_needin + "";
+            activityStoprentAllneedinTv.setText(String.format("￥%s", totleprice));
+            return totleprice;
+        } catch (Exception e) {
+            activityStoprentAllneedinTv.setText("");
+            return "";
         }
-        if (selectFloorDialog != null)
-            selectFloorDialog.show();
+
+
     }
 
+    private void sandmessage() {
+        String s_floor = activityStoprentFloorTv.getText().toString();
+        String s_room = activityStoprentRoomTv.getText().toString();
+        String s_no = activityStoprentNoTv.getText().toString();//自动获取
+        String s_unit = activityStoprentUnitTv.getText().toString();//自动获取
+        String s_deposit = activityStoprentDepositTv.getText().toString();
+        String s_water = activityStoprentWaterTv.getText().toString();//自动获取
+        String s_power = activityStoprentPowerTv.getText().toString();//自动获取
+        String s_startday = activityStoprentStartdayTv.getText().toString();
+        String s_endday = activityStoprentEnddayTv.getText().toString();//自动计算
+        String s_remark = activityStoprentRemarkTv.getText().toString();
 
-    private class MyViewHolder extends BaseRecyclerViewAdapter.SparseArrayViewHolder {
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
+        if (s_floor.equals("请选择楼号")) {
+            toastIfActive("还未选择楼号");
+            return;
         }
+        if (s_room.equals("请选择房号")) {
+            toastIfActive("还未选择楼号");
+            return;
+        }
+        if (TextUtil.isEmptyString(s_deposit)) {
+            toastIfActive("还未填写出租押金");
+            return;
+        } else {
+            if (!MyTextUtil.textIsNumber(s_deposit)) {
+                toastIfActive("出租押金必须大于0");
+                return;
+            }
+        }
+        if (s_startday.equals("请选择起始日期")) {
+            toastIfActive("还未选择起始日期");
+            return;
+        }
+
+        if (TextUtil.isEmptyString(s_remark)) {
+            s_remark = "新租";
+        }
+
+        MyLogUtils.e("ssss");
+
     }
 
-    private class FloorAdapter extends BaseRecyclerViewAdapter<FloorEntity, MyViewHolder> {
+    private class MyTextWatcher implements TextWatcher {
 
-        /**
-         * @param list the datas to attach the adapter
-         */
-        public FloorAdapter(List<FloorEntity> list) {
-            super(list);
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
         }
 
         @Override
-        protected void bindDataToItemView(MyViewHolder myViewHolder, FloorEntity item) {
-            myViewHolder.setText(R.id.adapter_tenantquery_item_title, item.getName())
-                    .setTag(R.id.adapter_tenantquery_item_title, item)
-                    .setOnClickListener(R.id.adapter_tenantquery_item_title, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if (selectFloorDialog != null) {
-                                FloorEntity item = (FloorEntity) view.getTag();
-                                switch (type) {
-                                    case 0:
-                                        activityStoprentFloorTv.setText(item.getName());
-                                        break;
-                                    case 1:
-                                        activityStoprentRoomTv.setText(item.getName());
-                                        break;
-                                    case 2:
-                                        break;
-                                    case 3:
-                                        activityStoprentReceverphoneTv.setText(item.getName());
-                                        break;
-                                }
-                                selectFloorDialog.dismiss();
-                            }
-                        }
-                    });
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
         }
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new MyViewHolder(inflateItemView(parent, R.layout.adapter_tenantquery_item));
+        public void afterTextChanged(Editable editable) {
+            totleGetPrice();
         }
     }
-
-
 }

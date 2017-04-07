@@ -10,21 +10,33 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/activity_addtenant_floor"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            style="@style/myRelativeLayout"
             >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="楼号"
-                android:textColor="#000"
-                android:textSize="16sp"
+                style="@style/myRentTitle"
+                android:text="房客姓名:"
+                />
+
+            <EditText
+                android:id="@+id/activity_addtenant_name_tv"
+                style="@style/myEditText"
+                android:layout_alignParentRight="true"
+                android:hint="请输入房客姓名"
+                android:paddingRight="20dp"
+                />
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+
+        <RelativeLayout
+            android:id="@+id/activity_addtenant_sex"
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="性别:"
                 />
 
             <ImageView
@@ -37,37 +49,133 @@
                 android:src="@drawable/dpgl_05"/>
 
             <TextView
-                android:id="@+id/activity_addtenant_floor_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/next"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="请选择楼号"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
+                android:id="@+id/activity_addtenant_sex_tv"
+                style="@style/myRentDetail"
+                android:layout_toLeftOf="@id/next"
+                android:text="请选择性别"
                 />
         </RelativeLayout>
 
         <View style="@style/line_1px"></View>
-
         <RelativeLayout
-            android:id="@+id/activity_addtenant_room"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            style="@style/myRelativeLayout"
             >
 
             <TextView
+                style="@style/myRentTitle"
+                android:text="身份证号码:"
+                />
+
+            <EditText
+                android:id="@+id/activity_addtenant_id_tv"
+                style="@style/myEditText"
+                android:layout_alignParentRight="true"
+                android:hint="请输入身份证号码"
+                android:paddingRight="20dp"
+                />
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="房客籍贯:"
+                />
+
+            <EditText
+                android:id="@+id/activity_addtenant_adress_tv"
+                style="@style/myEditText"
+                android:layout_alignParentRight="true"
+                android:hint="请输入房客籍贯"
+                android:paddingRight="20dp"
+                />
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            android:id="@+id/activity_addtenant_birthday"
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="出生年月:"
+                />
+
+            <ImageView
+                android:id="@id/next"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="房号"
-                android:textColor="#000"
-                android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="20dp"
+                android:src="@drawable/dpgl_05"/>
+
+            <TextView
+                android:id="@+id/activity_addtenant_birthday_tv"
+                style="@style/myRentDetail"
+                android:layout_toLeftOf="@id/next"
+                android:text="请选择出生年月"
+                />
+        </RelativeLayout>
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="手机号码:"
+                />
+
+            <EditText
+                android:id="@+id/activity_addtenant_phone_tv"
+                style="@style/myEditText"
+                android:layout_alignParentRight="true"
+                android:hint="请输入手机号码"
+                android:paddingRight="20dp"
+                />
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            android:id="@+id/activity_addtenant_floor"
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="楼号:"
+                />
+
+            <ImageView
+                android:id="@id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="20dp"
+                android:src="@drawable/dpgl_05"/>
+
+            <TextView
+                android:id="@+id/activity_addtenant_floor_tv"
+                style="@style/myRentDetail"
+                android:layout_toLeftOf="@id/next"
+                android:text="请选择楼号"
+                />
+        </RelativeLayout>
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            android:id="@+id/activity_addtenant_room"
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="房号:"
                 />
 
             <ImageView
@@ -81,183 +189,20 @@
 
             <TextView
                 android:id="@+id/activity_addtenant_room_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/next"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                style="@style/myRentDetail"
+                android:layout_toLeftOf="@id/next"
                 android:text="请选择房号"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
                 />
         </RelativeLayout>
-
         <View style="@style/line_1px"></View>
-
-        <View
-            style="@style/line_1px"
-            android:layout_marginTop="10dp"></View>
-
         <RelativeLayout
-            android:id="@+id/activity_addtenant_no"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#E0E0E0"
-            android:orientation="horizontal"
+            android:id="@+id/activity_addtenant_outtime"
+            style="@style/myRelativeLayout"
             >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="出租编号:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:id="@+id/activity_addtenant_no_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text="20111500"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#E0E0E0"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="房间状态:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text="空房"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_unit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#E0E0E0"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="单元租金:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:id="@+id/activity_addtenant_unit_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text="100"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_deposit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="出租押金:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <EditText
-                android:id="@+id/activity_addtenant_deposit_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="#fff"
-                android:gravity="center|right"
-                android:hint="请输入出租押金"
-                android:minWidth="100dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_advancemonths"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="预付月数:"
-                android:textColor="#000"
-                android:textSize="16sp"
+                style="@style/myRentTitle"
+                android:text="暂住证到期:"
                 />
 
             <ImageView
@@ -270,391 +215,13 @@
                 android:src="@drawable/dpgl_05"/>
 
             <TextView
-                android:id="@+id/activity_addtenant_advancemonths_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/activity_addtenant_outtime_tv"
+                style="@style/myRentDetail"
                 android:layout_toLeftOf="@id/next"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="请选择预付月数"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
+                android:text="请选择日期"
                 />
         </RelativeLayout>
-
         <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_water_no"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#E0E0E0"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="水费费率:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:id="@+id/activity_addtenant_water_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text="水费费率"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_power_no"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#E0E0E0"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="电费费率:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:id="@+id/activity_addtenant_power_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text="电费费率"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_startday"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="起租日期:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-            <ImageView
-                android:id="@id/next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:paddingRight="20dp"
-                android:src="@drawable/dpgl_05"/>
-
-            <TextView
-                android:id="@+id/activity_addtenant_startday_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/next"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="请选择起始日期"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_endday"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="结束日期:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:id="@+id/activity_addtenant_endday_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text="结束日期"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_waterstart"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="起始水表:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <EditText
-                android:id="@+id/activity_addtenant_waterstart_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="#fff"
-                android:gravity="center|right"
-                android:hint="请输入起始水表"
-                android:minWidth="100dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_powerstart"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="起始电表:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <EditText
-                android:id="@+id/activity_addtenant_powerstart_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="#fff"
-                android:gravity="center|right"
-                android:hint="请输入起始电表"
-                android:minWidth="100dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_remark"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="备注:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:id="@+id/activity_addtenant_remark_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text="新租"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_allprice"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="合计应收:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-
-            <TextView
-                android:id="@+id/activity_addtenant_allprice_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:text=""
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_key"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-
-            <EditText
-                android:id="@+id/activity_addtenant_key_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="#fff"
-                android:gravity="center|right"
-                android:hint="请输入钥匙卡个数"
-                android:minWidth="100dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="钥匙卡个数:"
-                android:textColor="#000"
-                android:textSize="16sp"/>
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
-        <RelativeLayout
-            android:id="@+id/activity_addtenant_phone"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="接收手机:"
-                android:textColor="#000"
-                android:textSize="16sp"
-                />
-
-            <EditText
-                android:id="@+id/activity_addtenant_phone_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:background="#fff"
-                android:gravity="center|right"
-                android:hint="请输入接收手机"
-                android:minWidth="100dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="20dp"
-                android:textColor="#9E9E9E"
-                android:textSize="16sp"
-                />
-
-        </RelativeLayout>
-
-        <View style="@style/line_1px"></View>
-
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/activity_roomquert_confirm"
             style="@style/myButton"
@@ -662,6 +229,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="24dp"
-            android:text="租金收取并等级"/>
+            android:text="确定"/>
     </LinearLayout>
 </ScrollView>

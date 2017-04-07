@@ -32,11 +32,11 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.base_toolbar_setting)
     ImageView baseToolbarSetting;
     @BindView(R.id.activity_main_houseperson_qury)
-    TextView activityMainHousepersonQury;
+    View activityMainHousepersonQury;
     @BindView(R.id.activity_main_housenull_qury)
-    TextView activityMainHousenullQury;
+    View activityMainHousenullQury;
     @BindView(R.id.activity_main_houseintime_qury)
-    TextView activityMainHouseintimeQury;
+    View activityMainHouseintimeQury;
     @BindView(R.id.view_iv)
     ImageView viewIv;
     @BindView(R.id.view_listview)
@@ -45,6 +45,8 @@ public class MainActivity extends BaseActivity {
     private MyAdapter myAdapter;
     private String[] item_s = {"房客起租", "房客续租", "房客退租",
             "新增房客", "租金变更", "短信查询"};
+    private int[] img_i = {R.drawable.btn_sy_icon_pm, R.drawable.btn_sy_icon_xf, R.drawable.btn_sy_icon_zf,
+            R.drawable.btn_sy_icon_fj, R.drawable.btn_sy_icon_mf, R.drawable.btn_sy_icon_bnzf};
     private Class[] activity_class = {TenantStartRentActivity.class, TenantContinueRentActivity.class, TenantStopRentActivity.class
             , AddTenantActivity.class, ChangeTenantMoneyActivity.class, ShotMessageQuertActivity.class};
 
@@ -63,6 +65,7 @@ public class MainActivity extends BaseActivity {
         for (String item_ : item_s) {
             ItemObject itemObject = new ItemObject();
             itemObject.setTitle(item_);
+            itemObject.setIma(img_i[i]);
             itemObject.setPostion(i++);
             strings.add(itemObject);
         }
@@ -91,12 +94,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.base_toolbar_setting, R.id.activity_main_houseperson_qury, R.id.activity_main_housenull_qury, R.id.activity_main_houseintime_qury})
     public void onViewClicked(View view) {
@@ -120,15 +117,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-//    private void startActivity(Class<?> cls, HashMap<String, String> map) {
-//        intent = new Intent(this, cls);
-//        if (map != null) {
-//            for (Map.Entry<String, String> entry : map.entrySet()) {
-//                intent.putExtra(entry.getKey(), entry.getValue());
-//            }
-//        }
-//        startActivity(intent);
-//    }
 
     private class MyAdapter extends BaseRecyclerViewAdapter<ItemObject, MyViewHolder> {
 
@@ -144,6 +132,7 @@ public class MainActivity extends BaseActivity {
         protected void bindDataToItemView(MyViewHolder myViewHolder, ItemObject itemObject) {
             myViewHolder.setText(R.id.adapter_mainactivity_item_list_tv, itemObject.getTitle())
                     .setTag(R.id.adapter_mainactivity_item_list_rl, itemObject.getPostion())
+                    .setImageResource(R.id.adapter_mainactivity_item_list_iv, itemObject.getIma())
                     .setOnClickListener(R.id.adapter_mainactivity_item_list_rl, MainActivity.this)
             ;
         }

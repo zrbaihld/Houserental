@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.zrb.baseapp.base.BaseActivity;
+import com.zrb.baseapp.tools.MyHttpTool;
+import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.R;
+import com.zrb.houserental.constant.URL_Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +32,7 @@ public class LoginActivity extends BaseActivity {
     public void init() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
     }
 
     @Override
@@ -46,17 +50,36 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick(R.id.activity_login_btn_login)
     public void onViewClicked() {
+//        String phone = activityLoginEtPhone.getText().toString();
+//        String password = activityLoginEtPassword.getText().toString();
+//        if (TextUtil.isEmptyString(phone)) {
+//            toastIfActive("请输入手机号");
+//            return;
+//        }
+//        if (TextUtil.isEmptyString(password)) {
+//            toastIfActive("请输入密码");
+//            return;
+//        }
+//        MyHttpTool.creat(this)
+//                .setContent("phone", phone)
+//                .setContent("passwd", password)
+//                .postShowDialog(0, URL_Constant.Login, this);
+
         startActivity(new Intent(this, MainActivity.class));
     }
 
+    @Override
+    public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
+        if (super.getIOAuthCallBack(type, json, isSuccess)) return true;
+        switch (type) {
+            case 0:
 
+                break;
+        }
+
+        return false;
+    }
 }

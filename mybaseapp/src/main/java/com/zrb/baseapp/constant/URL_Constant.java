@@ -5,4 +5,7 @@ package com.zrb.baseapp.constant;
  * 网址管理
  */
 public interface URL_Constant {
+    String HTTPSTATE = "status";
+    String HTTPMSG = "msg";
+    String HTTPBODY = "bata";
 }

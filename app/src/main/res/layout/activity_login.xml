@@ -8,15 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="56dp">
+     >
 
         <ImageView
             android:id="@+id/activity_login_iv_log"
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
             android:layout_marginBottom="24dp"
             android:src="@drawable/logo"/>
 
@@ -25,15 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:layout_marginTop="8dp">
 
             <EditText
-
                 android:id="@+id/activity_login_et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="手机号码"
-                android:inputType="textEmailAddress"/>
+                android:textColor="#000"
+                android:inputType="phone"/>
         </android.support.design.widget.TextInputLayout>
 
         <!--  Password Label -->
@@ -41,6 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:layout_marginTop="8dp">
 
             <EditText
@@ -48,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="密码"
+                android:textColor="#000"
                 android:inputType="textPassword"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -55,6 +59,8 @@
             android:id="@+id/activity_login_btn_login"
             style="@style/myButton"
             android:layout_marginTop="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:text="Login"/>
 
 

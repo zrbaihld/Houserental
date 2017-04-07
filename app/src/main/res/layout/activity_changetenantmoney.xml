@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/activity_addtenant_floor"
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="楼号:"
+                />
+
+            <ImageView
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="20dp"
+                android:src="@drawable/dpgl_05"/>
+
+            <TextView
+                android:id="@+id/activity_addtenant_floor_tv"
+                style="@style/myRentDetail"
+                android:layout_toLeftOf="@id/next"
+                android:text="请选择楼号"
+                />
+        </RelativeLayout>
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            android:id="@+id/activity_addtenant_room"
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="房号:"
+                />
+
+            <ImageView
+                android:id="@id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="20dp"
+                android:src="@drawable/dpgl_05"/>
+
+            <TextView
+                android:id="@+id/activity_addtenant_room_tv"
+                style="@style/myRentDetail"
+                android:layout_toLeftOf="@id/next"
+                android:text="请选择房号"
+                />
+        </RelativeLayout>
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            android:background="#E0E0E0"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="单元租金:"
+                />
+
+
+            <TextView
+                android:id="@+id/activity_startrent_unity_tv"
+                style="@style/myRentDetail"
+                android:layout_alignParentRight="true"
+                android:paddingRight="20dp"
+                android:text="100"
+                />
+        </RelativeLayout>
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            android:background="#E0E0E0"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="水费费率:"
+                />
+
+
+            <TextView
+                android:id="@+id/activity_startrent_water_tv"
+                style="@style/myRentDetail"
+                android:layout_alignParentRight="true"
+                android:paddingRight="20dp"
+                android:text="200"
+                />
+        </RelativeLayout>
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            android:background="#E0E0E0"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="电费费率:"
+                />
+
+
+            <TextView
+                android:id="@+id/activity_startrent_power_tv"
+                style="@style/myRentDetail"
+                android:layout_alignParentRight="true"
+                android:paddingRight="20dp"
+                android:text="300"
+                />
+        </RelativeLayout>
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="调整房租:"
+                />
+
+            <EditText
+                android:id="@+id/activity_addtenant_month_tv"
+                style="@style/myEditText"
+                android:hint="请输入调整后的月租"
+                android:inputType="number"
+                android:paddingRight="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="调整水费费率:"
+                />
+
+            <EditText
+                android:id="@+id/activity_addtenant_newwater_tv"
+                style="@style/myEditText"
+                android:layout_alignParentRight="true"
+                android:inputType="number"
+                android:hint="请输入调整后的水费费率"
+                android:paddingRight="20dp"
+                />
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+        <RelativeLayout
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="调整电费费率:"
+                />
+
+            <EditText
+                android:id="@+id/activity_addtenant_newpower_tv"
+                style="@style/myEditText"
+                android:layout_alignParentRight="true"
+                android:hint="请输入调整后的电费费率"
+                android:inputType="number"
+                android:paddingRight="20dp"
+                />
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/activity_roomquert_confirm"
+            style="@style/myButton"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="24dp"
+            android:text="确认变更租金及水电费费率"/>
+    </LinearLayout>
+</ScrollView>

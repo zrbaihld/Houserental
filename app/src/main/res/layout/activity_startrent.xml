@@ -158,6 +158,7 @@
                     android:id="@+id/activity_startrent_deposit_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:inputType="number"
                     android:hint="请输入出租押金"
                     android:paddingRight="20dp"
                     />
@@ -291,7 +292,6 @@
             <View style="@style/line_1px"></View>
 
             <RelativeLayout
-                android:id="@+id/activity_startrent_waterstart"
                 style="@style/myRelativeLayout" >
 
                 <TextView
@@ -304,6 +304,7 @@
                     android:id="@+id/activity_startrent_waterstart_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:inputType="number"
                     android:hint="请输入起始水表"
                     android:paddingRight="20dp"
                     />
@@ -325,6 +326,7 @@
                     android:id="@+id/activity_startrent_powerstart_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:inputType="number"
                     android:hint="请输入起始电表"
                     android:paddingRight="20dp"
                     />
@@ -341,13 +343,12 @@
                     android:text="备注:"
                     />
 
-
-                <TextView
+                <EditText
                     android:id="@+id/activity_startrent_remark_tv"
-                    style="@style/myRentDetail"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:paddingRight="20dp"
                     android:text="新租"
+                    android:paddingRight="20dp"
                     />
             </RelativeLayout>
 
@@ -389,6 +390,7 @@
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
                     android:hint="请输入钥匙卡个数"
+                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>
@@ -408,6 +410,7 @@
                     android:id="@+id/activity_startrent_phone_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:inputType="phone"
                     android:hint="请输入接收手机"
                     android:paddingRight="20dp"
                     />
@@ -423,7 +426,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="24dp"
-                android:text="租金收取并等级"/>
+                android:text="租金收取并登记"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
