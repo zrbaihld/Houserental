@@ -12,12 +12,17 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.tools.JsonParsing;
+import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.baseapp.tools.MyLogUtils;
 import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.FloorEntity;
+import com.zrb.houserental.Entity.ResultTenantQueryEntity;
 import com.zrb.houserental.R;
+import com.zrb.houserental.constant.URL_Constant;
 import com.zrb.houserental.dialog.DialogUntil;
 import com.zrb.houserental.dialog.SelectFloorDialog;
+import com.zrb.houserental.util.MyTextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +60,11 @@ public class AddTenantActivity extends BaseActivity {
     private List<FloorEntity> itemEntities;
     private int type = -1;//0 楼号 1房号 2性别
 
+    private String building_id = "";
+    private String building_name = "";
+    private String room_id = "";
+    private String room_name = "";
+
     @Override
     public void init() {
         addConView(R.layout.activity_addtenant);
@@ -84,42 +94,42 @@ public class AddTenantActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.activity_addtenant_floor:
-                itemEntities.clear();
-                for (int i = 0; i < 10; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("楼号" + i);
-                    itemEntities.add(itemEntity);
-                }
                 type = 0;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityAddtenantFloorTv.setText(entity.getName());
+                        activityAddtenantRoomTv.setText("请选择房号");
+                        building_id = entity.getId();
+                        building_name = entity.getName();
+                        itemEntities.clear();
+                        itemEntities.add(entity);
                     }
                 });
                 break;
             case R.id.activity_addtenant_room:
-                itemEntities.clear();
-                for (int i = 0; i < 10; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("房号" + i);
-                    itemEntities.add(itemEntity);
+                if (itemEntities == null || itemEntities.size() == 0) {
+                    toastIfActive("请先选择楼号");
+                    break;
                 }
                 type = 1;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityAddtenantRoomTv.setText(entity.getName());
+                        room_id = entity.getId();
+                        room_name = entity.getName();
                     }
                 });
                 break;
             case R.id.activity_addtenant_sex:
-                itemEntities.clear();
-                for (int i = 0; i < 2; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("性别" + i);
-                    itemEntities.add(itemEntity);
-                }
+                List<FloorEntity> itemEntities = new ArrayList<>();
+                FloorEntity itemEntity = new FloorEntity();
+                itemEntity.setName("男");
+                itemEntities.add(itemEntity);
+                itemEntity = new FloorEntity();
+                itemEntity.setName("女");
+                itemEntities.add(itemEntity);
                 type = 4;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
@@ -132,7 +142,7 @@ public class AddTenantActivity extends BaseActivity {
                 DialogUntil.getInstance().selectDate(getSupportFragmentManager(), new DialogUntil.DialogUtilDateDao() {
                     @Override
                     public void onPositiveActionClicked(String date) {
-
+                        activityAddtenantBirthdayTv.setText(date);
                     }
                 });
                 break;
@@ -140,7 +150,7 @@ public class AddTenantActivity extends BaseActivity {
                 DialogUntil.getInstance().selectDate(getSupportFragmentManager(), new DialogUntil.DialogUtilDateDao() {
                     @Override
                     public void onPositiveActionClicked(String date) {
-
+                        activityAddtenantOuttimeTv.setText(date);
                     }
                 });
                 break;
@@ -197,8 +207,55 @@ public class AddTenantActivity extends BaseActivity {
             toastIfActive("未选择日期");
             return;
         }
-        MyLogUtils.e("sssss");
+//        building_id |int| 是 | 12 | 楼号id
+//        room_id |int| 是 | 12 | 房号id
+//        name | string | 是 | 12 |
+//                id_card | string | 是 | 12 |
+//                sex |int| 是 | 12 |
+//                phone | string | 是 | 12 |
+//                hometown | string | 是 | 12 |
+//                birthday |date| 是 | 12 |
+//        `residence_permit_expire` |date| 是 | 12 |
+
+        MyHttpTool.creat(this)
+                .setContent("building_id", building_id)
+                .setContent("room_id", room_id)
+                .setContent("name", s_name)
+                .setContent("id_card", s_id)
+                .setContent("sex", MyTextUtil.getSexInt(s_sex))
+                .setContent("phone", s_phone)
+                .setContent("hometown", s_adress)
+                .setContent("birthday", s_bitth)
+                .setContent("residence_permit_expire", s_outtime)
+                .postShowDialog(0, URL_Constant.newLodger, this);
     }
 
+    @Override
+    public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
+        if (super.getIOAuthCallBack(type, json, isSuccess)) return true;
+        switch (type) {
+            case 0:
+                toastIfActive("新增成功");
+                clearUI();
+                break;
+        }
 
+        return false;
+    }
+
+    private void clearUI() {
+        activityAddtenantNameTv.setText("");
+        activityAddtenantSexTv.setText("请选择性别");
+        activityAddtenantIdTv.setText("");
+        activityAddtenantAdressTv.setText("");
+        activityAddtenantBirthdayTv.setText("请选择出生年月");
+        activityAddtenantPhoneTv.setText("");
+        activityAddtenantFloorTv.setText("请选择楼号");
+        activityAddtenantRoomTv.setText("请选择房号");
+        activityAddtenantOuttimeTv.setText("请选择日期");
+        building_id = "";
+        room_id = "";
+
+
+    }
 }

@@ -12,8 +12,14 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.constant.Constant_C;
+import com.zrb.baseapp.tools.JsonParsing;
+import com.zrb.baseapp.tools.MyHttpTool;
+import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.Entity.ResultTenantQueryEntity;
+import com.zrb.houserental.Entity.ResultTenantQueryEntity.LodgersBean;
 import com.zrb.houserental.R;
+import com.zrb.houserental.constant.URL_Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +40,8 @@ public class ResultTenantQueryActivity extends BaseActivity {
     XRecyclerView viewListview;
 
     private MyAdapter myAdapter;
-    private List<ResultTenantQueryEntity> entities = new ArrayList<>();
+    private List<LodgersBean> entities = new ArrayList<>();
+    String building_name;
 
     @Override
     public void init() {
@@ -42,17 +49,12 @@ public class ResultTenantQueryActivity extends BaseActivity {
         ButterKnife.bind(this);
         titleTV.setText("查询结果");
 
-        activityResulttenantqueryTitle.setText(String.format("%s楼    %s号", "五", "七"));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         viewListview.setLayoutManager(linearLayoutManager);
 
 
-        for (int i = 0; i < 10; i++) {
-            ResultTenantQueryEntity resultTenantQueryEntity = new ResultTenantQueryEntity();
-            entities.add(resultTenantQueryEntity);
-        }
         myAdapter = new MyAdapter(entities);
         viewListview.setAdapter(myAdapter);
     }
@@ -65,6 +67,19 @@ public class ResultTenantQueryActivity extends BaseActivity {
     @Override
     public void getData() {
 
+        intent = getIntent();
+        String building_id = intent.getStringExtra("building_id");
+        building_name = intent.getStringExtra("building_name");
+        String room_id = intent.getStringExtra("room_id");
+        String room_name = intent.getStringExtra("room_name");
+
+
+        activityResulttenantqueryTitle.setText(String.format("%s号", room_name));
+
+        MyHttpTool.creat(this)
+                .setContent("building_id", building_id)
+                .setContent("room_id", room_id)
+                .postShowDialog(0, URL_Constant.listLodger, this);
     }
 
     @Override
@@ -80,27 +95,28 @@ public class ResultTenantQueryActivity extends BaseActivity {
         }
     }
 
-    private class MyAdapter extends BaseRecyclerViewAdapter<ResultTenantQueryEntity, MyViewHolder> {
+    private class MyAdapter extends BaseRecyclerViewAdapter<LodgersBean, MyViewHolder> {
 
         /**
          * @param list the datas to attach the adapter
          */
-        public MyAdapter(List<ResultTenantQueryEntity> list) {
+        public MyAdapter(List<LodgersBean> list) {
             super(list);
         }
 
         @Override
-        protected void bindDataToItemView(MyViewHolder myViewHolder, ResultTenantQueryEntity item) {
-            myViewHolder.setText(R.id.adapter_resulttenantquery_name, String.format("房客:%s", "周桐同"))
-                    .setText(R.id.adapter_resulttenantquery_phone, String.format("手机号码:%s", "15659810000"))
-                    .setText(R.id.adapter_resulttenantquery_state, String.format("状态:%s", "租住中"))
-                    .setTextColor(R.id.adapter_resulttenantquery_state, ContextCompat.getColor(ResultTenantQueryActivity.this, R.color.tenant_on))
+        protected void bindDataToItemView(MyViewHolder myViewHolder, LodgersBean item) {
+            myViewHolder.setText(R.id.adapter_resulttenantquery_name, String.format("房客:%s", item.getName()))
+                    .setText(R.id.adapter_resulttenantquery_phone, String.format("手机号码:%s", item.getPhone()))
+                    .setStatus(R.id.adapter_resulttenantquery_state, item.getStatus())
                     .setTag(R.id.adapter_resulttenantquery_ll, item)
                     .setOnClickListener(R.id.adapter_resulttenantquery_ll, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            ResultTenantQueryEntity item = (ResultTenantQueryEntity) view.getTag();
-                            intent=new Intent(ResultTenantQueryActivity.this,TenantDetailActivity.class);
+                            LodgersBean item = (LodgersBean) view.getTag();
+                            intent = new Intent(ResultTenantQueryActivity.this, TenantDetailActivity.class);
+                            intent.putExtra("LodgersBean", item);
+                            intent.putExtra("building_name", building_name);
                             startActivity(intent);
                         }
                     })
@@ -114,4 +130,27 @@ public class ResultTenantQueryActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
+        if (super.getIOAuthCallBack(type, json, isSuccess)) return true;
+        switch (type) {
+            case 0:
+                ResultTenantQueryEntity resultTenantQueryEntity = gson.
+                        fromJson(JsonParsing.getData(json), ResultTenantQueryEntity.class);
+                entities.clear();
+                if (resultTenantQueryEntity.getLodgers() == null || resultTenantQueryEntity.getLodgers().size() == 0) {
+                    viewIv.setVisibility(View.VISIBLE);
+                    viewListview.setVisibility(View.GONE);
+                } else {
+                    viewIv.setVisibility(View.GONE);
+                    viewListview.setVisibility(View.VISIBLE);
+                    entities.addAll(resultTenantQueryEntity.getLodgers());
+                    myAdapter.notifyDataSetChanged();
+                }
+
+                break;
+        }
+
+        return false;
+    }
 }

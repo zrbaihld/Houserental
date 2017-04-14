@@ -7,7 +7,10 @@ import android.view.View;
 
 import com.zrb.baseapp.base.AppManager;
 import com.zrb.baseapp.base.BaseActivity;
+import com.zrb.baseapp.constant.Constant_C;
+import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.houserental.R;
+import com.zrb.houserental.constant.URL_Constant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +58,9 @@ public class SettingActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case R.id.activity_setting_exitting:
+                MyHttpTool.creat(this)
+                        .setContent("token", sp.getString(Constant_C.TOKEN, ""))
+                        .postShowDialog(0, URL_Constant.logout, this);
                 intent = new Intent(this, LoginActivity.class);
                 AppManager.finishAllActivity();
                 startActivity(intent);

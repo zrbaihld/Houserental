@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zrb.baseapp.base.BaseActivity;
+import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.FloorEntity;
 import com.zrb.houserental.R;
 import com.zrb.houserental.dialog.DialogUntil;
@@ -32,6 +33,10 @@ public class ExpireQuertActivity extends BaseActivity {
     TextView activityRoomquertFloorTv;
 
     private List<FloorEntity> itemEntities;
+
+
+    private String building_id;
+    private String building_name;
 
     @Override
     public void init() {
@@ -62,20 +67,24 @@ public class ExpireQuertActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.activity_roomquert_floor:
-                for (int i = 0; i < 10; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("测试数据" + i);
-                    itemEntities.add(itemEntity);
-                }
+
                 DialogUntil.getInstance().selectString(this, 0, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityRoomquertFloorTv.setText(entity.getName());
+                        building_id = entity.getId();
+                        building_name=entity.getName();
                     }
                 });
                 break;
             case R.id.activity_roomquert_confirm:
+                if (TextUtil.isEmptyString(building_id)) {
+                    toastIfActive("未选楼号");
+                    return;
+                }
                 intent = new Intent(this, ResultExpireQuertActivity.class);
+                intent.putExtra("building_id", building_id);
+                intent.putExtra("building_name", building_name);
                 startActivity(intent);
                 break;
         }

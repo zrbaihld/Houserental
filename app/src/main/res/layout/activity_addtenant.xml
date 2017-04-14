@@ -57,6 +57,7 @@
         </RelativeLayout>
 
         <View style="@style/line_1px"></View>
+
         <RelativeLayout
             style="@style/myRelativeLayout"
             >
@@ -70,12 +71,14 @@
                 android:id="@+id/activity_addtenant_id_tv"
                 style="@style/myEditText"
                 android:layout_alignParentRight="true"
+                android:digits="1234567890xX"
                 android:hint="请输入身份证号码"
                 android:paddingRight="20dp"
                 />
         </RelativeLayout>
 
         <View style="@style/line_1px"></View>
+
         <RelativeLayout
             style="@style/myRelativeLayout"
             >
@@ -95,6 +98,7 @@
         </RelativeLayout>
 
         <View style="@style/line_1px"></View>
+
         <RelativeLayout
             android:id="@+id/activity_addtenant_birthday"
             style="@style/myRelativeLayout"
@@ -121,7 +125,9 @@
                 android:text="请选择出生年月"
                 />
         </RelativeLayout>
+
         <View style="@style/line_1px"></View>
+
         <RelativeLayout
             style="@style/myRelativeLayout"
             >
@@ -136,11 +142,13 @@
                 style="@style/myEditText"
                 android:layout_alignParentRight="true"
                 android:hint="请输入手机号码"
+                android:inputType="phone"
                 android:paddingRight="20dp"
                 />
         </RelativeLayout>
 
         <View style="@style/line_1px"></View>
+
         <RelativeLayout
             android:id="@+id/activity_addtenant_floor"
             style="@style/myRelativeLayout"
@@ -167,7 +175,9 @@
                 android:text="请选择楼号"
                 />
         </RelativeLayout>
+
         <View style="@style/line_1px"></View>
+
         <RelativeLayout
             android:id="@+id/activity_addtenant_room"
             style="@style/myRelativeLayout"
@@ -194,7 +204,9 @@
                 android:text="请选择房号"
                 />
         </RelativeLayout>
+
         <View style="@style/line_1px"></View>
+
         <RelativeLayout
             android:id="@+id/activity_addtenant_outtime"
             style="@style/myRelativeLayout"
@@ -221,7 +233,9 @@
                 android:text="请选择日期"
                 />
         </RelativeLayout>
+
         <View style="@style/line_1px"></View>
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/activity_roomquert_confirm"
             style="@style/myButton"

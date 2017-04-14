@@ -1,5 +1,9 @@
 package com.zrb.houserental.util;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+
 import com.zrb.baseapp.tools.MyLogUtils;
 import com.zrb.baseapp.tools.SystemUtils;
 import com.zrb.baseapp.tools.TextUtil;
@@ -33,7 +37,7 @@ public class MyTextUtil {
     }
 
     public static String getEndDate(String s_date, String moth) {
-        DateFormat simpleDateFormat = SimpleDateFormat.getDateInstance();
+        DateFormat simpleDateFormat = MyTextUtil.getSimpleDateFormat();
         Date date = null;
         try {
             date = simpleDateFormat.parse(s_date);
@@ -50,7 +54,7 @@ public class MyTextUtil {
     }
 
     public static String getOutOfMoth(String s_date) {
-        DateFormat simpleDateFormat = SimpleDateFormat.getDateInstance();
+        DateFormat simpleDateFormat = MyTextUtil.getSimpleDateFormat();
         Date date = null;
         try {
             date = simpleDateFormat.parse(s_date);
@@ -111,4 +115,50 @@ public class MyTextUtil {
         }
         return uni2;
     }
+
+    private static SimpleDateFormat simpleDateFormat;
+
+    public static SimpleDateFormat getSimpleDateFormat() {
+        if (simpleDateFormat == null)
+            simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat;
+    }
+
+    public static String getSexString(int i) {
+        switch (i) {
+            case 1:
+                return "男";
+            case 2:
+                return "女";
+        }
+        return "未知";
+    }
+
+    public static int getSexInt(String sex) {
+        if ("男".equals(sex))
+            return 1;
+        else if ("女".equals(sex))
+            return 2;
+        else return 0;
+    }
+
+    public static String getStatusString(int i) {
+        switch (i) {
+            case 1:
+                return "租住中";
+            case 2:
+                return "退租";
+        }
+        return "新租";
+    }
+
+    public static void sendMessage(Context context, String number, String message) {
+        Uri uri = Uri.parse("smsto:" + number);
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW, uri);
+        sendIntent.putExtra("sms_body", message);
+        context.startActivity(sendIntent);
+    }
+//    public static String dateToString(String date) {
+////        date.re
+//    }
 }

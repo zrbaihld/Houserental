@@ -69,8 +69,10 @@
         ></View>
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
 
         <LinearLayout
@@ -106,11 +108,14 @@
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
                 >
+
                 <TextView
                     style="@style/myRentTitle"
                     android:text="房间状态:"
                     />
+
                 <TextView
+                    android:id="@+id/activity_startrent_status_tv"
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
@@ -158,8 +163,8 @@
                     android:id="@+id/activity_startrent_deposit_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:inputType="number"
                     android:hint="请输入出租押金"
+                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>
@@ -292,7 +297,7 @@
             <View style="@style/line_1px"></View>
 
             <RelativeLayout
-                style="@style/myRelativeLayout" >
+                style="@style/myRelativeLayout">
 
                 <TextView
                     style="@style/myRentTitle"
@@ -304,8 +309,8 @@
                     android:id="@+id/activity_startrent_waterstart_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:inputType="number"
                     android:hint="请输入起始水表"
+                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>
@@ -326,8 +331,8 @@
                     android:id="@+id/activity_startrent_powerstart_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:inputType="number"
                     android:hint="请输入起始电表"
+                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>
@@ -347,8 +352,8 @@
                     android:id="@+id/activity_startrent_remark_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:text="新租"
                     android:paddingRight="20dp"
+                    android:text="新租"
                     />
             </RelativeLayout>
 
@@ -399,7 +404,7 @@
 
             <RelativeLayout
                 android:id="@+id/activity_startrent_phone"
-                style="@style/myRelativeLayout"  >
+                style="@style/myRelativeLayout">
 
                 <TextView
                     style="@style/myRentTitle"
@@ -410,8 +415,8 @@
                     android:id="@+id/activity_startrent_phone_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:inputType="phone"
                     android:hint="请输入接收手机"
+                    android:inputType="phone"
                     android:paddingRight="20dp"
                     />
 

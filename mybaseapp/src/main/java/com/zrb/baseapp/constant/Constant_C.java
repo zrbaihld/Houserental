@@ -16,6 +16,7 @@ public final class Constant_C {
 
 
 
+
     public static final class SAVEPATH{
         /** 数据库保存目录路径 */
         public static final String DBPATH = Environment.getExternalStorageDirectory().toString() + BASEFILE+"/db/";
@@ -68,4 +69,7 @@ public final class Constant_C {
 
     public static final class OTHER{
     }
+
+    public static String TOKEN = "token";
+    public static String AID = "token";
 }

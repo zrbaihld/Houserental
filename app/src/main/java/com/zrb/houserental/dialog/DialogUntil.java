@@ -3,6 +3,7 @@ package com.zrb.houserental.dialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.constant.Constant_C;
+import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyLogUtils;
 import com.zrb.houserental.Entity.FloorEntity;
+import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.R;
 import com.zrb.houserental.activity.TenantContinueRentActivity;
 import com.zrb.houserental.activity.TenantStartRentActivity;
@@ -21,6 +26,7 @@ import com.zrb.houserental.meterial.app.DatePickerDialog;
 import com.zrb.houserental.meterial.app.Dialog;
 import com.zrb.houserental.meterial.app.DialogFragment;
 import com.zrb.houserental.meterial.app.ThemeManager;
+import com.zrb.houserental.util.MyTextUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,7 +65,7 @@ public class DialogUntil {
             @Override
             public void onPositiveActionClicked(DialogFragment fragment) {
                 DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
-                String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+                String date = dialog.getFormattedDate(MyTextUtil.getSimpleDateFormat());
                 dao.onPositiveActionClicked(date);
                 super.onPositiveActionClicked(fragment);
             }
@@ -78,6 +84,36 @@ public class DialogUntil {
     }
 
     public void selectString(final Context context, int type, List<FloorEntity> items, DialogUtilEntityDao dao) {
+
+        if (type == 0 || type == 1) {
+            SharedPreferences sp = context.getSharedPreferences(Constant_C.SPPATH.USER_MSG_SPPATH, Context.MODE_PRIVATE);
+            Gson gson = new Gson();
+            String login_response = sp.getString("Login_response", "");
+            LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
+            if (type == 0) {
+                items.clear();
+                for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
+                    FloorEntity floorEntity = new FloorEntity();
+                    floorEntity.setName(buildingsBean.getName());
+                    floorEntity.setId(buildingsBean.getId());
+                    items.add(floorEntity);
+                }
+            } else {
+                for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
+                    if (items.get(0).getId().equals(buildingsBean.getId())) {
+                        items.clear();
+                        for (LoginEntity.AdminBean.BuildingsBean.RoomsBean roomsBean : buildingsBean.getRooms()) {
+                            FloorEntity floorEntity = new FloorEntity();
+                            floorEntity.setName(roomsBean.getName());
+                            floorEntity.setId(roomsBean.getId());
+                            items.add(floorEntity);
+                        }
+                    }
+                }
+
+            }
+        }
+
         this.dao = dao;
         if (itemEntities == null)
             itemEntities = new ArrayList<>();

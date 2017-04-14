@@ -1,6 +1,7 @@
 package com.zrb.baseapp.base;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spanned;
 import android.util.SparseArray;
@@ -12,10 +13,10 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zrb.baseapp.R;
 import com.zrb.baseapp.tools.MyImageTool;
 
 import java.util.List;
-
 
 
 /**
@@ -115,7 +116,7 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends BaseRecyclerViewAdap
     public final void onBindViewHolder(VH vh, int position) {
         final T item = getItem(position);
         bindDataToItemView(vh, item);
-        bindDataToItemView(vh, item,position);
+        bindDataToItemView(vh, item, position);
         bindItemViewClickListener(vh, item);
     }
 
@@ -210,6 +211,22 @@ public abstract class BaseRecyclerViewAdapter<T, VH extends BaseRecyclerViewAdap
         public SparseArrayViewHolder setText(int viewId, String value) {
             TextView view = getView(viewId);
             view.setText(value);
+            return SparseArrayViewHolder.this;
+        }
+
+        public SparseArrayViewHolder setStatus(int viewId, int value) {
+//            0:新客(待租), 1:租住中, 2:退房
+            TextView view = getView(viewId);
+            if (value == 0) {
+                view.setText("状态:新客");
+                view.setTextColor(0xff000000);
+            } else if (value == 1) {
+                view.setText("状态:租住中");
+                view.setTextColor(0xff3949AB);
+            } else if (value == 2) {
+                view.setText("状态:退房");
+                view.setTextColor(0xffD32F2F);
+            }
             return SparseArrayViewHolder.this;
         }
 

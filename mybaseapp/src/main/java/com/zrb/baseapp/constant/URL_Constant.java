@@ -7,5 +7,5 @@ package com.zrb.baseapp.constant;
 public interface URL_Constant {
     String HTTPSTATE = "status";
     String HTTPMSG = "msg";
-    String HTTPBODY = "bata";
+    String HTTPBODY = "data";
 }

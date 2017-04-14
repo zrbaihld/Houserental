@@ -23,4 +23,6 @@ public class FloorEntity {
     public void setId(String id) {
         this.id = id;
     }
+
+
 }

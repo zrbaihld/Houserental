@@ -176,6 +176,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="24dp"
-            android:text="查询"/>
+            android:text="联系TA"/>
     </LinearLayout>
 </ScrollView>

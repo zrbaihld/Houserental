@@ -12,9 +12,15 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.tools.JsonParsing;
+import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.baseapp.tools.MyLogUtils;
+import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.FloorEntity;
+import com.zrb.houserental.Entity.ResultTenantQueryEntity;
+import com.zrb.houserental.Entity.RoomEntity;
 import com.zrb.houserental.R;
+import com.zrb.houserental.constant.URL_Constant;
 import com.zrb.houserental.dialog.DialogUntil;
 import com.zrb.houserental.dialog.SelectFloorDialog;
 
@@ -46,6 +52,9 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
     EditText activityAddtenantNewwaterTv;
     @BindView(R.id.activity_addtenant_newpower_tv)
     EditText activityAddtenantNewpowerTv;
+    @BindView(R.id.scrollview)
+    View scrollview;
+
     @BindView(R.id.activity_roomquert_confirm)
     AppCompatButton activityRoomquertConfirm;
 
@@ -53,9 +62,17 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
     private int type = -1;//0 楼号 1房号 2性别
 
 
+    private String building_id = "";
+    private String building_name = "";
+    private String room_id = "";
+    private String room_name = "";
+
+    private RoomEntity roomEntity;
+
     @Override
     public void init() {
         addConView(R.layout.activity_changetenantmoney);
+        ButterKnife.bind(this);
 
         titleTV.setText("租金变更");
         itemEntities = new ArrayList<>();
@@ -80,37 +97,41 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.activity_addtenant_floor:
-                itemEntities.clear();
-                for (int i = 0; i < 10; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("楼号" + i);
-                    itemEntities.add(itemEntity);
-                }
                 type = 0;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityAddtenantFloorTv.setText(entity.getName());
+                        activityAddtenantRoomTv.setText("请选择房号");
+                        building_id = entity.getId();
+                        building_name = entity.getName();
+                        itemEntities.clear();
+                        itemEntities.add(entity);
                     }
                 });
                 break;
             case R.id.activity_addtenant_room:
-                itemEntities.clear();
-                for (int i = 0; i < 10; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("房号" + i);
-                    itemEntities.add(itemEntity);
+                if (itemEntities == null || itemEntities.size() == 0) {
+                    toastIfActive("请先选择楼号");
+                    break;
                 }
                 type = 1;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
+                        room_id = entity.getId();
+                        room_name = entity.getName();
                         activityAddtenantRoomTv.setText(entity.getName());
+                        MyHttpTool.creat(ChangeTenantMoneyActivity.this)
+                                .setContent("building_id", building_id)
+                                .setContent("room_id", room_id)
+                                .postShowDialog(0, URL_Constant.room, ChangeTenantMoneyActivity.this);
+
+
                     }
                 });
                 break;
             case R.id.activity_roomquert_confirm:
-
                 sendMessage();
                 break;
         }
@@ -133,9 +154,64 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
             toastIfActive("未选择房号");
             return;
         }
+        if (roomEntity != null) {
+            if (TextUtil.isEmptyString(s_month)) {
+                s_month = roomEntity.getRoom().getRental() + "";
+            } else {
+                if (!(Double.parseDouble(s_month) > 0)) {
+                    toastIfActive("月租必须大于0");
+                }
+            }
+            if (TextUtil.isEmptyString(s_water)) {
+                s_water = roomEntity.getRoom().getWater_rate() + "";
+            } else {
+                if (!(Double.parseDouble(s_water) > 0)) {
+                    toastIfActive("水费必须大于0");
+                }
+            }
+            if (TextUtil.isEmptyString(s_power)) {
+                s_power = roomEntity.getRoom().getElectric_rate() + "";
+            } else {
+                if (!(Double.parseDouble(s_power) > 0)) {
+                    toastIfActive("电费必须大于0");
+                }
+            }
 
+            MyHttpTool.creat(ChangeTenantMoneyActivity.this)
+                    .setContent("building_id", building_id)
+                    .setContent("room_id", room_id)
+                    .setContent("rental", s_month)
+                    .setContent("water_rate", s_water)
+                    .setContent("electric_rate", s_power)
+                    .postShowDialog(1, URL_Constant.updateRoom, ChangeTenantMoneyActivity.this);
+        }
+    }
 
-        MyLogUtils.e("sssss");
-
+    @Override
+    public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
+        if (super.getIOAuthCallBack(type, json, isSuccess)) {
+            if (type == 0)
+                scrollview.setVisibility(View.GONE);
+            return true;
+        }
+        switch (type) {
+            case 0:
+                roomEntity = gson.fromJson(JsonParsing.getData(json), RoomEntity.class);
+                if (roomEntity != null && roomEntity.getRoom() != null) {
+                    scrollview.setVisibility(View.VISIBLE);
+                    activityStartrentUnityTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
+                    activityStartrentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
+                    activityStartrentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
+                } else {
+                    scrollview.setVisibility(View.GONE);
+                }
+                break;
+            case 1:
+                activityStartrentUnityTv.setText(String.format("￥ %s",activityAddtenantMonthTv.getText().toString()));
+                activityStartrentWaterTv.setText(String.format("￥ %s/吨",activityAddtenantNewwaterTv.getText().toString()));
+                activityStartrentPowerTv.setText(String.format("￥ %s/度", activityAddtenantNewpowerTv.getText().toString()));
+                break;
+        }
+        return false;
     }
 }

@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.zrb.baseapp.base.BaseActivity;
+import com.zrb.baseapp.constant.Constant_C;
+import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.baseapp.tools.TextUtil;
+import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.R;
 import com.zrb.houserental.constant.URL_Constant;
 
@@ -32,7 +35,8 @@ public class LoginActivity extends BaseActivity {
     public void init() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        activityLoginEtPhone.setText("123456789");
+        activityLoginEtPassword.setText("123456");
     }
 
     @Override
@@ -53,22 +57,22 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.activity_login_btn_login)
     public void onViewClicked() {
-//        String phone = activityLoginEtPhone.getText().toString();
-//        String password = activityLoginEtPassword.getText().toString();
-//        if (TextUtil.isEmptyString(phone)) {
-//            toastIfActive("请输入手机号");
-//            return;
-//        }
-//        if (TextUtil.isEmptyString(password)) {
-//            toastIfActive("请输入密码");
-//            return;
-//        }
-//        MyHttpTool.creat(this)
-//                .setContent("phone", phone)
-//                .setContent("passwd", password)
-//                .postShowDialog(0, URL_Constant.Login, this);
+        String phone = activityLoginEtPhone.getText().toString();
+        String password = activityLoginEtPassword.getText().toString();
+        if (TextUtil.isEmptyString(phone)) {
+            toastIfActive("请输入手机号");
+            return;
+        }
+        if (TextUtil.isEmptyString(password)) {
+            toastIfActive("请输入密码");
+            return;
+        }
+        MyHttpTool.creat(this)
+                .setContent("passwd", password)
+                .setContent("phone", phone)
+                .postShowDialog(0, URL_Constant.Login, this);
 
-        startActivity(new Intent(this, MainActivity.class));
+//
     }
 
     @Override
@@ -76,6 +80,12 @@ public class LoginActivity extends BaseActivity {
         if (super.getIOAuthCallBack(type, json, isSuccess)) return true;
         switch (type) {
             case 0:
+                if (JsonParsing.getState(json)) {
+                    sp.edit().putString("Login_response", json).
+                            commit();
+                    startActivity(new Intent(this, MainActivity.class));
+                }
+
 
                 break;
         }

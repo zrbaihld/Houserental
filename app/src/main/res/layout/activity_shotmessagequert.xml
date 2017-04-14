@@ -97,8 +97,10 @@
         ></View>
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
 
         <LinearLayout
@@ -269,7 +271,7 @@
 
                 <TextView
                     style="@style/myRentTitle"
-                    android:text="上月电费:"
+                    android:text="上月电表:"
                     />
 
 
@@ -286,7 +288,6 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
-                android:background="#E0E0E0"
                 >
 
                 <TextView
@@ -294,12 +295,13 @@
                     android:text="本月水表:"
                     />
 
-                <TextView
+                <EditText
                     android:id="@+id/activity_shotmessagequert_nowwater_tv"
-                    style="@style/myRentDetail"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:hint="请输入本月水表"
+                    android:inputType="number"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
                     />
             </RelativeLayout>
 
@@ -307,7 +309,6 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
-                android:background="#E0E0E0"
                 >
 
                 <TextView
@@ -315,12 +316,13 @@
                     android:text="本月电表:"
                     />
 
-                <TextView
+                <EditText
                     android:id="@+id/activity_shotmessagequert_nowpower_tv"
-                    style="@style/myRentDetail"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:hint="请输入本月电表"
+                    android:inputType="number"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
                     />
             </RelativeLayout>
 
@@ -416,7 +418,6 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
-                android:background="#E0E0E0"
                 >
 
                 <TextView
@@ -424,12 +425,13 @@
                     android:text="其他应收:"
                     />
 
-                <TextView
+                <EditText
                     android:id="@+id/activity_shotmessagequert_otherin_tv"
-                    style="@style/myRentDetail"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:hint="请输入其他应收"
+                    android:inputType="number"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
                     />
             </RelativeLayout>
 
@@ -437,7 +439,6 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
-                android:background="#E0E0E0"
                 >
 
                 <TextView
@@ -445,12 +446,13 @@
                     android:text="其他应付:"
                     />
 
-                <TextView
+                <EditText
                     android:id="@+id/activity_shotmessagequert_otherout_tv"
-                    style="@style/myRentDetail"
+                    style="@style/myEditText"
                     android:layout_alignParentRight="true"
+                    android:hint="请输入其他应付"
+                    android:inputType="number"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
                     />
             </RelativeLayout>
 
@@ -497,33 +499,11 @@
                     android:text=""
                     />
             </RelativeLayout>
-
             <View style="@style/line_1px"></View>
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
                 android:background="#E0E0E0"
-                >
-
-                <TextView
-                    style="@style/myRentTitle"
-                    android:text="备注:"
-                    />
-
-
-                <TextView
-                    android:id="@+id/activity_shotmessagequert_remark_tv"
-                    style="@style/myRentDetail"
-                    android:layout_alignParentRight="true"
-                    android:paddingRight="20dp"
-                    android:text="退租"
-                    />
-            </RelativeLayout>
-
-            <View style="@style/line_1px"></View>
-
-            <RelativeLayout
-                style="@style/myRelativeLayout"
                 >
 
 
@@ -532,15 +512,37 @@
                     android:text="收租人员:"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/activity_startrent_getman_tv"
-                    style="@style/myEditText"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:inputType="phone"
-                    android:hint="请输入其他手机"
                     android:paddingRight="20dp"
+                    android:text=""
                     />
             </RelativeLayout>
+            <View style="@style/line_1px"></View>
+
+            <RelativeLayout
+                style="@style/myRelativeLayout"
+                >
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="备注:"
+                    />
+
+                <EditText
+                    android:id="@+id/activity_shotmessagequert_remark_tv"
+                    style="@style/myEditText"
+                    android:layout_alignParentRight="true"
+                    android:hint="退租"
+                    android:inputType="phone"
+                    android:paddingRight="20dp"
+                    />
+
+            </RelativeLayout>
+
+
 
             <View style="@style/line_1px"></View>
 
@@ -587,8 +589,8 @@
                     android:id="@+id/activity_shotmessagequert_otherphone_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:inputType="phone"
                     android:hint="请输入其他手机"
+                    android:inputType="phone"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>

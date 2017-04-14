@@ -13,7 +13,11 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.constant.Constant_C;
+import com.zrb.baseapp.tools.JsonParsing;
+import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.FloorEntity;
+import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.R;
 import com.zrb.houserental.dialog.DialogUntil;
 import com.zrb.houserental.dialog.SelectFloorDialog;
@@ -44,12 +48,10 @@ public class TenantQueryActivity extends BaseActivity {
     private List<FloorEntity> itemEntities;
     private int type = -1;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-
-    }
+    private String building_id = "";
+    private String building_name = "";
+    private String room_id = "";
+    private String room_name = "";
 
     @Override
     public void init() {
@@ -79,37 +81,49 @@ public class TenantQueryActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.activity_tenantquert_change_floor:
-                itemEntities.clear();
-                for (int i = 0; i < 10; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("测试数据" + i);
-                    itemEntities.add(itemEntity);
-                }
                 type = 0;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityTenantquertChangeFloorTv.setText(entity.getName());
+                        activityTenantquertChangeRoomTv.setText("请选择房号");
+                        building_id = entity.getId();
+                        building_name = entity.getName();
+                        itemEntities.clear();
+                        itemEntities.add(entity);
                     }
                 });
                 break;
             case R.id.activity_tenantquert_change_room:
-                itemEntities.clear();
-                for (int i = 0; i < 10; i++) {
-                    FloorEntity itemEntity = new FloorEntity();
-                    itemEntity.setName("测试" + i);
-                    itemEntities.add(itemEntity);
+                if (itemEntities == null || itemEntities.size() == 0) {
+                    toastIfActive("请先选择楼号");
+                    break;
                 }
                 type = 1;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
+                        room_id = entity.getId();
+                        room_name = entity.getName();
                         activityTenantquertChangeRoomTv.setText(entity.getName());
                     }
                 });
                 break;
             case R.id.activity_changepassword_confirm:
+
+                if (TextUtil.isEmptyString(building_id)) {
+                    toastIfActive("还未选楼号");
+                    return;
+                }
+                if (TextUtil.isEmptyString(room_id)) {
+                    toastIfActive("还未选房号");
+                    return;
+                }
                 intent = new Intent(this, ResultTenantQueryActivity.class);
+                intent.putExtra("building_id", building_id);
+                intent.putExtra("building_name", building_name);
+                intent.putExtra("room_id", room_id);
+                intent.putExtra("room_name", room_name);
                 startActivity(intent);
                 break;
         }

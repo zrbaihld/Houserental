@@ -78,7 +78,7 @@
             style="@style/myRentDetail"
             android:layout_alignParentRight="true"
             android:paddingRight="20dp"
-            android:text="张冬冬"
+            android:text=""
             />
     </RelativeLayout>
 
@@ -89,7 +89,9 @@
         ></View>
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent">
 
 

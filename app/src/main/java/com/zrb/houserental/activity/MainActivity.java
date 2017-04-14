@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.constant.Constant_C;
+import com.zrb.baseapp.tools.JsonParsing;
+import com.zrb.baseapp.tools.TextUtil;
+import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.R;
 
 import java.util.ArrayList;
@@ -50,6 +54,10 @@ public class MainActivity extends BaseActivity {
     private Class[] activity_class = {TenantStartRentActivity.class, TenantContinueRentActivity.class, TenantStopRentActivity.class
             , AddTenantActivity.class, ChangeTenantMoneyActivity.class, ShotMessageQuertActivity.class};
 
+
+    private LoginEntity loginEntity;
+
+
     @Override
     public void init() {
         setContentView(R.layout.activity_main);
@@ -70,9 +78,29 @@ public class MainActivity extends BaseActivity {
             strings.add(itemObject);
         }
         myAdapter = new MyAdapter(strings);
-
-
         viewListview.setAdapter(myAdapter);
+
+        initDate();
+    }
+
+    private void initDate() {
+        String login_response = sp.getString("Login_response", "");
+        if (TextUtil.isEmptyString(login_response)) {
+            intent = new Intent(this, LoginEntity.class);
+            startActivity(intent);
+            finish();
+        }
+        loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
+
+        Constant_C.AID = loginEntity.getAdmin().getId();
+        Constant_C.TOKEN = loginEntity.getToken();
+
+        if (loginEntity != null && loginEntity.getAdmin() != null) {
+            baseToolbarTitle.setText(String.format("管理员:%s", loginEntity.getAdmin().getUsername()));
+        } else {
+
+        }
+
     }
 
     @Override

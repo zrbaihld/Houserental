@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.google.gson.GsonBuilder;
 import com.zrb.baseapp.base.AppManager;
+import com.zrb.baseapp.constant.Constant_C;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +34,7 @@ import okhttp3.Response;
  * Created by Administrator on 2016/3/1.
  */
 public class MyHttpTool {
-    private MediaType MEDIA_TYPE_PLAIN = MediaType.parse("text/plain;charset=utf-8");
+    private MediaType MEDIA_TYPE_PLAIN = MediaType.parse("application/json;charset=utf-8");
     private static MyHttpTool myHttp;
     private HashMap<String, String> map;
     private HashMap<String, File> fileMap;
@@ -53,7 +54,11 @@ public class MyHttpTool {
         }
         myHttp.mContext = context;
         myHttp.map.clear();
-        myHttp.map.put("client_ver", AppManager.getVersionCode());
+        if (!TextUtil.isEmptyString(Constant_C.TOKEN))
+            myHttp.map.put("token", Constant_C.TOKEN);
+        if (!TextUtil.isEmptyString(Constant_C.AID))
+            myHttp.map.put("aid", Constant_C.AID);
+
         myHttp.handler = new Handler(context.getMainLooper());
         return myHttp;
     }
@@ -88,12 +93,13 @@ public class MyHttpTool {
         GsonBuilder gb = new GsonBuilder();
         RequestBody body = RequestBody.create(MEDIA_TYPE_PLAIN, gb.create().toJson(map));
 
-        MyLogUtils.d(map.toString());
+        MyLogUtils.d(gb.create().toJson(map));
         MyLogUtils.d(url);
-        Request request = new Request.Builder().addHeader("content-type", "application/json")
+        Request request = new Request.Builder()
                 .url(url)
                 .post(body)
                 .build();
+        MyLogUtils.d(request.header("content-type"));
         client.newCall(request).enqueue(new Callback() {
 
             @Override
@@ -211,7 +217,7 @@ public class MyHttpTool {
             public void onResponse(Call call, Response response) throws IOException {
                 fileMap.clear();
                 final String s = response.body().string();
-                MyLogUtils.d(response.toString()+s);
+                MyLogUtils.d(response.toString() + s);
 
                 handler.post(new Runnable() {
                     @Override
