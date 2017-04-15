@@ -103,6 +103,7 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityAddtenantFloorTv.setText(entity.getName());
                         activityAddtenantRoomTv.setText("请选择房号");
+                        scrollview.setVisibility(View.GONE);
                         building_id = entity.getId();
                         building_name = entity.getName();
                         itemEntities.clear();

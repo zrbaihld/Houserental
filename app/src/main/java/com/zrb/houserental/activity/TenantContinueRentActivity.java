@@ -197,6 +197,8 @@ public class TenantContinueRentActivity extends BaseActivity {
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityContinuerentFloorTv.setText(entity.getName());
                         activityContinuerentRoomTv.setText("请选择房号");
+                        activityContinuerentNameTv.setText("");
+                        scrollView.setVisibility(View.GONE);
                         building_id = entity.getId();
                         building_name = entity.getName();
                         itemEntities.clear();
@@ -206,12 +208,13 @@ public class TenantContinueRentActivity extends BaseActivity {
                 });
                 break;
             case R.id.activity_continuerent_room:
-                if (itemEntities == null || itemEntities.size() == 0) {
+                if (itemEntities == null) {
                     toastIfActive("请先选择楼号");
                     break;
                 }
                 type = 1;
-                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
+
+             DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
                         room_id = entity.getId();
@@ -224,6 +227,7 @@ public class TenantContinueRentActivity extends BaseActivity {
 
                     }
                 });
+
                 break;
             case R.id.activity_continuerent_receverphone:
                 List<FloorEntity> itemEntities = new ArrayList<>();
@@ -430,7 +434,7 @@ public class TenantContinueRentActivity extends BaseActivity {
                     activityContinuerentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityContinuerentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
                     activityContinuerentDepositTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getDeposit()));
-                    activityContinuerentStartdayTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getRent_date_start()));
+                    activityContinuerentStartdayTv.setText(String.format("%s", roomEntity.getRoom().getRend_date_end()));
                     activityContinuerentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getLodger().getPrev_water()));
                     activityContinuerentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getLodger().getPrev_electric()));
                     activityContinuerentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getPhone()));

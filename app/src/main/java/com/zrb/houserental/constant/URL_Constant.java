@@ -18,4 +18,6 @@ public interface URL_Constant {
     String initRent = BaseURL + "api/house/initRent";
     String xuRent = BaseURL + "api/house/xuRent";
     String exitRent = BaseURL + "api/house/exitRent";
+    String listSms = BaseURL + "api/house/listSms";
+
 }

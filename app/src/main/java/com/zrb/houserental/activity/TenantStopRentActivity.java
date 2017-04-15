@@ -214,6 +214,8 @@ public class TenantStopRentActivity extends BaseActivity {
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityStoprentFloorTv.setText(entity.getName());
                         activityStoprentRoomTv.setText("请选择房号");
+                        activityStoprentNameTv.setText("");
+                        scrollView.setVisibility(View.GONE);
                         building_id = entity.getId();
                         building_name = entity.getName();
                         itemEntities.clear();

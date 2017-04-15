@@ -84,7 +84,6 @@ public class DialogUntil {
     }
 
     public void selectString(final Context context, int type, List<FloorEntity> items, DialogUtilEntityDao dao) {
-
         if (type == 0 || type == 1) {
             SharedPreferences sp = context.getSharedPreferences(Constant_C.SPPATH.USER_MSG_SPPATH, Context.MODE_PRIVATE);
             Gson gson = new Gson();
@@ -100,8 +99,9 @@ public class DialogUntil {
                 }
             } else {
                 for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
+                    if (items.size()>0)
                     if (items.get(0).getId().equals(buildingsBean.getId())) {
-                        items.clear();
+                            items.clear();
                         for (LoginEntity.AdminBean.BuildingsBean.RoomsBean roomsBean : buildingsBean.getRooms()) {
                             FloorEntity floorEntity = new FloorEntity();
                             floorEntity.setName(roomsBean.getName());
@@ -162,7 +162,6 @@ public class DialogUntil {
             });
         }
         selectFloorDialog.show();
-
     }
 
     private class MyViewHolder extends BaseRecyclerViewAdapter.SparseArrayViewHolder {

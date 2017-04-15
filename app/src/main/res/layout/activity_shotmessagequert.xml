@@ -288,6 +288,7 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
+                android:background="#E0E0E0"
                 >
 
                 <TextView
@@ -295,13 +296,12 @@
                     android:text="本月水表:"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/activity_shotmessagequert_nowwater_tv"
-                    style="@style/myEditText"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:hint="请输入本月水表"
-                    android:inputType="number"
                     android:paddingRight="20dp"
+                    android:text=""
                     />
             </RelativeLayout>
 
@@ -309,6 +309,7 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
+                android:background="#E0E0E0"
                 >
 
                 <TextView
@@ -316,13 +317,12 @@
                     android:text="本月电表:"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/activity_shotmessagequert_nowpower_tv"
-                    style="@style/myEditText"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:hint="请输入本月电表"
-                    android:inputType="number"
                     android:paddingRight="20dp"
+                    android:text=""
                     />
             </RelativeLayout>
 
@@ -418,19 +418,17 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
+                android:background="#E0E0E0"
                 >
 
                 <TextView
                     style="@style/myRentTitle"
                     android:text="其他应收:"
                     />
-
-                <EditText
+                <TextView
                     android:id="@+id/activity_shotmessagequert_otherin_tv"
-                    style="@style/myEditText"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:hint="请输入其他应收"
-                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>
@@ -439,6 +437,7 @@
 
             <RelativeLayout
                 style="@style/myRelativeLayout"
+                android:background="#E0E0E0"
                 >
 
                 <TextView
@@ -446,12 +445,10 @@
                     android:text="其他应付:"
                     />
 
-                <EditText
+                <TextView
                     android:id="@+id/activity_shotmessagequert_otherout_tv"
-                    style="@style/myEditText"
+                    style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
-                    android:hint="请输入其他应付"
-                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>

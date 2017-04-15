@@ -95,7 +95,7 @@ public class TenantQueryActivity extends BaseActivity {
                 });
                 break;
             case R.id.activity_tenantquert_change_room:
-                if (itemEntities == null || itemEntities.size() == 0) {
+                if (itemEntities == null ) {
                     toastIfActive("请先选择楼号");
                     break;
                 }

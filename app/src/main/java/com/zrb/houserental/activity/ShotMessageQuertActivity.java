@@ -18,6 +18,7 @@ import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.FloorEntity;
+import com.zrb.houserental.Entity.ListSmsEntity;
 import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.Entity.RoomEntity;
 import com.zrb.houserental.R;
@@ -62,9 +63,9 @@ public class ShotMessageQuertActivity extends BaseActivity {
     @BindView(R.id.activity_shotmessagequert_beforewpower_tv)
     TextView activityShotmessagequertBeforewpowerTv;
     @BindView(R.id.activity_shotmessagequert_nowwater_tv)
-    EditText activityShotmessagequertNowwaterTv;
+    TextView activityShotmessagequertNowwaterTv;
     @BindView(R.id.activity_shotmessagequert_nowpower_tv)
-    EditText activityShotmessagequertNowpowerTv;
+    TextView activityShotmessagequertNowpowerTv;
     @BindView(R.id.activity_shotmessagequert_userwater_tv)
     TextView activityShotmessagequertUserwaterTv;
     @BindView(R.id.activity_shotmessagequert_userpower_tv)
@@ -74,9 +75,9 @@ public class ShotMessageQuertActivity extends BaseActivity {
     @BindView(R.id.activity_shotmessagequert_powerprice_tv)
     TextView activityShotmessagequertPowerpriceTv;
     @BindView(R.id.activity_shotmessagequert_otherin_tv)
-    EditText activityShotmessagequertOtherinTv;
+    TextView activityShotmessagequertOtherinTv;
     @BindView(R.id.activity_shotmessagequert_otherout_tv)
-    EditText activityShotmessagequertOtheroutTv;
+    TextView activityShotmessagequertOtheroutTv;
     @BindView(R.id.activity_shotmessagequert_needin_tv)
     TextView activityShotmessagequertNeedinTv;
     @BindView(R.id.activity_shotmessagequert_allneedin_tv)
@@ -102,7 +103,7 @@ public class ShotMessageQuertActivity extends BaseActivity {
     private String building_name = "";
     private String room_id = "";
     private String room_name = "";
-    private RoomEntity roomEntity;
+    private ListSmsEntity roomEntity;
 
     @Override
     public void init() {
@@ -115,61 +116,61 @@ public class ShotMessageQuertActivity extends BaseActivity {
 
     @Override
     public void setListenner() {
-        activityShotmessagequertNowwaterTv.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                activityShotmessagequertUserwaterTv.setText(
-                        MyTextUtil.useNum(editable.toString(),
-                                activityShotmessagequertBeforewaterTv.getText().toString(),
-                                "本月用电少于上月用水")
-                );
-                activityShotmessagequertWaterpriceTv.setText(String.format("￥%s",
-                        MyTextUtil.totlePrice(activityShotmessagequertUserwaterTv.getText().toString(),
-                                activityShotmessagequertWaterTv.getText().toString()))
-
-                );
-                totleGetPrice();
-            }
-        });
-        activityShotmessagequertNowpowerTv.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                activityShotmessagequertUserpowerTv.setText(
-                        MyTextUtil.useNum(editable.toString(),
-                                activityShotmessagequertBeforewpowerTv.getText().toString(),
-                                "本月用电少于上月用电")
-                );
-                activityShotmessagequertPowerpriceTv.setText(String.format("￥%s",
-                        MyTextUtil.totlePrice(activityShotmessagequertUserpowerTv.getText().toString(),
-                                activityShotmessagequertPowerTv.getText().toString()))
-
-                );
-                totleGetPrice();
-            }
-        });
-
-        activityShotmessagequertOtherinTv.addTextChangedListener(new MyTextWatcher());
-        activityShotmessagequertOtheroutTv.addTextChangedListener(new MyTextWatcher());
+//        activityShotmessagequertNowwaterTv.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                activityShotmessagequertUserwaterTv.setText(
+//                        MyTextUtil.useNum(editable.toString(),
+//                                activityShotmessagequertBeforewaterTv.getText().toString(),
+//                                "本月用电少于上月用水")
+//                );
+//                activityShotmessagequertWaterpriceTv.setText(String.format("￥%s",
+//                        MyTextUtil.totlePrice(activityShotmessagequertUserwaterTv.getText().toString(),
+//                                activityShotmessagequertWaterTv.getText().toString()))
+//
+//                );
+//                totleGetPrice();
+//            }
+//        });
+//        activityShotmessagequertNowpowerTv.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                activityShotmessagequertUserpowerTv.setText(
+//                        MyTextUtil.useNum(editable.toString(),
+//                                activityShotmessagequertBeforewpowerTv.getText().toString(),
+//                                "本月用电少于上月用电")
+//                );
+//                activityShotmessagequertPowerpriceTv.setText(String.format("￥%s",
+//                        MyTextUtil.totlePrice(activityShotmessagequertUserpowerTv.getText().toString(),
+//                                activityShotmessagequertPowerTv.getText().toString()))
+//
+//                );
+//                totleGetPrice();
+//            }
+//        });
+//
+//        activityShotmessagequertOtherinTv.addTextChangedListener(new MyTextWatcher());
+//        activityShotmessagequertOtheroutTv.addTextChangedListener(new MyTextWatcher());
 
     }
 
@@ -245,27 +246,32 @@ public class ShotMessageQuertActivity extends BaseActivity {
                         MyHttpTool.creat(ShotMessageQuertActivity.this)
                                 .setContent("building_id", building_id)
                                 .setContent("room_id", room_id)
-                                .postShowDialog(0, URL_Constant.room, ShotMessageQuertActivity.this);
+                                .postShowDialog(0, URL_Constant.listSms, ShotMessageQuertActivity.this);
                     }
                 });
                 break;
 
             case R.id.activity_shotmessagequert_receverphone:
                 List<FloorEntity> itemEntities = new ArrayList<>();
-                FloorEntity itemEntity = new FloorEntity();
-                itemEntity.setName(roomEntity.getRoom().getLodger().getPhone());
-                itemEntities.add(itemEntity);
                 type = 3;
-                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
-                    @Override
-                    public void onPositiveActionClicked(FloorEntity entity) {
-                        activityShotmessagequertReceverphoneTv.setText(entity.getName());
+                if (roomEntity!=null&&roomEntity.getRoom()!=null&&roomEntity.getRoom().getRent_records()!=null){
+                    for (ListSmsEntity.RoomBean.RentRecordsBean rentRecordsBean : roomEntity.getRoom().getRent_records()) {
+                        FloorEntity itemEntity = new FloorEntity();
+                        itemEntity.setName(rentRecordsBean.getPhone());
+                        itemEntities.add(itemEntity);
                     }
-                });
+                    DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
+                        @Override
+                        public void onPositiveActionClicked(FloorEntity entity) {
+                            activityShotmessagequertReceverphoneTv.setText(entity.getName());
+                        }
+                    });
+                }
+
                 break;
             case R.id.activity_shotmessagequert_no:
                 itemEntities = new ArrayList<>();
-                itemEntity = new FloorEntity();
+                FloorEntity itemEntity = new FloorEntity();
                 if (roomEntity==null){
                     toastIfActive("请先选择楼号房号");
                     return;
@@ -273,15 +279,22 @@ public class ShotMessageQuertActivity extends BaseActivity {
                 if (roomEntity.getRoom()==null){
                     return;
                 }
-                itemEntity.setName( roomEntity.getRoom().getNumber());
-                itemEntities.add(itemEntity);
                 type = 5;
-                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
-                    @Override
-                    public void onPositiveActionClicked(FloorEntity entity) {
-                        activityShotmessagequertNoTv.setText(entity.getName());
+                if (roomEntity!=null&&roomEntity.getRoom()!=null&&roomEntity.getRoom().getRent_records()!=null){
+                    for (ListSmsEntity.RoomBean.RentRecordsBean rentRecordsBean : roomEntity.getRoom().getRent_records()) {
+                         itemEntity = new FloorEntity();
+                        itemEntity.setName(rentRecordsBean.getNumber());
+                        itemEntities.add(itemEntity);
                     }
-                });
+                    DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
+                        @Override
+                        public void onPositiveActionClicked(FloorEntity entity) {
+                            activityShotmessagequertNoTv.setText(entity.getName());
+                        }
+                    });
+                }
+
+
                 break;
             case R.id.activity_roomquert_confirm:
                 sendShotMessage();
@@ -345,23 +358,35 @@ public class ShotMessageQuertActivity extends BaseActivity {
         }
         switch (type) {
             case 0:
-                roomEntity = gson.fromJson(JsonParsing.getData(json), RoomEntity.class);
-                if (roomEntity != null && roomEntity.getRoom() != null && roomEntity.getRoom().getLodger() != null) {
+                roomEntity = gson.fromJson(JsonParsing.getData(json), ListSmsEntity.class);
+                if (roomEntity != null && roomEntity.getRoom() != null && roomEntity.getRoom().getRent_records() != null) {
                     scrollview.setVisibility(View.VISIBLE);
-
                     String login_response = sp.getString("Login_response", "");
                     LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
-                    activityShotmessagequertNoTv.setText(String.format("%s", roomEntity.getRoom().getNumber()));
                     activityShotmessagequertUnityTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
                     activityShotmessagequertDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
                     activityShotmessagequertWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityShotmessagequertPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
-                    activityShotmessagequertStartdayTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getRent_date_start()));
-                    activityShotmessagequertEnddayTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getRent_date_end()));
-                    activityShotmessagequertBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getLodger().getPrev_water()));
-                    activityShotmessagequertBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getLodger().getPrev_electric()));
+                    if (roomEntity.getRoom().getRent_records().size()>0){
+                        ListSmsEntity.RoomBean.RentRecordsBean rentRecordsBean=roomEntity.getRoom().getRent_records().get(0);
+                        activityShotmessagequertNoTv.setText(String.format("%s", rentRecordsBean.getNumber()));
+                        activityShotmessagequertStartdayTv.setText(String.format("%s", rentRecordsBean.getStart_date()));
+                        activityShotmessagequertEnddayTv.setText(String.format("%s", rentRecordsBean.getEnd_date()));
+                        activityShotmessagequertBeforewaterTv.setText(String.format("%s吨", rentRecordsBean.getPrev_water()));
+                        activityShotmessagequertBeforewpowerTv.setText(String.format("%s度", rentRecordsBean.getPrev_electric()));
+                        activityShotmessagequertNowpowerTv.setText(String.format("%s度", rentRecordsBean.getElectric()));
+                        activityShotmessagequertNowwaterTv.setText(String.format("%s吨", rentRecordsBean.getWater()));
+                        activityShotmessagequertUserpowerTv.setText(String.format("%s度",rentRecordsBean.getElectric()- rentRecordsBean.getPrev_water()));
+                        activityShotmessagequertUserwaterTv.setText(String.format("%s吨", rentRecordsBean.getWater()-rentRecordsBean.getPrev_electric()));
+
+                        activityShotmessagequertOtherinTv.setText(String.format("￥ %s", rentRecordsBean.getReceivable()));
+                        activityShotmessagequertOtheroutTv.setText(String.format("￥ %s", rentRecordsBean.getPayable()));
+                        activityShotmessagequertAllneedinTv.setText(String.format("￥ %s", rentRecordsBean.getTotal_fee()));
+                        activityShotmessagequertRemarkTv.setText(String.format("￥ %s", rentRecordsBean.getRemark()));
+                        activityShotmessagequertReceverphoneTv.setText(rentRecordsBean.getPhone());
+                    }
+
                     activityStartrentGetmanTv.setText(loginEntity.getAdmin().getRealname());
-                    activityShotmessagequertReceverphoneTv.setText(roomEntity.getRoom().getLodger().getPhone());
                     activityShotmessagequertNeedinTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
 
                 } else {
