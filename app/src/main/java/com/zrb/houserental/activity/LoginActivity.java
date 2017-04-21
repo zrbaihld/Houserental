@@ -35,7 +35,7 @@ public class LoginActivity extends BaseActivity {
     public void init() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        activityLoginEtPhone.setText("123456789");
+        activityLoginEtPhone.setText("root");
         activityLoginEtPassword.setText("123456");
     }
 

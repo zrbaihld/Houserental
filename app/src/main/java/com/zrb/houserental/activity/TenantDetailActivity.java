@@ -98,13 +98,13 @@ public class TenantDetailActivity extends BaseActivity {
 
         activityTenantdetailIdcare.setText(String.format("证件号码 : %s", lodgersBean.getId_card()));
         activityTenantdetailAddress.setText(String.format("房客籍贯 : %s", lodgersBean.getHometown()));
-        activityTenantdetailBirthday.setText(String.format("出生日期 : %s", lodgersBean.getBirthday()));
+        activityTenantdetailBirthday.setText(String.format("出生日期 : %s", MyTextUtil.getDate(lodgersBean.getBirthday())));
         activityTenantdetailPhone.setText(String.format("电话号码 : %s", phone));
         activityTenantdetailFloor.setText(String.format("楼号 : %s", getIntent().getStringExtra("building_name")));
         activityTenantdetailRoom.setText(String.format("房号 : %s", lodgersBean.getRoom().getName()));
-        activityTenantdetailPermitday.setText(String.format("暂住证日期 : %s", lodgersBean.getResidence_permit_expire()));
-        activityTenantdetailStartday.setText(String.format("起租日期 : %s", lodgersBean.getRent_date_start()));
-        activityTenantdetailStopday.setText(String.format("结束日期 : %s", lodgersBean.getRent_date_end()));
+        activityTenantdetailPermitday.setText(String.format("暂住证日期 : %s", MyTextUtil.getDate(lodgersBean.getResidence_permit_expire())));
+        activityTenantdetailStartday.setText(String.format("起租日期 : %s", MyTextUtil.getDate(lodgersBean.getRent_date_start())));
+        activityTenantdetailStopday.setText(String.format("结束日期 : %s", MyTextUtil.getDate(lodgersBean.getRent_date_end())));
 
     }
 

@@ -244,7 +244,7 @@ public class TenantContinueRentActivity extends BaseActivity {
                 break;
             case R.id.activity_continuerent_advancemonths:
                 itemEntities = new ArrayList<>();
-                for (int i = 0; i < 12; i++) {
+                for (int i = 1; i < 13; i++) {
                     itemEntity = new FloorEntity();
                     itemEntity.setName("月数" + i);
                     itemEntities.add(itemEntity);
@@ -434,7 +434,7 @@ public class TenantContinueRentActivity extends BaseActivity {
                     activityContinuerentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityContinuerentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
                     activityContinuerentDepositTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getDeposit()));
-                    activityContinuerentStartdayTv.setText(String.format("%s", roomEntity.getRoom().getRend_date_end()));
+                    activityContinuerentStartdayTv.setText(String.format("%s",MyTextUtil.getDate( roomEntity.getRoom().getRend_date_end())));
                     activityContinuerentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getLodger().getPrev_water()));
                     activityContinuerentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getLodger().getPrev_electric()));
                     activityContinuerentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getPhone()));
@@ -467,8 +467,8 @@ public class TenantContinueRentActivity extends BaseActivity {
                         activityContinuerentBeforewpowerTv.getText().toString(),
                         activityContinuerentNowpowerTv.getText().toString(),
                         activityContinuerentPowerTv.getText().toString(),
-                        activityContinuerentOtherinTv.getText().toString(),
-                        activityContinuerentOtheroutTv.getText().toString(),
+                        TextUtil.isEmptyString(activityContinuerentOtherinTv.getText().toString())?"0":activityContinuerentOtherinTv.getText().toString(),
+                        TextUtil.isEmptyString(activityContinuerentOtheroutTv.getText().toString())?"0":activityContinuerentOtheroutTv.getText().toString(),
                         loginEntity.getAdmin().getRealname(),
                         MyTextUtil.getSimpleDateFormat().format(new Date()).replace("-", "年").replace("-", "月") + "日"
                 );

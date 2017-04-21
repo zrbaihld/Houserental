@@ -271,7 +271,12 @@ public class MyHttpTool {
     Runnable dismissDialogRun = new Runnable() {
         @Override
         public void run() {
-            dialog.dismiss();
+            try {
+                dialog.dismiss();
+            }catch (Exception e){
+
+            }
+
         }
     };
 

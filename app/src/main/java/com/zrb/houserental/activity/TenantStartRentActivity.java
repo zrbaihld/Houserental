@@ -161,7 +161,7 @@ public class TenantStartRentActivity extends BaseActivity {
                 break;
             case R.id.activity_startrent_advancemonths:
                 List<FloorEntity> itemEntities = new ArrayList<>();
-                for (int i = 0; i < 12; i++) {
+                for (int i = 1; i < 13; i++) {
                     FloorEntity itemEntity = new FloorEntity();
                     itemEntity.setName("月数" + i);
                     itemEntities.add(itemEntity);
@@ -344,6 +344,7 @@ public class TenantStartRentActivity extends BaseActivity {
                     activityAddtenantPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
                     activityAddtenantStatusTv.setText(String.format("%s", MyTextUtil.getStatusString(roomEntity.getRoom().getStatus())));
                 } else {
+                    toastIfActive("无房客");
                     scrollView.setVisibility(View.GONE);
                 }
                 break;

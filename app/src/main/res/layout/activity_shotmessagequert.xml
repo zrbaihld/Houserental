@@ -147,7 +147,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="100"
+                    android:text="￥"
                     />
             </RelativeLayout>
 
@@ -170,7 +170,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="水费费率"
+                    android:text="￥"
                     />
             </RelativeLayout>
 
@@ -192,7 +192,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="电费费率"
+                    android:text="￥"
                     />
             </RelativeLayout>
 
@@ -213,7 +213,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="2015-15-10"
+                    android:text=""
                     />
             </RelativeLayout>
 
@@ -236,7 +236,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
+                    android:text=""
                     />
             </RelativeLayout>
 
@@ -258,7 +258,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
+                    android:text=""
                     />
             </RelativeLayout>
 
@@ -280,7 +280,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
+                    android:text=""
                     />
             </RelativeLayout>
 
@@ -388,7 +388,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
+                    android:text=""
                     />
             </RelativeLayout>
 
@@ -410,7 +410,7 @@
                     style="@style/myRentDetail"
                     android:layout_alignParentRight="true"
                     android:paddingRight="20dp"
-                    android:text="结束日期"
+                    android:text=""
                     />
             </RelativeLayout>
 

@@ -74,7 +74,7 @@ public class ResultTenantQueryActivity extends BaseActivity {
         String room_name = intent.getStringExtra("room_name");
 
 
-        activityResulttenantqueryTitle.setText(String.format("%s号", room_name));
+        activityResulttenantqueryTitle.setText(String.format("%s楼 %s号",building_name, room_name));
 
         MyHttpTool.creat(this)
                 .setContent("building_id", building_id)

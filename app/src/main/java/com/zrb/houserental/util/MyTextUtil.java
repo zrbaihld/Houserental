@@ -113,6 +113,8 @@ public class MyTextUtil {
                 uni2 += unit.charAt(i);
             }
         }
+        if (TextUtil.isEmptyString(uni2))
+            uni2 = "0";
         return uni2;
     }
 
@@ -161,4 +163,13 @@ public class MyTextUtil {
 //    public static String dateToString(String date) {
 ////        date.re
 //    }
+
+
+    public static String getDate(String date) {
+        if (!TextUtil.isEmptyString(date)) {
+            return date.substring(0, 10);
+        }
+        return "";
+    }
+
 }

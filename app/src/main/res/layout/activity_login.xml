@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:hint="手机号码"
                 android:textColor="#000"
-                android:inputType="phone"/>
+             />
         </android.support.design.widget.TextInputLayout>
 
         <!--  Password Label -->

@@ -208,6 +208,7 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
                 }
                 break;
             case 1:
+                toastIfActive("修改成功");
                 activityStartrentUnityTv.setText(String.format("￥ %s",activityAddtenantMonthTv.getText().toString()));
                 activityStartrentWaterTv.setText(String.format("￥ %s/吨",activityAddtenantNewwaterTv.getText().toString()));
                 activityStartrentPowerTv.setText(String.format("￥ %s/度", activityAddtenantNewpowerTv.getText().toString()));
