@@ -102,7 +102,7 @@ public class TenantDetailActivity extends BaseActivity {
         activityTenantdetailPhone.setText(String.format("电话号码 : %s", phone));
         activityTenantdetailFloor.setText(String.format("楼号 : %s", getIntent().getStringExtra("building_name")));
         activityTenantdetailRoom.setText(String.format("房号 : %s", lodgersBean.getRoom().getName()));
-        activityTenantdetailPermitday.setText(String.format("暂住证日期 : %s", MyTextUtil.getDate(lodgersBean.getResidence_permit_expire())));
+        activityTenantdetailPermitday.setText(String.format("居住证日期 : %s", MyTextUtil.getDate(lodgersBean.getResidence_permit_expire())));
         activityTenantdetailStartday.setText(String.format("起租日期 : %s", MyTextUtil.getDate(lodgersBean.getRent_date_start())));
         activityTenantdetailStopday.setText(String.format("结束日期 : %s", MyTextUtil.getDate(lodgersBean.getRent_date_end())));
 

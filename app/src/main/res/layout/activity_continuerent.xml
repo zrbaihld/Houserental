@@ -532,6 +532,77 @@
 
             <View style="@style/line_1px"></View>
 
+
+
+            <RelativeLayout
+                style="@style/myRelativeLayout">
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="宽带条数:"
+                    />
+
+
+                <EditText
+                    android:id="@+id/activity_startrent_network_num_tv"
+                    style="@style/myEditText"
+                    android:layout_alignParentRight="true"
+                    android:hint="请输入宽带条数"
+                    android:inputType="number"
+                    android:paddingRight="20dp"
+                    />
+            </RelativeLayout>
+
+            <View style="@style/line_1px"></View>
+
+            <RelativeLayout
+                style="@style/myRelativeLayout">
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="宽带品牌:"
+                    />
+
+
+                <EditText
+                    android:id="@+id/activity_startrent_network_provider_tv"
+                    style="@style/myEditText"
+                    android:layout_alignParentRight="true"
+                    android:hint="请输入宽带品牌"
+                    android:paddingRight="20dp"
+                    />
+            </RelativeLayout>
+
+            <View style="@style/line_1px"></View>
+            <RelativeLayout
+                android:id="@+id/activity_startrent_contract_months"
+                style="@style/myRelativeLayout"
+                >
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="合同月数"
+                    />
+
+                <ImageView
+                    android:id="@id/next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="20dp"
+                    android:src="@drawable/dpgl_05"/>
+
+                <TextView
+                    android:id="@+id/activity_startrent_contract_months_tv"
+                    style="@style/myRentDetail"
+                    android:layout_toLeftOf="@+id/next"
+                    android:text="请选择合同月数"
+                    />
+            </RelativeLayout>
+            <View style="@style/line_1px"></View>
+
+
             <RelativeLayout
                 android:id="@+id/activity_continuerent_remark"
                 style="@style/myRelativeLayout"

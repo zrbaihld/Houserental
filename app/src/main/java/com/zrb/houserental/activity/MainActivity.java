@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
         }
         loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
 
-        Constant_C.AID = loginEntity.getAdmin().getId();
+        Constant_C.AID = loginEntity.getAdmin().getId()+"";
         Constant_C.TOKEN = loginEntity.getToken();
 
         if (loginEntity != null && loginEntity.getAdmin() != null) {

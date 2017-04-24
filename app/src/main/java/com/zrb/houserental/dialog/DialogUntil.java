@@ -94,7 +94,7 @@ public class DialogUntil {
                 for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
                     FloorEntity floorEntity = new FloorEntity();
                     floorEntity.setName(buildingsBean.getName());
-                    floorEntity.setId(buildingsBean.getId());
+                    floorEntity.setId(buildingsBean.getId()+"");
                     items.add(floorEntity);
                 }
             } else {
@@ -105,7 +105,7 @@ public class DialogUntil {
                         for (LoginEntity.AdminBean.BuildingsBean.RoomsBean roomsBean : buildingsBean.getRooms()) {
                             FloorEntity floorEntity = new FloorEntity();
                             floorEntity.setName(roomsBean.getName());
-                            floorEntity.setId(roomsBean.getId());
+                            floorEntity.setId(roomsBean.getId()+"");
                             items.add(floorEntity);
                         }
                     }
@@ -149,6 +149,9 @@ public class DialogUntil {
                     break;
                 case 5://手机
                     title = "请选择编号";
+                    break;
+                case 6://合同期
+                    title = "请选择合同期";
                     break;
             }
             selectFloorDialog = new SelectFloorDialog(context, title, new SelectFloorDialog.RecyclerViewInterface() {

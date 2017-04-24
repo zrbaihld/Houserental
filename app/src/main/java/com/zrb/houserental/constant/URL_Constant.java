@@ -5,7 +5,7 @@ package com.zrb.houserental.constant;
  * 网址管理
  */
 public interface URL_Constant {
-    String BaseURL = "http://house.xinuxz.com/";
+    String BaseURL = "http://house.xinuxz.com:83/";
 
     String Login = BaseURL + "api/login";
     String logout = BaseURL + "api/logout";

@@ -11,21 +11,23 @@ import java.util.List;
 public class LoginEntity {
 
     /**
-     * token : 328a4a96ebfe747b99ba7ae8deb1a975
-     * admin : {"id":2,"username":"pangzhi","realname":"pangzhi","email":"123456@qq.com","phone":"123456789","super":0,"created_at":"2017-04-09 19:36:51","updated_at":"2017-04-09 19:36:51","buildings":[{"id":3,"admin_id":2,"name":"楼201","address":"说的房间","room_count":3,"created_at":null,"updated_at":null,"rooms":[{"id":5,"name":"楼201-房301","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":"2017-06-09 00:00:00","created_at":"2017-04-09 00:00:00","updated_at":"2017-04-09 20:23:12"},{"id":6,"name":"楼201-房302","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":1,"rend_date_end":"2017-10-09 00:00:00","created_at":"2017-04-09 00:00:00","updated_at":"2017-04-09 20:14:42"},{"id":7,"name":"楼201-房303","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":null,"created_at":"2017-04-08 00:00:00","updated_at":null}]},{"id":4,"admin_id":2,"name":"楼202","address":"是短发了","room_count":2,"created_at":null,"updated_at":null,"rooms":[{"id":10,"name":"楼301-房403","building_id":4,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":null,"created_at":"2017-04-09 00:00:00","updated_at":null}]}]}
+     * token : 1a79c96495e2d9ab5ec5c3381c1bd234
+     * admin : {"id":1,"username":"root","name":"超级管理员","avatar":"image/admin-head.jpg","realname":"superMan","phone":"15688888888","super":1,"email":null,"created_at":"2017-04-08 09:56:52","updated_at":"2017-04-09 23:26:36","buildings":[{"id":1,"admin_id":1,"name":"101","province_id":4,"city_id":53,"area_id":519,"address":"啊啊啊啊","room_count":200,"created_at":"2017-04-24 10:18:34","updated_at":"2017-04-24 10:18:34","rooms":[{"id":1,"name":"201","building_id":1,"rental":"1000.00","water_rate":"5.00","electric_rate":"1.00","status":1,"rent_date_start":"2017-04-24","rent_date_end":"2017-08-24","keys":2,"deposit":1000,"network_num":3,"network_provider":"44455","contract_months":36,"created_at":"2017-04-24 10:18:51","updated_at":"2017-04-24 10:33:33"}]}]}
      */
 
     private String token;
     /**
-     * id : 2
-     * username : pangzhi
-     * realname : pangzhi
-     * email : 123456@qq.com
-     * phone : 123456789
-     * super : 0
-     * created_at : 2017-04-09 19:36:51
-     * updated_at : 2017-04-09 19:36:51
-     * buildings : [{"id":3,"admin_id":2,"name":"楼201","address":"说的房间","room_count":3,"created_at":null,"updated_at":null,"rooms":[{"id":5,"name":"楼201-房301","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":"2017-06-09 00:00:00","created_at":"2017-04-09 00:00:00","updated_at":"2017-04-09 20:23:12"},{"id":6,"name":"楼201-房302","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":1,"rend_date_end":"2017-10-09 00:00:00","created_at":"2017-04-09 00:00:00","updated_at":"2017-04-09 20:14:42"},{"id":7,"name":"楼201-房303","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":null,"created_at":"2017-04-08 00:00:00","updated_at":null}]},{"id":4,"admin_id":2,"name":"楼202","address":"是短发了","room_count":2,"created_at":null,"updated_at":null,"rooms":[{"id":10,"name":"楼301-房403","building_id":4,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":null,"created_at":"2017-04-09 00:00:00","updated_at":null}]}]
+     * id : 1
+     * username : root
+     * name : 超级管理员
+     * avatar : image/admin-head.jpg
+     * realname : superMan
+     * phone : 15688888888
+     * super : 1
+     * email : null
+     * created_at : 2017-04-08 09:56:52
+     * updated_at : 2017-04-09 23:26:36
+     * buildings : [{"id":1,"admin_id":1,"name":"101","province_id":4,"city_id":53,"area_id":519,"address":"啊啊啊啊","room_count":200,"created_at":"2017-04-24 10:18:34","updated_at":"2017-04-24 10:18:34","rooms":[{"id":1,"name":"201","building_id":1,"rental":"1000.00","water_rate":"5.00","electric_rate":"1.00","status":1,"rent_date_start":"2017-04-24","rent_date_end":"2017-08-24","keys":2,"deposit":1000,"network_num":3,"network_provider":"44455","contract_months":36,"created_at":"2017-04-24 10:18:51","updated_at":"2017-04-24 10:33:33"}]}]
      */
 
     private AdminBean admin;
@@ -47,33 +49,38 @@ public class LoginEntity {
     }
 
     public static class AdminBean {
-        private String id;
+        private int id;
         private String username;
+        private String name;
+        private String avatar;
         private String realname;
-        private String email;
         private String phone;
         @SerializedName("super")
         private int superX;
+        private Object email;
         private String created_at;
         private String updated_at;
         /**
-         * id : 3
-         * admin_id : 2
-         * name : 楼201
-         * address : 说的房间
-         * room_count : 3
-         * created_at : null
-         * updated_at : null
-         * rooms : [{"id":5,"name":"楼201-房301","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":"2017-06-09 00:00:00","created_at":"2017-04-09 00:00:00","updated_at":"2017-04-09 20:23:12"},{"id":6,"name":"楼201-房302","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":1,"rend_date_end":"2017-10-09 00:00:00","created_at":"2017-04-09 00:00:00","updated_at":"2017-04-09 20:14:42"},{"id":7,"name":"楼201-房303","building_id":3,"rental":200,"water_rate":5,"electric_rate":"1","status":0,"rend_date_end":null,"created_at":"2017-04-08 00:00:00","updated_at":null}]
+         * id : 1
+         * admin_id : 1
+         * name : 101
+         * province_id : 4
+         * city_id : 53
+         * area_id : 519
+         * address : 啊啊啊啊
+         * room_count : 200
+         * created_at : 2017-04-24 10:18:34
+         * updated_at : 2017-04-24 10:18:34
+         * rooms : [{"id":1,"name":"201","building_id":1,"rental":"1000.00","water_rate":"5.00","electric_rate":"1.00","status":1,"rent_date_start":"2017-04-24","rent_date_end":"2017-08-24","keys":2,"deposit":1000,"network_num":3,"network_provider":"44455","contract_months":36,"created_at":"2017-04-24 10:18:51","updated_at":"2017-04-24 10:33:33"}]
          */
 
         private List<BuildingsBean> buildings;
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 
@@ -85,20 +92,28 @@ public class LoginEntity {
             this.username = username;
         }
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAvatar() {
+            return avatar;
+        }
+
+        public void setAvatar(String avatar) {
+            this.avatar = avatar;
+        }
+
         public String getRealname() {
             return realname;
         }
 
         public void setRealname(String realname) {
             this.realname = realname;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
         }
 
         public String getPhone() {
@@ -115,6 +130,14 @@ public class LoginEntity {
 
         public void setSuperX(int superX) {
             this.superX = superX;
+        }
+
+        public Object getEmail() {
+            return email;
+        }
+
+        public void setEmail(Object email) {
+            this.email = email;
         }
 
         public String getCreated_at() {
@@ -142,33 +165,42 @@ public class LoginEntity {
         }
 
         public static class BuildingsBean {
-            private String id;
+            private int id;
             private int admin_id;
             private String name;
+            private int province_id;
+            private int city_id;
+            private int area_id;
             private String address;
             private int room_count;
             private String created_at;
             private String updated_at;
             /**
-             * id : 5
-             * name : 楼201-房301
-             * building_id : 3
-             * rental : 200
-             * water_rate : 5
-             * electric_rate : 1
-             * status : 0
-             * rend_date_end : 2017-06-09 00:00:00
-             * created_at : 2017-04-09 00:00:00
-             * updated_at : 2017-04-09 20:23:12
+             * id : 1
+             * name : 201
+             * building_id : 1
+             * rental : 1000.00
+             * water_rate : 5.00
+             * electric_rate : 1.00
+             * status : 1
+             * rent_date_start : 2017-04-24
+             * rent_date_end : 2017-08-24
+             * keys : 2
+             * deposit : 1000
+             * network_num : 3
+             * network_provider : 44455
+             * contract_months : 36
+             * created_at : 2017-04-24 10:18:51
+             * updated_at : 2017-04-24 10:33:33
              */
 
             private List<RoomsBean> rooms;
 
-            public String getId() {
+            public int getId() {
                 return id;
             }
 
-            public void setId(String id) {
+            public void setId(int id) {
                 this.id = id;
             }
 
@@ -186,6 +218,30 @@ public class LoginEntity {
 
             public void setName(String name) {
                 this.name = name;
+            }
+
+            public int getProvince_id() {
+                return province_id;
+            }
+
+            public void setProvince_id(int province_id) {
+                this.province_id = province_id;
+            }
+
+            public int getCity_id() {
+                return city_id;
+            }
+
+            public void setCity_id(int city_id) {
+                this.city_id = city_id;
+            }
+
+            public int getArea_id() {
+                return area_id;
+            }
+
+            public void setArea_id(int area_id) {
+                this.area_id = area_id;
             }
 
             public String getAddress() {
@@ -229,22 +285,28 @@ public class LoginEntity {
             }
 
             public static class RoomsBean {
-                private String id;
+                private int id;
                 private String name;
                 private int building_id;
-                private int rental;
-                private int water_rate;
+                private String rental;
+                private String water_rate;
                 private String electric_rate;
                 private int status;
-                private String rend_date_end;
+                private String rent_date_start;
+                private String rent_date_end;
+                private int keys;
+                private int deposit;
+                private int network_num;
+                private String network_provider;
+                private int contract_months;
                 private String created_at;
                 private String updated_at;
 
-                public String getId() {
+                public int getId() {
                     return id;
                 }
 
-                public void setId(String id) {
+                public void setId(int id) {
                     this.id = id;
                 }
 
@@ -264,19 +326,19 @@ public class LoginEntity {
                     this.building_id = building_id;
                 }
 
-                public int getRental() {
+                public String getRental() {
                     return rental;
                 }
 
-                public void setRental(int rental) {
+                public void setRental(String rental) {
                     this.rental = rental;
                 }
 
-                public int getWater_rate() {
+                public String getWater_rate() {
                     return water_rate;
                 }
 
-                public void setWater_rate(int water_rate) {
+                public void setWater_rate(String water_rate) {
                     this.water_rate = water_rate;
                 }
 
@@ -296,12 +358,60 @@ public class LoginEntity {
                     this.status = status;
                 }
 
-                public String getRend_date_end() {
-                    return rend_date_end;
+                public String getRent_date_start() {
+                    return rent_date_start;
                 }
 
-                public void setRend_date_end(String rend_date_end) {
-                    this.rend_date_end = rend_date_end;
+                public void setRent_date_start(String rent_date_start) {
+                    this.rent_date_start = rent_date_start;
+                }
+
+                public String getRent_date_end() {
+                    return rent_date_end;
+                }
+
+                public void setRent_date_end(String rent_date_end) {
+                    this.rent_date_end = rent_date_end;
+                }
+
+                public int getKeys() {
+                    return keys;
+                }
+
+                public void setKeys(int keys) {
+                    this.keys = keys;
+                }
+
+                public int getDeposit() {
+                    return deposit;
+                }
+
+                public void setDeposit(int deposit) {
+                    this.deposit = deposit;
+                }
+
+                public int getNetwork_num() {
+                    return network_num;
+                }
+
+                public void setNetwork_num(int network_num) {
+                    this.network_num = network_num;
+                }
+
+                public String getNetwork_provider() {
+                    return network_provider;
+                }
+
+                public void setNetwork_provider(String network_provider) {
+                    this.network_provider = network_provider;
+                }
+
+                public int getContract_months() {
+                    return contract_months;
+                }
+
+                public void setContract_months(int contract_months) {
+                    this.contract_months = contract_months;
                 }
 
                 public String getCreated_at() {

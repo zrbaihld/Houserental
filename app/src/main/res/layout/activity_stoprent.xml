@@ -91,8 +91,8 @@
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
 
         <LinearLayout
@@ -313,8 +313,8 @@
                     android:id="@+id/activity_stoprent_nowwater_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:inputType="number"
                     android:hint="请输入本月水表"
+                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>
@@ -335,8 +335,8 @@
                     android:id="@+id/activity_stoprent_nowpower_tv"
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
-                    android:inputType="number"
                     android:hint="请输入本月电表"
+                    android:inputType="number"
                     android:paddingRight="20dp"
                     />
             </RelativeLayout>
@@ -538,15 +538,17 @@
             </RelativeLayout>
 
             <View style="@style/line_1px"></View>
+
             <RelativeLayout
-                android:background="#E0E0E0"
-                style="@style/myRelativeLayout">
+                style="@style/myRelativeLayout"
+                android:background="#E0E0E0">
 
 
                 <TextView
                     style="@style/myRentTitle"
                     android:text="钥匙卡个数:"
                     />
+
                 <TextView
                     android:id="@+id/activity_startrent_key_tv"
                     style="@style/myRentDetail"
@@ -557,6 +559,67 @@
             </RelativeLayout>
 
             <View style="@style/line_1px"></View>
+
+            <RelativeLayout
+                style="@style/myRelativeLayout"
+                android:background="#E0E0E0">
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="宽带条数:"
+                    />
+
+                <TextView
+                    android:id="@+id/activity_startrent_network_num_tv"
+                    style="@style/myRentDetail"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="20dp"
+                    android:text=""
+                    />
+            </RelativeLayout>
+
+            <View style="@style/line_1px"></View>
+
+            <RelativeLayout
+                style="@style/myRelativeLayout"
+                android:background="#E0E0E0">
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="宽带品牌:"
+                    />
+
+                <TextView
+                    android:id="@+id/activity_startrent_network_provider_tv"
+                    style="@style/myRentDetail"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="20dp"
+                    android:text=""
+                    />
+            </RelativeLayout>
+
+            <View style="@style/line_1px"></View>
+
+            <RelativeLayout
+                style="@style/myRelativeLayout"
+                android:background="#E0E0E0"
+                >
+
+                <TextView
+                    style="@style/myRentTitle"
+                    android:text="合同月数"
+                    />
+                <TextView
+                    android:id="@+id/activity_startrent_contract_months_tv"
+                    style="@style/myRentDetail"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="20dp"
+                    android:text=""
+                    />
+            </RelativeLayout>
+
+            <View style="@style/line_1px"></View>
+
             <RelativeLayout
                 android:id="@+id/activity_stoprent_remark"
                 style="@style/myRelativeLayout"
@@ -578,7 +641,6 @@
             </RelativeLayout>
 
             <View style="@style/line_1px"></View>
-
 
 
             <RelativeLayout

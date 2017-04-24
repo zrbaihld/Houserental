@@ -7,17 +7,24 @@ package com.zrb.houserental.Entity;
 public class RoomEntity {
 
     /**
-     * id : 6
-     * name : 楼201-房302
-     * building_id : 3
-     * rental : 200
-     * water_rate : 5
-     * electric_rate : 1
+     * id : 1
+     * name : 201
+     * building_id : 1
+     * rental : 1000.00
+     * water_rate : 5.00
+     * electric_rate : 1.00
      * status : 1
-     * rend_date_end : 2017-10-09 00:00:00
-     * created_at : 2017-04-09 00:00:00
-     * updated_at : 2017-04-09 20:14:42
-     * lodger : {"id":3,"room_id":6,"name":"kkk01","status":1,"id_card":"132123129312323123","sex":1,"phone":"18850583123","hometown":"test1213","birthday":"2017-08-02 12:00:00","residence_permit_expire":"2017-08-08 12:00:00","rent_date_start":"2017-04-09 00:00:00","rent_date_end":"2017-10-09 00:00:00","deposit":0,"keys":0,"created_at":"2017-04-09 20:06:40","updated_at":"2017-04-09 20:14:42","prev_water":120,"prev_electric":120,"prev_start_date":"2017-08-09 00:00:00","prev_end_date":"2017-10-09 00:00:00"}
+     * rent_date_start : 2017-04-24
+     * rent_date_end : 2017-08-24
+     * keys : 2
+     * deposit : 1000
+     * network_num : 3
+     * network_provider : 44455
+     * contract_months : 36
+     * created_at : 2017-04-24 10:18:51
+     * updated_at : 2017-04-24 10:33:33
+     * number : 20170424
+     * lodger : {"id":1,"room_id":1,"building_id":1,"name":"gvbb","status":1,"id_card":"123456789123456789","sex":1,"phone":"15659810042","province_id":0,"city_id":0,"area_id":0,"hometown":"gbbvv","birthday":"2017-04-24 00:00:00","residence_permit_expire":"2017-04-24 00:00:00","rent_date_start":"2017-04-24 00:00:00","rent_date_end":"2017-08-24 00:00:00","deposit":1000,"created_at":"2017-04-24 10:37:46","updated_at":"2017-04-24 10:37:46","prev_water":0,"prev_electric":0,"prev_start_date":"2017-04-24","prev_end_date":"2017-08-24"}
      */
 
     private RoomBean room;
@@ -34,44 +41,44 @@ public class RoomEntity {
         private int id;
         private String name;
         private int building_id;
-        private int rental;
-        private int water_rate;
+        private String rental;
+        private String water_rate;
         private String electric_rate;
         private int status;
-        private String rend_date_end;
+        private String rent_date_start;
+        private String rent_date_end;
+        private int keys;
+        private int deposit;
+        private int network_num;
+        private String network_provider;
+        private int contract_months;
         private String created_at;
         private String updated_at;
         private String number;
-
-        public String getNumber() {
-            return number;
-        }
-
-        public void setNumber(String number) {
-            this.number = number;
-        }
-
         /**
-         * id : 3
-         * room_id : 6
-         * name : kkk01
+         * id : 1
+         * room_id : 1
+         * building_id : 1
+         * name : gvbb
          * status : 1
-         * id_card : 132123129312323123
+         * id_card : 123456789123456789
          * sex : 1
-         * phone : 18850583123
-         * hometown : test1213
-         * birthday : 2017-08-02 12:00:00
-         * residence_permit_expire : 2017-08-08 12:00:00
-         * rent_date_start : 2017-04-09 00:00:00
-         * rent_date_end : 2017-10-09 00:00:00
-         * deposit : 0
-         * keys : 0
-         * created_at : 2017-04-09 20:06:40
-         * updated_at : 2017-04-09 20:14:42
-         * prev_water : 120
-         * prev_electric : 120
-         * prev_start_date : 2017-08-09 00:00:00
-         * prev_end_date : 2017-10-09 00:00:00
+         * phone : 15659810042
+         * province_id : 0
+         * city_id : 0
+         * area_id : 0
+         * hometown : gbbvv
+         * birthday : 2017-04-24 00:00:00
+         * residence_permit_expire : 2017-04-24 00:00:00
+         * rent_date_start : 2017-04-24 00:00:00
+         * rent_date_end : 2017-08-24 00:00:00
+         * deposit : 1000
+         * created_at : 2017-04-24 10:37:46
+         * updated_at : 2017-04-24 10:37:46
+         * prev_water : 0
+         * prev_electric : 0
+         * prev_start_date : 2017-04-24
+         * prev_end_date : 2017-08-24
          */
 
         private LodgerBean lodger;
@@ -100,19 +107,19 @@ public class RoomEntity {
             this.building_id = building_id;
         }
 
-        public int getRental() {
+        public String getRental() {
             return rental;
         }
 
-        public void setRental(int rental) {
+        public void setRental(String rental) {
             this.rental = rental;
         }
 
-        public int getWater_rate() {
+        public String getWater_rate() {
             return water_rate;
         }
 
-        public void setWater_rate(int water_rate) {
+        public void setWater_rate(String water_rate) {
             this.water_rate = water_rate;
         }
 
@@ -132,12 +139,60 @@ public class RoomEntity {
             this.status = status;
         }
 
-        public String getRend_date_end() {
-            return rend_date_end;
+        public String getRent_date_start() {
+            return rent_date_start;
         }
 
-        public void setRend_date_end(String rend_date_end) {
-            this.rend_date_end = rend_date_end;
+        public void setRent_date_start(String rent_date_start) {
+            this.rent_date_start = rent_date_start;
+        }
+
+        public String getRent_date_end() {
+            return rent_date_end;
+        }
+
+        public void setRent_date_end(String rent_date_end) {
+            this.rent_date_end = rent_date_end;
+        }
+
+        public int getKeys() {
+            return keys;
+        }
+
+        public void setKeys(int keys) {
+            this.keys = keys;
+        }
+
+        public int getDeposit() {
+            return deposit;
+        }
+
+        public void setDeposit(int deposit) {
+            this.deposit = deposit;
+        }
+
+        public int getNetwork_num() {
+            return network_num;
+        }
+
+        public void setNetwork_num(int network_num) {
+            this.network_num = network_num;
+        }
+
+        public String getNetwork_provider() {
+            return network_provider;
+        }
+
+        public void setNetwork_provider(String network_provider) {
+            this.network_provider = network_provider;
+        }
+
+        public int getContract_months() {
+            return contract_months;
+        }
+
+        public void setContract_months(int contract_months) {
+            this.contract_months = contract_months;
         }
 
         public String getCreated_at() {
@@ -156,6 +211,14 @@ public class RoomEntity {
             this.updated_at = updated_at;
         }
 
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
+
         public LodgerBean getLodger() {
             return lodger;
         }
@@ -167,18 +230,21 @@ public class RoomEntity {
         public static class LodgerBean {
             private int id;
             private int room_id;
+            private int building_id;
             private String name;
             private int status;
             private String id_card;
             private int sex;
             private String phone;
+            private int province_id;
+            private int city_id;
+            private int area_id;
             private String hometown;
             private String birthday;
             private String residence_permit_expire;
             private String rent_date_start;
             private String rent_date_end;
             private int deposit;
-            private int keys;
             private String created_at;
             private String updated_at;
             private int prev_water;
@@ -200,6 +266,14 @@ public class RoomEntity {
 
             public void setRoom_id(int room_id) {
                 this.room_id = room_id;
+            }
+
+            public int getBuilding_id() {
+                return building_id;
+            }
+
+            public void setBuilding_id(int building_id) {
+                this.building_id = building_id;
             }
 
             public String getName() {
@@ -240,6 +314,30 @@ public class RoomEntity {
 
             public void setPhone(String phone) {
                 this.phone = phone;
+            }
+
+            public int getProvince_id() {
+                return province_id;
+            }
+
+            public void setProvince_id(int province_id) {
+                this.province_id = province_id;
+            }
+
+            public int getCity_id() {
+                return city_id;
+            }
+
+            public void setCity_id(int city_id) {
+                this.city_id = city_id;
+            }
+
+            public int getArea_id() {
+                return area_id;
+            }
+
+            public void setArea_id(int area_id) {
+                this.area_id = area_id;
             }
 
             public String getHometown() {
@@ -288,14 +386,6 @@ public class RoomEntity {
 
             public void setDeposit(int deposit) {
                 this.deposit = deposit;
-            }
-
-            public int getKeys() {
-                return keys;
-            }
-
-            public void setKeys(int keys) {
-                this.keys = keys;
             }
 
             public String getCreated_at() {

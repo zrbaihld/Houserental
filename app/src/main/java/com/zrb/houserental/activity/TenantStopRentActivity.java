@@ -1,6 +1,8 @@
 package com.zrb.houserental.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
@@ -28,8 +30,10 @@ import com.zrb.houserental.dialog.DialogUntil;
 import com.zrb.houserental.dialog.SelectFloorDialog;
 import com.zrb.houserental.util.MyTextUtil;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -98,6 +102,12 @@ public class TenantStopRentActivity extends BaseActivity {
     EditText activityStoprentOtherphoneTv;
     @BindView(R.id.scrollview)
     ScrollView scrollView;
+    @BindView(R.id.activity_startrent_network_num_tv)
+    TextView activityStartrentNetworkNumTv;
+    @BindView(R.id.activity_startrent_network_provider_tv)
+    TextView activityStartrentNetworkProviderTv;
+    @BindView(R.id.activity_startrent_contract_months_tv)
+    TextView activityStartrentContractMonthsTv;
 
     private List<FloorEntity> itemEntities;
     private int type = -1;//0 楼号 1房号 2  3电话
@@ -289,13 +299,13 @@ public class TenantStopRentActivity extends BaseActivity {
     }
 
     private void sandmessage() {
-        String s_water = activityStoprentNowwaterTv.getText().toString();
-        String s_no = activityStoprentNoTv.getText().toString();
-        String s_power = activityStoprentNowpowerTv.getText().toString();
+        final String s_water = activityStoprentNowwaterTv.getText().toString();
+        final String s_no = activityStoprentNoTv.getText().toString();
+        final String s_power = activityStoprentNowpowerTv.getText().toString();
         String s_remark = activityStoprentRemarkTv.getText().toString();
         String s_otherin = activityStoprentOtherinTv.getText().toString();
         String s_otherout = activityStoprentOtheroutTv.getText().toString();
-        String s_outtime = activityStoprentOuttimeTv.getText().toString();
+        final String s_outtime = activityStoprentOuttimeTv.getText().toString();
 
         if (TextUtil.isEmptyString(building_id)) {
             toastIfActive("还未选择楼号");
@@ -343,27 +353,123 @@ public class TenantStopRentActivity extends BaseActivity {
 //        receivable | float | 是 | 80 | 应收金额
 //        total_fee | float | 是 | 66.89 | 应收金额两位小数
 
+        if (isOutTime(roomEntity.getRoom().getContract_months())) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("提示");
+            alertDialog.setMessage("合同期未到，是否结算？");
+            final String finalS_remark = s_remark;
+            final String finalS_otherout = s_otherout;
+            final String finalS_otherin = s_otherin;
+            alertDialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    MyHttpTool.creat(TenantStopRentActivity.this)
+                            .setContent("building_id", building_id)
+                            .setContent("room_id", room_id)
+                            .setContent("number", s_no)
+                            .setContent("user_id", roomEntity.getRoom().getLodger().getId())
+                            .setContent("rent_date_start", roomEntity.getRoom().getLodger().getRent_date_start())
+                            .setContent("rent_date_end", roomEntity.getRoom().getLodger().getRent_date_end())
+                            .setContent("prev_water", roomEntity.getRoom().getLodger().getPrev_water())
+                            .setContent("prev_electric", roomEntity.getRoom().getLodger().getPrev_electric())
+                            .setContent("water", s_water)
+                            .setContent("electric", s_power)
+                            .setContent("days", s_outtime)
+                            .setContent("remark", finalS_remark)
+                            .setContent("phone", roomEntity.getRoom().getLodger().getPhone())
+                            .setContent("rent_fee", roomEntity.getRoom().getRental())
+                            .setContent("payable", finalS_otherout)
+                            .setContent("sms_content", getSms())
+                            .setContent("receivable", finalS_otherin)
+                            .setContent("keys", roomEntity.getRoom().getKeys())
+                            .setContent("total_fee", activityStoprentAllneedinTv.getText().toString())
+                            .postShowDialog(1, URL_Constant.exitRent, TenantStopRentActivity.this);
+                }
+            });
+            alertDialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
 
-        MyHttpTool.creat(this)
-                .setContent("building_id", building_id)
-                .setContent("room_id", room_id)
-                .setContent("number", s_no)
-                .setContent("user_id", roomEntity.getRoom().getLodger().getId())
-                .setContent("rent_date_start", roomEntity.getRoom().getLodger().getRent_date_start())
-                .setContent("rent_date_end", roomEntity.getRoom().getLodger().getRent_date_end())
-                .setContent("prev_water", roomEntity.getRoom().getLodger().getPrev_water())
-                .setContent("prev_electric", roomEntity.getRoom().getLodger().getPrev_electric())
-                .setContent("water", s_water)
-                .setContent("electric", s_power)
-                .setContent("days", s_outtime)
-                .setContent("remark", s_remark)
-                .setContent("phone", roomEntity.getRoom().getLodger().getPhone())
-                .setContent("rent_fee", roomEntity.getRoom().getRental())
-                .setContent("payable", s_otherout)
-                .setContent("receivable", s_otherin)
-                .setContent("keys", roomEntity.getRoom().getLodger().getKeys())
-                .setContent("total_fee", activityStoprentAllneedinTv.getText().toString())
-                .postShowDialog(1, URL_Constant.exitRent, this);
+                }
+            });
+            alertDialog.show();
+
+        } else {
+            MyHttpTool.creat(this)
+                    .setContent("building_id", building_id)
+                    .setContent("room_id", room_id)
+                    .setContent("number", s_no)
+                    .setContent("user_id", roomEntity.getRoom().getLodger().getId())
+                    .setContent("rent_date_start", roomEntity.getRoom().getLodger().getRent_date_start())
+                    .setContent("rent_date_end", roomEntity.getRoom().getLodger().getRent_date_end())
+                    .setContent("prev_water", roomEntity.getRoom().getLodger().getPrev_water())
+                    .setContent("prev_electric", roomEntity.getRoom().getLodger().getPrev_electric())
+                    .setContent("water", s_water)
+                    .setContent("electric", s_power)
+                    .setContent("days", s_outtime)
+                    .setContent("remark", s_remark)
+                    .setContent("phone", roomEntity.getRoom().getLodger().getPhone())
+                    .setContent("rent_fee", roomEntity.getRoom().getRental())
+                    .setContent("payable", s_otherout)
+                    .setContent("sms_content", getSms())
+                    .setContent("receivable", s_otherin)
+                    .setContent("keys", roomEntity.getRoom().getKeys())
+                    .setContent("total_fee", activityStoprentAllneedinTv.getText().toString())
+                    .postShowDialog(1, URL_Constant.exitRent, this);
+        }
+
+
+    }
+
+
+    private boolean isOutTime(int moth) {
+        DateFormat simpleDateFormat = MyTextUtil.getSimpleDateFormat();
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(roomEntity.getRoom().getLodger().getRent_date_start());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            int om = calendar.get(Calendar.MONTH);
+            int oy = calendar.get(Calendar.YEAR);
+            calendar.setTime(new Date());
+            int nm = calendar.get(Calendar.MONTH);
+            int ny = calendar.get(Calendar.YEAR);
+            int dm = (ny - oy) * 12 + nm - om;
+            return dm < moth;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
+    }
+
+    private String getSms() {
+        String login_response = sp.getString("Login_response", "");
+        LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
+        return String.format("退租：尊敬的%s的房客您好，" +
+                        "从%s至%s，" +
+                        "水费%s元 电费%s元 " +
+                        "其他应收%s，其他应付%s，超期租金%s，" +
+                        "合计%s元 收租人：%s，收租日期：%s",
+                activityStoprentRoomTv.getText().toString(),
+                activityStoprentStartdayTv.getText().toString().substring(0, 10).replace("-", "年").replace("-", "月") + "日",
+                activityStoprentEnddayTv.getText().toString().substring(0, 10).replace("-", "年").replace("-", "月") + "日",
+                activityStoprentNowwaterTv.getText().toString() +
+                        "-" + activityStoprentBeforewaterTv.getText().toString() +
+                        "=" + activityStoprentUserwaterTv.getText().toString() +
+                        "*" + activityStoprentWaterTv.getText().toString() +
+                        "=" + activityStoprentWaterpriceTv.getText().toString(),
+                activityStoprentNowpowerTv.getText().toString() +
+                        "-" + activityStoprentBeforewpowerTv.getText().toString() +
+                        "=" + activityStoprentUserpowerTv.getText().toString() +
+                        "*" + activityStoprentPowerTv.getText().toString() +
+                        "=" + activityStoprentPowerpriceTv.getText().toString(),
+                TextUtil.isEmptyString(activityStoprentOtherinTv.getText().toString()) ? "0" : activityStoprentOtherinTv.getText().toString(),
+                TextUtil.isEmptyString(activityStoprentOtheroutTv.getText().toString()) ? "0" : activityStoprentOtheroutTv.getText().toString(),
+                activityStoprentNeedinTv.getText().toString(),
+                activityStoprentAllneedinTv.getText().toString(),
+                loginEntity.getAdmin().getRealname(),
+                MyTextUtil.getSimpleDateFormat().format(new Date()).replace("-", "年").replace("-", "月") + "日"
+        );
 
     }
 
@@ -402,53 +508,29 @@ public class TenantStopRentActivity extends BaseActivity {
                     activityStoprentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityStoprentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
                     activityStoprentDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getLodger().getDeposit()));
-                    activityStoprentStartdayTv.setText(String.format("%s",MyTextUtil.getDate( roomEntity.getRoom().getLodger().getRent_date_start())));
+                    activityStoprentStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getLodger().getRent_date_start())));
                     activityStoprentEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getLodger().getRent_date_end())));
+                    activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
+                    activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
+                    activityStartrentContractMonthsTv.setText(String.format("%s", roomEntity.getRoom().getContract_months() + "个月"));
                     activityStoprentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getLodger().getPrev_water()));
                     activityStoprentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getLodger().getPrev_electric()));
-                    activityStartrentKeyTv.setText(String.format("%s个", roomEntity.getRoom().getLodger().getKeys()));
+                    activityStartrentKeyTv.setText(String.format("%s个", roomEntity.getRoom().getKeys()));
                     activityStoprentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getPhone()));
 
                     totleGetPrice();
                 } else {
-                    activityStoprentNameTv.setText(String.format("%s",""));
+                    activityStoprentNameTv.setText(String.format("%s", ""));
                     toastIfActive("暂无房客");
                     scrollView.setVisibility(View.GONE);
                 }
                 break;
             case 1:
 //                水费171-171=0X5=0.0元 电费4797-4750=47X1=47.0元
-                String login_response = sp.getString("Login_response", "");
-                LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
-                String message_body = String.format("退租：尊敬的%s的房客您好，" +
-                                "从%s至%s，" +
-                                "水费%s元 电费%s元 " +
-                                "其他应收%s，其他应付%s，超期租金%s，" +
-                                "合计%s元 收租人：%s，收租日期：%s",
-                        activityStoprentRoomTv.getText().toString(),
-                        activityStoprentStartdayTv.getText().toString().substring(0, 10).replace("-", "年").replace("-", "月") + "日",
-                        activityStoprentEnddayTv.getText().toString().substring(0, 10).replace("-", "年").replace("-", "月") + "日",
-                        activityStoprentNowwaterTv.getText().toString() +
-                                "-" + activityStoprentBeforewaterTv.getText().toString() +
-                                "=" + activityStoprentUserwaterTv.getText().toString() +
-                                "*" + activityStoprentWaterTv.getText().toString() +
-                                "=" + activityStoprentWaterpriceTv.getText().toString(),
-                        activityStoprentNowpowerTv.getText().toString() +
-                                "-" + activityStoprentBeforewpowerTv.getText().toString() +
-                                "=" + activityStoprentUserpowerTv.getText().toString() +
-                                "*" + activityStoprentPowerTv.getText().toString() +
-                                "=" + activityStoprentPowerpriceTv.getText().toString(),
-                        TextUtil.isEmptyString(activityStoprentOtherinTv.getText().toString())?"0":activityStoprentOtherinTv.getText().toString(),
-                        TextUtil.isEmptyString(activityStoprentOtheroutTv.getText().toString())?"0":activityStoprentOtheroutTv.getText().toString(),
-                        activityStoprentNeedinTv.getText().toString(),
-                        activityStoprentAllneedinTv.getText().toString(),
-                        loginEntity.getAdmin().getRealname(),
-                        MyTextUtil.getSimpleDateFormat().format(new Date()).replace("-", "年").replace("-", "月") + "日"
-                );
 
 
                 MyTextUtil.sendMessage(this, activityStoprentReceverphoneTv.getText().toString() +
-                        "," + activityStoprentOtherphoneTv.getText().toString(), message_body);
+                        "," + activityStoprentOtherphoneTv.getText().toString(), getSms());
 
                 break;
         }
