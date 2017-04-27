@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
+import com.zrb.baseapp.constant.Constant_C;
 import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.baseapp.tools.MyLogUtils;
@@ -118,10 +119,17 @@ public class TenantStopRentActivity extends BaseActivity {
     private String room_name = "";
     private RoomEntity roomEntity;
 
+
+    private String phone;
+    private String password;
+
     @Override
     public void init() {
         addConView(R.layout.activity_stoprent);
         ButterKnife.bind(this);
+
+        phone = sp.getString(Constant_C.SPPATH.USER_NAME, "");
+        password = sp.getString(Constant_C.SPPATH.USER_PW, "");
 
         titleTV.setText("房客退租");
         itemEntities = new ArrayList<>();
@@ -239,7 +247,7 @@ public class TenantStopRentActivity extends BaseActivity {
                     toastIfActive("请先选择楼号");
                     break;
                 }
-                type = 1;
+                type = 7;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
@@ -526,11 +534,25 @@ public class TenantStopRentActivity extends BaseActivity {
                 }
                 break;
             case 1:
-//                水费171-171=0X5=0.0元 电费4797-4750=47X1=47.0元
-
+                MyHttpTool.creat(this)
+                        .setContent("passwd", password)
+                        .setContent("phone", phone)
+                        .postShowDialog(0, URL_Constant.Login, new MyHttpTool.IOAuthCallBack() {
+                            @Override
+                            public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
+                                sp.edit().putString("Login_response", json).
+                                        commit();
+                                LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(json), LoginEntity.class);
+                                Constant_C.AID = loginEntity.getAdmin().getId() + "";
+                                Constant_C.TOKEN = loginEntity.getToken();
+                                return false;
+                            }
+                        });
 
                 MyTextUtil.sendMessage(this, activityStoprentReceverphoneTv.getText().toString() +
                         "," + activityStoprentOtherphoneTv.getText().toString(), getSms());
+
+
 
                 break;
         }

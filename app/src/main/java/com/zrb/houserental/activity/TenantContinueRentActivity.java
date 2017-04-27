@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.zrb.baseapp.base.BaseActivity;
+import com.zrb.baseapp.constant.Constant_C;
 import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.baseapp.tools.MyLogUtils;
@@ -108,10 +109,16 @@ public class TenantContinueRentActivity extends BaseActivity {
     private String room_name = "";
     private RoomEntity roomEntity;
 
+    private String phone;
+    private String password;
+
     @Override
     public void init() {
         addConView(R.layout.activity_continuerent);
         ButterKnife.bind(this);
+
+        phone = sp.getString(Constant_C.SPPATH.USER_NAME, "");
+        password = sp.getString(Constant_C.SPPATH.USER_PW, "");
 
         titleTV.setText("房客续租");
         itemEntities = new ArrayList<>();
@@ -221,8 +228,7 @@ public class TenantContinueRentActivity extends BaseActivity {
                     toastIfActive("请先选择楼号");
                     break;
                 }
-                type = 1;
-
+                type = 7;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
@@ -481,7 +487,7 @@ public class TenantContinueRentActivity extends BaseActivity {
                     activityContinuerentEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_end())));
                     activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
                     activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
-                    activityStartrentContractMonthsTv.setText(String.format("%s", roomEntity.getRoom().getContract_months()+"个月"));
+                    activityStartrentContractMonthsTv.setText(String.format("%s", roomEntity.getRoom().getContract_months() + "个月"));
                     activityContinuerentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getLodger().getPrev_water()));
                     activityContinuerentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getLodger().getPrev_electric()));
                     activityContinuerentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getPhone()));
@@ -492,7 +498,20 @@ public class TenantContinueRentActivity extends BaseActivity {
                 }
                 break;
             case 1:
-
+                MyHttpTool.creat(this)
+                        .setContent("passwd", password)
+                        .setContent("phone", phone)
+                        .postShowDialog(0, URL_Constant.Login, new MyHttpTool.IOAuthCallBack() {
+                            @Override
+                            public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
+                                sp.edit().putString("Login_response", json).
+                                        commit();
+                                LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(json), LoginEntity.class);
+                                Constant_C.AID = loginEntity.getAdmin().getId() + "";
+                                Constant_C.TOKEN = loginEntity.getToken();
+                                return false;
+                            }
+                        });
 
                 MyTextUtil.sendMessage(this, activityContinuerentReceverphoneTv.getText().toString()
                         + "," + activityContinuerentOtherphoneTv.getText(), getSms());

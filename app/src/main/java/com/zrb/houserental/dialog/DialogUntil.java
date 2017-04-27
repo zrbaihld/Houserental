@@ -84,7 +84,7 @@ public class DialogUntil {
     }
 
     public void selectString(final Context context, int type, List<FloorEntity> items, DialogUtilEntityDao dao) {
-        if (type == 0 || type == 1) {
+        if (type == 0 || type == 1 || type == 7 || type == 8) {
             SharedPreferences sp = context.getSharedPreferences(Constant_C.SPPATH.USER_MSG_SPPATH, Context.MODE_PRIVATE);
             Gson gson = new Gson();
             String login_response = sp.getString("Login_response", "");
@@ -94,21 +94,29 @@ public class DialogUntil {
                 for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
                     FloorEntity floorEntity = new FloorEntity();
                     floorEntity.setName(buildingsBean.getName());
-                    floorEntity.setId(buildingsBean.getId()+"");
+                    floorEntity.setId(buildingsBean.getId() + "");
                     items.add(floorEntity);
                 }
             } else {
                 for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
-                    if (items.size()>0)
-                    if (items.get(0).getId().equals(buildingsBean.getId())) {
+                    if (items.size() > 0)
+                        if (items.get(0).getId().equals(buildingsBean.getId() + "")) {
                             items.clear();
-                        for (LoginEntity.AdminBean.BuildingsBean.RoomsBean roomsBean : buildingsBean.getRooms()) {
-                            FloorEntity floorEntity = new FloorEntity();
-                            floorEntity.setName(roomsBean.getName());
-                            floorEntity.setId(roomsBean.getId()+"");
-                            items.add(floorEntity);
+                            for (LoginEntity.AdminBean.BuildingsBean.RoomsBean roomsBean : buildingsBean.getRooms()) {
+                                FloorEntity floorEntity = new FloorEntity();
+                                floorEntity.setName(roomsBean.getName());
+                                floorEntity.setId(roomsBean.getId() + "");
+                                if (type == 1) {
+                                    if (roomsBean.getStatus() == 0)
+                                        items.add(floorEntity);
+                                } else if (type == 7) {
+                                    if (roomsBean.getStatus() == 1)
+                                        items.add(floorEntity);
+                                } else {
+                                    items.add(floorEntity);
+                                }
+                            }
                         }
-                    }
                 }
 
             }
@@ -139,6 +147,7 @@ public class DialogUntil {
                     title = "请选择楼号";
                     break;
                 case 1://房号
+                case 7://房号
                     title = "请选择房号";
                     break;
                 case 3://手机

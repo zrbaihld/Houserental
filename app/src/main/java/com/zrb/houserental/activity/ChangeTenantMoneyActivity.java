@@ -116,7 +116,7 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
                     toastIfActive("请先选择楼号");
                     break;
                 }
-                type = 1;
+                type = 8;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {

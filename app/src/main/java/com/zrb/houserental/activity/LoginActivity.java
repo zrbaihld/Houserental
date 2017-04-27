@@ -54,11 +54,13 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    private String phone;
+    private String password;
 
     @OnClick(R.id.activity_login_btn_login)
     public void onViewClicked() {
-        String phone = activityLoginEtPhone.getText().toString();
-        String password = activityLoginEtPassword.getText().toString();
+        phone = activityLoginEtPhone.getText().toString();
+        password = activityLoginEtPassword.getText().toString();
         if (TextUtil.isEmptyString(phone)) {
             toastIfActive("请输入手机号");
             return;
@@ -82,6 +84,8 @@ public class LoginActivity extends BaseActivity {
             case 0:
                 if (JsonParsing.getState(json)) {
                     sp.edit().putString("Login_response", json).
+                            putString(Constant_C.SPPATH.USER_NAME, phone).
+                            putString(Constant_C.SPPATH.USER_PW, password).
                             commit();
                     startActivity(new Intent(this, MainActivity.class));
                 }
