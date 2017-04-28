@@ -52,7 +52,7 @@
                 android:id="@+id/activity_addtenant_sex_tv"
                 style="@style/myRentDetail"
                 android:layout_toLeftOf="@id/next"
-                android:text="请选择性别"
+                android:text="男"
                 />
         </RelativeLayout>
 
@@ -214,7 +214,7 @@
 
             <TextView
                 style="@style/myRentTitle"
-                android:text="居住证到期:"
+                android:text="居住证是否到期:"
                 />
 
             <ImageView
@@ -230,7 +230,7 @@
                 android:id="@+id/activity_addtenant_outtime_tv"
                 style="@style/myRentDetail"
                 android:layout_toLeftOf="@id/next"
-                android:text="请选择日期"
+                android:text="否"
                 />
         </RelativeLayout>
 

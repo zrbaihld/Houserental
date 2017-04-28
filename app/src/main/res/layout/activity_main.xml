@@ -38,13 +38,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200px"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="10px"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
         >
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/activity_main_houseperson_qury"
+            android:id="@+id/activity_main_start"
             android:layout_width="0px"
             android:layout_height="200px"
             android:layout_centerInParent="true"
@@ -64,14 +63,14 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="房客查询"
-                android:textColor="@color/white"/>
+                android:text="房客起租"
+               />
 
         </com.zhy.autolayout.AutoLinearLayout>
 
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/activity_main_housenull_qury"
+            android:id="@+id/activity_main_continue"
             android:layout_width="0px"
             android:layout_height="200px"
             android:layout_centerInParent="true"
@@ -91,13 +90,13 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="空房查询"
-                android:textColor="@color/white"/>
+                android:text="租金收取"
+              />
 
         </com.zhy.autolayout.AutoLinearLayout>
 
         <com.zhy.autolayout.AutoLinearLayout
-            android:id="@+id/activity_main_houseintime_qury"
+            android:id="@+id/activity_main_exit"
             android:layout_width="0px"
             android:layout_height="200px"
             android:layout_centerInParent="true"
@@ -118,14 +117,188 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="到期查询"
-                android:textColor="@color/white"/>
+                android:text="房客退租"
+               />
 
         </com.zhy.autolayout.AutoLinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:orientation="horizontal"
+        >
 
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/activity_main_change"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:src="@drawable/btn_pub_icon_change"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="租金变更"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/activity_main_outtime_qury"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:src="@drawable/btn_pub_icon_outtime"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="到期查询"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/activity_main_housenull_qury"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:src="@drawable/btn_pub_icon_null"
+                />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="空房查询"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:orientation="horizontal"
+        >
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/activity_main_add"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:src="@drawable/btn_pub_icon_add"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="新增房客"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/activity_main_shortmessage"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:src="@drawable/btn_pub_icon_shot"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="短信查询"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+        <com.zhy.autolayout.AutoLinearLayout
+            android:id="@+id/activity_main_house_qury"
+            android:layout_width="0px"
+            android:layout_height="200px"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="110px"
+                android:layout_height="110px"
+                android:src="@drawable/btn_pub_icon_main"
+                />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="房客查询"
+                />
+
+        </com.zhy.autolayout.AutoLinearLayout>
+
+    </LinearLayout>
     <include layout="@layout/view_listview"
+             android:visibility="gone"
         ></include>
 
 </LinearLayout>

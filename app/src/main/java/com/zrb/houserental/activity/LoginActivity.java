@@ -35,8 +35,12 @@ public class LoginActivity extends BaseActivity {
     public void init() {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        activityLoginEtPhone.setText("root");
-        activityLoginEtPassword.setText("123456");
+
+        String phone = sp.getString(Constant_C.SPPATH.USER_NAME, "");
+        String pw = sp.getString(Constant_C.SPPATH.USER_PW, "");
+
+        activityLoginEtPhone.setText(phone);
+        activityLoginEtPassword.setText(pw);
     }
 
     @Override

@@ -3,14 +3,15 @@ package com.zrb.houserental.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.zhy.autolayout.AutoLinearLayout;
 import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.base.BaseRecyclerViewAdapter;
 import com.zrb.baseapp.constant.Constant_C;
@@ -19,32 +20,57 @@ import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.R;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
-
-
     @BindView(R.id.base_toolbar_title)
     TextView baseToolbarTitle;
     @BindView(R.id.base_toolbar_setting)
     ImageView baseToolbarSetting;
-    @BindView(R.id.activity_main_houseperson_qury)
-    View activityMainHousepersonQury;
+    @BindView(R.id.activity_main_start)
+    AutoLinearLayout activityMainStart;
+    @BindView(R.id.activity_main_continue)
+    AutoLinearLayout activityMainContinue;
+    @BindView(R.id.activity_main_exit)
+    AutoLinearLayout activityMainExit;
+    @BindView(R.id.activity_main_change)
+    AutoLinearLayout activityMainChange;
+    @BindView(R.id.activity_main_outtime_qury)
+    AutoLinearLayout activityMainOuttimeQury;
     @BindView(R.id.activity_main_housenull_qury)
-    View activityMainHousenullQury;
-    @BindView(R.id.activity_main_houseintime_qury)
-    View activityMainHouseintimeQury;
+    AutoLinearLayout activityMainHousenullQury;
+    @BindView(R.id.activity_main_add)
+    AutoLinearLayout activityMainAdd;
+    @BindView(R.id.activity_main_shortmessage)
+    AutoLinearLayout activityMainShortmessage;
+    @BindView(R.id.activity_main_house_qury)
+    AutoLinearLayout activityMainHouseQury;
     @BindView(R.id.view_iv)
     ImageView viewIv;
     @BindView(R.id.view_listview)
     XRecyclerView viewListview;
+    @BindView(R.id.activity_main)
+    LinearLayout activityMain;
+
+
+//    @BindView(R.id.base_toolbar_title)
+//    TextView baseToolbarTitle;
+//    @BindView(R.id.base_toolbar_setting)
+//    ImageView baseToolbarSetting;
+//    @BindView(R.id.activity_main_houseperson_qury)
+//    View activityMainHousepersonQury;
+//    @BindView(R.id.activity_main_housenull_qury)
+//    View activityMainHousenullQury;
+//    @BindView(R.id.activity_main_houseintime_qury)
+//    View activityMainHouseintimeQury;
+//    @BindView(R.id.view_iv)
+//    ImageView viewIv;
+//    @BindView(R.id.view_listview)
+//    XRecyclerView viewListview;
 
     private MyAdapter myAdapter;
     private String[] item_s = {"房客起租", "房客续租", "房客退租",
@@ -63,22 +89,22 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         LayoutManager layoutManager = new GridLayoutManager(this, 3);
-        viewListview.setLayoutManager(layoutManager);
-        viewListview.setLoadingMoreEnabled(false);
-        viewListview.setPullRefreshEnabled(false);
-        viewListview.setOverScrollMode(View.OVER_SCROLL_NEVER);
-
-        List<ItemObject> strings = new ArrayList<>();
-        int i = 0;
-        for (String item_ : item_s) {
-            ItemObject itemObject = new ItemObject();
-            itemObject.setTitle(item_);
-            itemObject.setIma(img_i[i]);
-            itemObject.setPostion(i++);
-            strings.add(itemObject);
-        }
-        myAdapter = new MyAdapter(strings);
-        viewListview.setAdapter(myAdapter);
+//        viewListview.setLayoutManager(layoutManager);
+//        viewListview.setLoadingMoreEnabled(false);
+//        viewListview.setPullRefreshEnabled(false);
+//        viewListview.setOverScrollMode(View.OVER_SCROLL_NEVER);
+//
+//        List<ItemObject> strings = new ArrayList<>();
+//        int i = 0;
+//        for (String item_ : item_s) {
+//            ItemObject itemObject = new ItemObject();
+//            itemObject.setTitle(item_);
+//            itemObject.setIma(img_i[i]);
+//            itemObject.setPostion(i++);
+//            strings.add(itemObject);
+//        }
+//        myAdapter = new MyAdapter(strings);
+//        viewListview.setAdapter(myAdapter);
 
         initDate();
     }
@@ -92,14 +118,14 @@ public class MainActivity extends BaseActivity {
         }
         loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
 
-        Constant_C.AID = loginEntity.getAdmin().getId()+"";
+        Constant_C.AID = loginEntity.getAdmin().getId() + "";
         Constant_C.TOKEN = loginEntity.getToken();
 
-        if (loginEntity != null && loginEntity.getAdmin() != null) {
-            baseToolbarTitle.setText(String.format("管理员:%s", loginEntity.getAdmin().getUsername()));
-        } else {
-
-        }
+//        if (loginEntity != null && loginEntity.getAdmin() != null) {
+//            baseToolbarTitle.setText(String.format("管理员:%s", loginEntity.getAdmin().getUsername()));
+//        } else {
+//
+//        }
 
     }
 
@@ -123,23 +149,70 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.base_toolbar_setting, R.id.activity_main_houseperson_qury, R.id.activity_main_housenull_qury, R.id.activity_main_houseintime_qury})
+//    @OnClick({R.id.base_toolbar_setting, R.id.activity_main_houseperson_qury, R.id.activity_main_housenull_qury, R.id.activity_main_houseintime_qury})
+//    public void onViewClicked(View view) {
+//        switch (view.getId()) {
+//            case R.id.base_toolbar_setting:
+//                intent = new Intent(this, SettingActivity.class);
+//                startActivity(intent);
+//                break;
+//            case R.id.activity_main_houseperson_qury:
+//                intent = new Intent(this, TenantQueryActivity.class);
+//                startActivity(intent);
+//                break;
+//            case R.id.activity_main_housenull_qury:
+//                intent = new Intent(this, RoomQuertActivity.class);
+//                startActivity(intent);
+//                break;
+//            case R.id.activity_main_houseintime_qury:
+//                intent = new Intent(this, ExpireQuertActivity.class);
+//                startActivity(intent);
+//                break;
+//        }
+//    }
+
+
+    @OnClick({R.id.base_toolbar_setting, R.id.activity_main_start, R.id.activity_main_continue, R.id.activity_main_exit, R.id.activity_main_change, R.id.activity_main_outtime_qury, R.id.activity_main_housenull_qury, R.id.activity_main_add, R.id.activity_main_shortmessage, R.id.activity_main_house_qury})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_toolbar_setting:
                 intent = new Intent(this, SettingActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.activity_main_houseperson_qury:
-                intent = new Intent(this, TenantQueryActivity.class);
+            case R.id.activity_main_start:
+                intent = new Intent(this, activity_class[0]);
+                startActivity(intent);
+                break;
+            case R.id.activity_main_continue:
+                intent = new Intent(this, activity_class[1]);
+                startActivity(intent);
+                break;
+            case R.id.activity_main_exit:
+                intent = new Intent(this, activity_class[2]);
+                startActivity(intent);
+                break;
+            case R.id.activity_main_change:
+                intent = new Intent(this, activity_class[4]);
+                startActivity(intent);
+                break;
+            case R.id.activity_main_outtime_qury:
+                intent = new Intent(this, ExpireQuertActivity.class);
                 startActivity(intent);
                 break;
             case R.id.activity_main_housenull_qury:
                 intent = new Intent(this, RoomQuertActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.activity_main_houseintime_qury:
-                intent = new Intent(this, ExpireQuertActivity.class);
+            case R.id.activity_main_add:
+                intent = new Intent(this, activity_class[3]);
+                startActivity(intent);
+                break;
+            case R.id.activity_main_shortmessage:
+                intent = new Intent(this, activity_class[5]);
+                startActivity(intent);
+                break;
+            case R.id.activity_main_house_qury:
+                intent = new Intent(this, TenantQueryActivity.class);
                 startActivity(intent);
                 break;
         }

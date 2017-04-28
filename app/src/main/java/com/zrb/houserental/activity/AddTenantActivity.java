@@ -123,20 +123,25 @@ public class AddTenantActivity extends BaseActivity {
                 });
                 break;
             case R.id.activity_addtenant_sex:
-                List<FloorEntity> itemEntities = new ArrayList<>();
-                FloorEntity itemEntity = new FloorEntity();
-                itemEntity.setName("男");
-                itemEntities.add(itemEntity);
-                itemEntity = new FloorEntity();
-                itemEntity.setName("女");
-                itemEntities.add(itemEntity);
-                type = 4;
-                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
-                    @Override
-                    public void onPositiveActionClicked(FloorEntity entity) {
-                        activityAddtenantSexTv.setText(entity.getName());
-                    }
-                });
+                if ("男".equals(activityAddtenantSexTv.getText().toString())) {
+                    activityAddtenantSexTv.setText("女");
+                } else {
+                    activityAddtenantSexTv.setText("男");
+                }
+//                List<FloorEntity> itemEntities = new ArrayList<>();
+//                FloorEntity itemEntity = new FloorEntity();
+//                itemEntity.setName("男");
+//                itemEntities.add(itemEntity);
+//                itemEntity = new FloorEntity();
+//                itemEntity.setName("女");
+//                itemEntities.add(itemEntity);
+//                type = 4;
+//                DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
+//                    @Override
+//                    public void onPositiveActionClicked(FloorEntity entity) {
+//                        activityAddtenantSexTv.setText(entity.getName());
+//                    }
+//                });
                 break;
             case R.id.activity_addtenant_birthday:
                 DialogUntil.getInstance().selectDate(getSupportFragmentManager(), new DialogUntil.DialogUtilDateDao() {
@@ -147,16 +152,22 @@ public class AddTenantActivity extends BaseActivity {
                 });
                 break;
             case R.id.activity_addtenant_outtime:
-                DialogUntil.getInstance().selectDate(getSupportFragmentManager(), new DialogUntil.DialogUtilDateDao() {
-                    @Override
-                    public void onPositiveActionClicked(String date) {
-                        activityAddtenantOuttimeTv.setText(date);
-                    }
-                });
+                if ("否".equals(activityAddtenantSexTv.getText().toString())) {
+                    activityAddtenantOuttimeTv.setText("是");
+                } else {
+                    activityAddtenantOuttimeTv.setText("否");
+                }
+//                DialogUntil.getInstance().selectDate(getSupportFragmentManager(), new DialogUntil.DialogUtilDateDao() {
+//                    @Override
+//                    public void onPositiveActionClicked(String date) {
+//                        activityAddtenantOuttimeTv.setText(date);
+//                    }
+//                });
                 break;
             case R.id.activity_roomquert_confirm:
                 sendMessage();
                 break;
+
         }
     }
 
