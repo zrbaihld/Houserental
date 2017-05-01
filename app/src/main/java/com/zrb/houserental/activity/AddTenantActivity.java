@@ -152,7 +152,7 @@ public class AddTenantActivity extends BaseActivity {
                 });
                 break;
             case R.id.activity_addtenant_outtime:
-                if ("否".equals(activityAddtenantSexTv.getText().toString())) {
+                if ("否".equals(activityAddtenantOuttimeTv.getText().toString())) {
                     activityAddtenantOuttimeTv.setText("是");
                 } else {
                     activityAddtenantOuttimeTv.setText("否");
@@ -218,6 +218,8 @@ public class AddTenantActivity extends BaseActivity {
             toastIfActive("未选择日期");
             return;
         }
+        s_outtime = "是".equals(s_outtime) ? "1" : "0";
+
 //        building_id |int| 是 | 12 | 楼号id
 //        room_id |int| 是 | 12 | 房号id
 //        name | string | 是 | 12 |

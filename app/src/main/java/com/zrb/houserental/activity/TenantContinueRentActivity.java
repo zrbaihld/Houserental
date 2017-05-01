@@ -478,16 +478,18 @@ public class TenantContinueRentActivity extends BaseActivity {
                 roomEntity = gson.fromJson(JsonParsing.getData(json), RoomEntity.class);
                 if (roomEntity != null && roomEntity.getRoom() != null && roomEntity.getRoom().getLodger() != null) {
                     scrollView.setVisibility(View.VISIBLE);
-                    activityContinuerentNameTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getName()));
+
                     activityContinuerentUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
                     activityContinuerentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityContinuerentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
-                    activityContinuerentDepositTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getDeposit()));
                     activityContinuerentStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_start())));
                     activityContinuerentEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_end())));
                     activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
                     activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
                     activityStartrentContractMonthsTv.setText(String.format("%s", roomEntity.getRoom().getContract_months() + "个月"));
+
+                    activityContinuerentDepositTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getDeposit()));
+                    activityContinuerentNameTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getName()));
                     activityContinuerentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getLodger().getPrev_water()));
                     activityContinuerentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getLodger().getPrev_electric()));
                     activityContinuerentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getPhone()));
