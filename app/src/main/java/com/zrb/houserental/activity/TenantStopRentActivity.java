@@ -247,7 +247,7 @@ public class TenantStopRentActivity extends BaseActivity {
                     toastIfActive("请先选择楼号");
                     break;
                 }
-                type = 7;
+                type = 9;
                 DialogUntil.getInstance().selectString(this, type, itemEntities, new DialogUntil.DialogUtilEntityDao() {
                     @Override
                     public void onPositiveActionClicked(FloorEntity entity) {
@@ -375,16 +375,16 @@ public class TenantStopRentActivity extends BaseActivity {
                             .setContent("building_id", building_id)
                             .setContent("room_id", room_id)
                             .setContent("number", s_no)
-                            .setContent("user_id", roomEntity.getRoom().getLodger().getId())
-                            .setContent("rent_date_start", roomEntity.getRoom().getLodger().getRent_date_start())
-                            .setContent("rent_date_end", roomEntity.getRoom().getLodger().getRent_date_end())
-                            .setContent("prev_water", roomEntity.getRoom().getLodger().getPrev_water())
-                            .setContent("prev_electric", roomEntity.getRoom().getLodger().getPrev_electric())
+                            .setContent("user_id", roomEntity.getRoom().getLodger() == null ? 0 : roomEntity.getRoom().getLodger().getId())
+                            .setContent("rent_date_start", roomEntity.getRoom().getRent_date_start())
+                            .setContent("rent_date_end", roomEntity.getRoom().getRent_date_end())
+                            .setContent("prev_water", roomEntity.getRoom().getPrev_water())
+                            .setContent("prev_electric", roomEntity.getRoom().getPrev_electric())
                             .setContent("water", s_water)
                             .setContent("electric", s_power)
                             .setContent("days", s_outtime)
                             .setContent("remark", finalS_remark)
-                            .setContent("phone", roomEntity.getRoom().getLodger().getPhone())
+                            .setContent("phone", roomEntity.getRoom().getPhone())
                             .setContent("rent_fee", roomEntity.getRoom().getRental())
                             .setContent("payable", finalS_otherout)
                             .setContent("sms_content", getSms())
@@ -407,16 +407,16 @@ public class TenantStopRentActivity extends BaseActivity {
                     .setContent("building_id", building_id)
                     .setContent("room_id", room_id)
                     .setContent("number", s_no)
-                    .setContent("user_id", roomEntity.getRoom().getLodger().getId())
-                    .setContent("rent_date_start", roomEntity.getRoom().getLodger().getRent_date_start())
-                    .setContent("rent_date_end", roomEntity.getRoom().getLodger().getRent_date_end())
-                    .setContent("prev_water", roomEntity.getRoom().getLodger().getPrev_water())
-                    .setContent("prev_electric", roomEntity.getRoom().getLodger().getPrev_electric())
+                    .setContent("user_id", roomEntity.getRoom().getLodger() == null ? 0 : roomEntity.getRoom().getLodger().getId())
+                    .setContent("rent_date_start", roomEntity.getRoom().getRent_date_start())
+                    .setContent("rent_date_end", roomEntity.getRoom().getRent_date_end())
+                    .setContent("prev_water", roomEntity.getRoom().getPrev_water())
+                    .setContent("prev_electric", roomEntity.getRoom().getPrev_electric())
                     .setContent("water", s_water)
                     .setContent("electric", s_power)
                     .setContent("days", s_outtime)
                     .setContent("remark", s_remark)
-                    .setContent("phone", roomEntity.getRoom().getLodger().getPhone())
+                    .setContent("phone", roomEntity.getRoom().getPhone())
                     .setContent("rent_fee", roomEntity.getRoom().getRental())
                     .setContent("payable", s_otherout)
                     .setContent("sms_content", getSms())
@@ -509,23 +509,27 @@ public class TenantStopRentActivity extends BaseActivity {
         switch (type) {
             case 0:
                 roomEntity = gson.fromJson(JsonParsing.getData(json), RoomEntity.class);
-                if (roomEntity != null && roomEntity.getRoom() != null && roomEntity.getRoom().getLodger() != null) {
+                if (roomEntity != null && roomEntity.getRoom() != null ) {
                     scrollView.setVisibility(View.VISIBLE);
-                    activityStoprentNameTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getName()));
+                    activityStoprentNameTv.setText(String.format("%s", roomEntity.getRoom().getName()));
                     activityStoprentUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
                     activityStoprentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityStoprentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
-                    activityStoprentDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getLodger().getDeposit()));
-                    activityStoprentStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getLodger().getRent_date_start())));
-                    activityStoprentEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getLodger().getRent_date_end())));
+                    activityStoprentDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getDeposit()));
+                    activityStoprentStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_start())));
+                    activityStoprentEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_end())));
                     activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
                     activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
                     activityStartrentContractMonthsTv.setText(String.format("%s", roomEntity.getRoom().getContract_months() + "个月"));
-                    activityStoprentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getLodger().getPrev_water()));
-                    activityStoprentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getLodger().getPrev_electric()));
+                    activityStoprentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getPrev_water()));
+                    activityStoprentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getPrev_electric()));
                     activityStartrentKeyTv.setText(String.format("%s个", roomEntity.getRoom().getKeys()));
-                    activityStoprentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getPhone()));
-
+                    activityStoprentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getPhone()));
+                    if (roomEntity.getRoom().getLodger() != null) {
+                        activityStoprentNameTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getName()));
+                    } else {
+                        activityStoprentNameTv.setText(String.format("%s", "无房客"));
+                    }
                     totleGetPrice();
                 } else {
                     activityStoprentNameTv.setText(String.format("%s", ""));

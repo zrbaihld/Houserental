@@ -55,6 +55,28 @@ public class RoomEntity {
         private String created_at;
         private String updated_at;
         private String number;
+        private int prev_water;
+        private int prev_electric;
+        private String phone;
+        private String prev_start_date;
+        private String prev_end_date;
+
+        public String getPrev_start_date() {
+            return prev_start_date;
+        }
+
+        public void setPrev_start_date(String prev_start_date) {
+            this.prev_start_date = prev_start_date;
+        }
+
+        public String getPrev_end_date() {
+            return prev_end_date;
+        }
+
+        public void setPrev_end_date(String prev_end_date) {
+            this.prev_end_date = prev_end_date;
+        }
+
         /**
          * id : 1
          * room_id : 1
@@ -82,7 +104,28 @@ public class RoomEntity {
          */
 
         private LodgerBean lodger;
+        public int getPrev_water() {
+            return prev_water;
+        }
 
+        public void setPrev_water(int prev_water) {
+            this.prev_water = prev_water;
+        }
+
+        public int getPrev_electric() {
+            return prev_electric;
+        }
+
+        public void setPrev_electric(int prev_electric) {
+            this.prev_electric = prev_electric;
+        }
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
         public int getId() {
             return id;
         }

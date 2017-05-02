@@ -288,6 +288,7 @@ public class LoginEntity {
                 private int id;
                 private String name;
                 private int building_id;
+                private int days;
                 private String rental;
                 private String water_rate;
                 private String electric_rate;
@@ -301,6 +302,14 @@ public class LoginEntity {
                 private int contract_months;
                 private String created_at;
                 private String updated_at;
+
+                public int getDays() {
+                    return days;
+                }
+
+                public void setDays(int days) {
+                    this.days = days;
+                }
 
                 public int getId() {
                     return id;

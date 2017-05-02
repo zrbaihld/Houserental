@@ -30,6 +30,9 @@ import com.zrb.houserental.util.MyTextUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -41,6 +44,7 @@ public class DialogUntil {
     private FloorAdapter floorAdapter;
     private SelectFloorDialog selectFloorDialog;
     private DialogUtilEntityDao dao;
+    private int type;
 
     private static DialogUntil dialogUntil;
 
@@ -83,13 +87,15 @@ public class DialogUntil {
         fragment.show(manager, null);
     }
 
+
     public void selectString(final Context context, int type, List<FloorEntity> items, DialogUtilEntityDao dao) {
-        if (type == 0 || type == 1 || type == 7 || type == 8) {
+        this.type = type;
+        if (type == 0 || type == 1 || type == 7 || type == 8 || type == 9) {
             SharedPreferences sp = context.getSharedPreferences(Constant_C.SPPATH.USER_MSG_SPPATH, Context.MODE_PRIVATE);
             Gson gson = new Gson();
             String login_response = sp.getString("Login_response", "");
             LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
-            if (type == 0) {
+            if (type == 0) {//楼号
                 items.clear();
                 for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
                     FloorEntity floorEntity = new FloorEntity();
@@ -105,13 +111,28 @@ public class DialogUntil {
                             for (LoginEntity.AdminBean.BuildingsBean.RoomsBean roomsBean : buildingsBean.getRooms()) {
                                 FloorEntity floorEntity = new FloorEntity();
                                 floorEntity.setName(roomsBean.getName());
+                                floorEntity.setDays(roomsBean.getDays());
                                 floorEntity.setId(roomsBean.getId() + "");
-                                if (type == 1) {
+                                if (type == 1) {//起租
                                     if (roomsBean.getStatus() == 0)
                                         items.add(floorEntity);
-                                } else if (type == 7) {
+                                } else if (type == 7) {//续租
                                     if (roomsBean.getStatus() == 1)
                                         items.add(floorEntity);
+                                } else if (type == 9) {//续租
+                                    if (roomsBean.getStatus() == 1)
+                                        items.add(floorEntity);
+                                    Collections.sort(items, new Comparator<FloorEntity>() {
+                                        @Override
+                                        public int compare(FloorEntity floorEntity, FloorEntity t1) {
+                                            if (floorEntity.getDays() > t1.getDays())
+                                                return -1;
+                                            else if (floorEntity.getDays() == t1.getDays())
+                                                return 0;
+                                            else
+                                                return 1;
+                                        }
+                                    });
                                 } else {
                                     items.add(floorEntity);
                                 }
@@ -148,6 +169,8 @@ public class DialogUntil {
                     break;
                 case 1://房号
                 case 7://房号
+                case 9://房号
+                case 8://房号
                     title = "请选择房号";
                     break;
                 case 3://手机
@@ -196,6 +219,7 @@ public class DialogUntil {
         protected void bindDataToItemView(MyViewHolder myViewHolder, FloorEntity item) {
             myViewHolder.setText(R.id.adapter_tenantquery_item_title, item.getName())
                     .setTag(R.id.adapter_tenantquery_item_title, item)
+                    .setTextColor(R.id.adapter_tenantquery_item_title, item.getDays() != 0 && (type == 9) ? 0xffff0000 : 0xff000000)
                     .setOnClickListener(R.id.adapter_tenantquery_item_title, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

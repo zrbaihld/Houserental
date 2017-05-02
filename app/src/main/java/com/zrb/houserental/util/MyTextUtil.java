@@ -167,7 +167,10 @@ public class MyTextUtil {
 
     public static String getDate(String date) {
         if (!TextUtil.isEmptyString(date)) {
-            return date.substring(0, 10);
+            if (date.length() > 10)
+                return date.substring(0, 10);
+            else
+                return date;
         }
         return "";
     }

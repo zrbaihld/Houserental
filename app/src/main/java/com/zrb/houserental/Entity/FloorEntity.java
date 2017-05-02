@@ -8,6 +8,15 @@ public class FloorEntity {
     private String name;
     private String id;
     private int i_id;
+    private int days;
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
 
     public int getI_id() {
         return i_id;

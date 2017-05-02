@@ -32,7 +32,8 @@
                 android:id="@+id/activity_login_et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="手机号码"
+                android:hint="手机号或帐号"
+                android:maxLines="1"
                 android:textColor="#000"
              />
         </android.support.design.widget.TextInputLayout>
@@ -51,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="密码"
+                android:maxLines="1"
                 android:textColor="#000"
                 android:inputType="textPassword"/>
         </android.support.design.widget.TextInputLayout>
