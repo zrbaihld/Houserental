@@ -1,5 +1,7 @@
 package com.zrb.houserental.Entity;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/4/10.
  */
@@ -47,7 +49,10 @@ public class RoomEntity {
         private int status;
         private String rent_date_start;
         private String rent_date_end;
+        private int water_init;
+        private int electric_init;
         private int keys;
+        private int days;
         private int deposit;
         private int network_num;
         private String network_provider;
@@ -55,26 +60,34 @@ public class RoomEntity {
         private String created_at;
         private String updated_at;
         private String number;
-        private int prev_water;
-        private int prev_electric;
-        private String phone;
-        private String prev_start_date;
-        private String prev_end_date;
+        private List<String> phone;
 
-        public String getPrev_start_date() {
-            return prev_start_date;
+        public int getDays() {
+            return days;
         }
 
-        public void setPrev_start_date(String prev_start_date) {
-            this.prev_start_date = prev_start_date;
+        public void setDays(int days) {
+            this.days = days;
         }
 
-        public String getPrev_end_date() {
-            return prev_end_date;
+        public int getWater_init() {
+            return water_init;
         }
 
-        public void setPrev_end_date(String prev_end_date) {
-            this.prev_end_date = prev_end_date;
+        public void setWater_init(int water_init) {
+            this.water_init = water_init;
+        }
+
+        public int getElectric_init() {
+            return electric_init;
+        }
+
+        public void setElectric_init(int electric_init) {
+            this.electric_init = electric_init;
+        }
+
+        public List<String> getPhone() {
+            return phone;
         }
 
         /**
@@ -104,26 +117,8 @@ public class RoomEntity {
          */
 
         private LodgerBean lodger;
-        public int getPrev_water() {
-            return prev_water;
-        }
 
-        public void setPrev_water(int prev_water) {
-            this.prev_water = prev_water;
-        }
-
-        public int getPrev_electric() {
-            return prev_electric;
-        }
-
-        public void setPrev_electric(int prev_electric) {
-            this.prev_electric = prev_electric;
-        }
-        public String getPhone() {
-            return phone;
-        }
-
-        public void setPhone(String phone) {
+        public void setPhone(List<String>  phone) {
             this.phone = phone;
         }
         public int getId() {

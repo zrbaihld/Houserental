@@ -42,6 +42,12 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
     TextView activityAddtenantRoomTv;
     @BindView(R.id.activity_startrent_unity_tv)
     TextView activityStartrentUnityTv;
+    @BindView(R.id.activity_startrent_waternum_tv)
+    TextView activityStartrentWaternumTv;
+    @BindView(R.id.activity_startrent_powornum_tv)
+    TextView activityStartrentPowornumTv;
+    @BindView(R.id.activity_startrent_yajin_tv)
+    TextView activityStartrentYajinTv;
     @BindView(R.id.activity_startrent_water_tv)
     TextView activityStartrentWaterTv;
     @BindView(R.id.activity_startrent_power_tv)
@@ -52,6 +58,12 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
     EditText activityAddtenantNewwaterTv;
     @BindView(R.id.activity_addtenant_newpower_tv)
     EditText activityAddtenantNewpowerTv;
+    @BindView(R.id.activity_addtenant_water_tv)
+    EditText activityAddtenantWaterTv;
+    @BindView(R.id.activity_addtenant_powor_tv)
+    EditText activityAddtenantPoworTv;
+    @BindView(R.id.activity_addtenant_yajin_tv)
+    EditText activityAddtenantYajinTv;
     @BindView(R.id.scrollview)
     View scrollview;
 
@@ -103,7 +115,6 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityAddtenantFloorTv.setText(entity.getName());
                         activityAddtenantRoomTv.setText("请选择房号");
-                        scrollview.setVisibility(View.GONE);
                         building_id = entity.getId();
                         building_name = entity.getName();
                         itemEntities.clear();
@@ -145,6 +156,9 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
         String s_month = activityAddtenantMonthTv.getText().toString();
         String s_water = activityAddtenantNewwaterTv.getText().toString();
         String s_power = activityAddtenantNewpowerTv.getText().toString();
+        String s_powernum = activityAddtenantPoworTv.getText().toString();
+        String s_waternum = activityAddtenantWaterTv.getText().toString();
+        String s_yajin = activityAddtenantYajinTv.getText().toString();
 
 
         if ("请选择楼号".equals(s_floor)) {
@@ -155,7 +169,18 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
             toastIfActive("未选择房号");
             return;
         }
+
+
         if (roomEntity != null) {
+            if (TextUtil.isEmptyString(s_powernum)) {
+                s_powernum = roomEntity.getRoom().getElectric_init() + "";
+            }
+            if (TextUtil.isEmptyString(s_waternum)) {
+                s_waternum = roomEntity.getRoom().getWater_init() + "";
+            }
+            if (TextUtil.isEmptyString(s_yajin)) {
+                s_yajin = roomEntity.getRoom().getDeposit() + "";
+            }
             if (TextUtil.isEmptyString(s_month)) {
                 s_month = roomEntity.getRoom().getRental() + "";
             } else {
@@ -177,11 +202,13 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
                     toastIfActive("电费必须大于0");
                 }
             }
-
             MyHttpTool.creat(ChangeTenantMoneyActivity.this)
                     .setContent("building_id", building_id)
                     .setContent("room_id", room_id)
                     .setContent("rental", s_month)
+                    .setContent("deposit", s_yajin)
+                    .setContent("water_init", s_waternum)
+                    .setContent("electric_init", s_powernum)
                     .setContent("water_rate", s_water)
                     .setContent("electric_rate", s_power)
                     .postShowDialog(1, URL_Constant.updateRoom, ChangeTenantMoneyActivity.this);
@@ -192,8 +219,7 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
     public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
         if (super.getIOAuthCallBack(type, json, isSuccess)) {
             if (type == 0)
-                scrollview.setVisibility(View.GONE);
-            return true;
+                return true;
         }
         switch (type) {
             case 0:
@@ -201,16 +227,27 @@ public class ChangeTenantMoneyActivity extends BaseActivity {
                 if (roomEntity != null && roomEntity.getRoom() != null) {
                     scrollview.setVisibility(View.VISIBLE);
                     activityStartrentUnityTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
+                    activityStartrentWaternumTv.setText(String.format("%s吨", roomEntity.getRoom().getWater_init()));
+                    activityStartrentPowornumTv.setText(String.format("%s度", roomEntity.getRoom().getElectric_init()));
+                    activityStartrentYajinTv.setText(String.format("￥ %s", roomEntity.getRoom().getDeposit()));
                     activityStartrentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityStartrentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
                 } else {
-                    scrollview.setVisibility(View.GONE);
                 }
                 break;
             case 1:
                 toastIfActive("修改成功");
-                activityStartrentUnityTv.setText(String.format("￥ %s",activityAddtenantMonthTv.getText().toString()));
-                activityStartrentWaterTv.setText(String.format("￥ %s/吨",activityAddtenantNewwaterTv.getText().toString()));
+                if (!TextUtil.isEmptyString(activityAddtenantMonthTv.getText().toString()))
+                activityStartrentUnityTv.setText(String.format("￥ %s", activityAddtenantMonthTv.getText().toString()));
+                if (!TextUtil.isEmptyString(activityAddtenantWaterTv.getText().toString()))
+                activityStartrentWaternumTv.setText(String.format("%s吨", activityAddtenantWaterTv.getText().toString()));
+                if (!TextUtil.isEmptyString(activityAddtenantPoworTv.getText().toString()))
+                activityStartrentPowornumTv.setText(String.format("%s度", activityAddtenantPoworTv.getText().toString()));
+                if (!TextUtil.isEmptyString(activityAddtenantYajinTv.getText().toString()))
+                activityStartrentYajinTv.setText(String.format("￥ %s", activityAddtenantYajinTv.getText().toString()));
+                if (!TextUtil.isEmptyString(activityAddtenantNewwaterTv.getText().toString()))
+                activityStartrentWaterTv.setText(String.format("￥ %s/吨", activityAddtenantNewwaterTv.getText().toString()));
+                if (!TextUtil.isEmptyString(activityAddtenantNewpowerTv.getText().toString()))
                 activityStartrentPowerTv.setText(String.format("￥ %s/度", activityAddtenantNewpowerTv.getText().toString()));
                 break;
         }

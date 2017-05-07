@@ -136,7 +136,6 @@ public class TenantStartRentActivity extends BaseActivity {
                     public void onPositiveActionClicked(FloorEntity entity) {
                         activityAddtenantFloorTv.setText(entity.getName());
                         activityAddtenantRoomTv.setText("请选择房号");
-                        scrollView.setVisibility(View.GONE);
                         building_id = entity.getId();
                         building_name = entity.getName();
                         itemEntities.clear();
@@ -321,14 +320,14 @@ public class TenantStartRentActivity extends BaseActivity {
                 return;
             }
         }
-        if (TextUtil.isEmptyString(s_NetworkNum)) {
-            toastIfActive("还未填宽带条数");
-            return;
-        }
-        if (TextUtil.isEmptyString(s_NetworkProvider)) {
-            toastIfActive("还未填写宽带品牌");
-            return;
-        }
+//        if (TextUtil.isEmptyString(s_NetworkNum)) {
+//            toastIfActive("还未填宽带条数");
+//            return;
+//        }
+//        if (TextUtil.isEmptyString(s_NetworkProvider)) {
+//            toastIfActive("还未填写宽带品牌");
+//            return;
+//        }
         if (s_floor.equals("请选择合同月数")) {
             toastIfActive("还未选择合同月数");
             return;
@@ -378,7 +377,7 @@ public class TenantStartRentActivity extends BaseActivity {
     public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
         if (super.getIOAuthCallBack(type, json, isSuccess)) {
             if (type == 0)
-                scrollView.setVisibility(View.GONE);
+//                scrollView.setVisibility(View.GONE);
             return true;
         }
         switch (type) {
@@ -414,6 +413,7 @@ public class TenantStartRentActivity extends BaseActivity {
                                 LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(json), LoginEntity.class);
                                 Constant_C.AID = loginEntity.getAdmin().getId() + "";
                                 Constant_C.TOKEN = loginEntity.getToken();
+                                finish();
                                 return false;
                             }
                         });
