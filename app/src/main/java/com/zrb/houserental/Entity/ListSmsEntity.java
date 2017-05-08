@@ -31,6 +31,7 @@ public class ListSmsEntity {
          * water_rate : 23
          * electric_rate : 235
          * status : 1
+         *    * deposit : 1000
          * rend_date_end : 2017-08-14 00:00:00
          * created_at : 2017-04-14 18:31:13
          * updated_at : 2017-04-15 10:08:51
@@ -44,10 +45,19 @@ public class ListSmsEntity {
         private int water_rate;
         private int electric_rate;
         private int status;
+        private int deposit;
         private String rend_date_end;
         private String created_at;
         private String updated_at;
         private List<RentRecordsBean> rent_records;
+
+        public int getDeposit() {
+            return deposit;
+        }
+
+        public void setDeposit(int deposit) {
+            this.deposit = deposit;
+        }
 
         public int getId() {
             return id;

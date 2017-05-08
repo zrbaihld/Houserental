@@ -387,7 +387,7 @@ public class ShotMessageQuertActivity extends BaseActivity {
                     String login_response = sp.getString("Login_response", "");
                     LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
                     activityShotmessagequertUnityTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
-                    activityShotmessagequertDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
+                    activityShotmessagequertDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getDeposit()));
                     activityShotmessagequertWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityShotmessagequertPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
                     activityStartrentGetmanTv.setText(loginEntity.getAdmin().getRealname());
