@@ -186,7 +186,7 @@ public class ShotMessageQuertActivity extends BaseActivity {
             double d_userP = Double.parseDouble(MyTextUtil.getNumberFromString(userP));
             double d_needin = Double.parseDouble(MyTextUtil.getNumberFromString(needin));
             double d_otherin = Double.parseDouble(MyTextUtil.getNumberFromString(otherin));
-            double d_otherout=Double.parseDouble(MyTextUtil.getNumberFromString(otherout));
+            double d_otherout = Double.parseDouble(MyTextUtil.getNumberFromString(otherout));
 
             String totleprice = d_userW + d_userP + d_otherin - d_otherout + d_needin + "";
             activityShotmessagequertAllneedinTv.setText(String.format("￥%s", totleprice));
@@ -287,7 +287,7 @@ public class ShotMessageQuertActivity extends BaseActivity {
                         public void onPositiveActionClicked(FloorEntity entity) {
                             activityShotmessagequertNoTv.setText(entity.getName());
                             for (ListSmsEntity.RoomBean.RentRecordsBean rentRecordsBean : roomEntity.getRoom().getRent_records()) {
-                                if (rentRecordsBean.getId()==entity.getI_id()) {
+                                if (rentRecordsBean.getId() == entity.getI_id()) {
                                     initData(rentRecordsBean);
                                 }
                             }
@@ -305,7 +305,7 @@ public class ShotMessageQuertActivity extends BaseActivity {
 
     private void initData(ListSmsEntity.RoomBean.RentRecordsBean rentRecordsBean) {
         activityShotmessagequertNoTv.setText(String.format("%s", rentRecordsBean.getNumber()));
-        activityShotmessagequertStartdayTv.setText(String.format("%s",MyTextUtil.getDate( rentRecordsBean.getStart_date())));
+        activityShotmessagequertStartdayTv.setText(String.format("%s", MyTextUtil.getDate(rentRecordsBean.getStart_date())));
         activityShotmessagequertEnddayTv.setText(String.format("%s", MyTextUtil.getDate(rentRecordsBean.getEnd_date())));
         activityShotmessagequertBeforewaterTv.setText(String.format("%s吨", rentRecordsBean.getPrev_water()));
         activityShotmessagequertBeforewpowerTv.setText(String.format("%s度", rentRecordsBean.getPrev_electric()));
@@ -320,6 +320,8 @@ public class ShotMessageQuertActivity extends BaseActivity {
         totleGetPrice();
         activityShotmessagequertRemarkTv.setText(String.format("%s", rentRecordsBean.getRemark()));
         activityShotmessagequertReceverphoneTv.setText(rentRecordsBean.getPhone());
+
+        activityStartrentGetmanTv.setText(getRealname(rentRecordsBean.getSms_content()));
     }
 
     private void sendShotMessage() {
@@ -390,9 +392,15 @@ public class ShotMessageQuertActivity extends BaseActivity {
                     activityShotmessagequertDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getDeposit()));
                     activityShotmessagequertWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityShotmessagequertPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
+
+
                     activityStartrentGetmanTv.setText(loginEntity.getAdmin().getRealname());
+
+
                     activityShotmessagequertNeedinTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
                     if (roomEntity.getRoom().getRent_records().size() > 0) {
+                        String sms = roomEntity.getRoom().getRent_records().get(0).getSms_content();
+                        activityStartrentGetmanTv.setText(getRealname(sms));
                         ListSmsEntity.RoomBean.RentRecordsBean rentRecordsBean = roomEntity.getRoom().getRent_records().get(0);
                         initData(rentRecordsBean);
                     } else {
@@ -409,6 +417,22 @@ public class ShotMessageQuertActivity extends BaseActivity {
         }
 
         return false;
+    }
+
+    private String getRealname(String s) {
+        try {
+            String[] smss = s.split("：");
+            if (smss.length > 0) {
+                String[] smss2 = smss[smss.length - 2].split("，");
+                if (smss2.length > 0) {
+                    return smss2[0];
+                }
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
+        }
+
     }
 
     private class MyTextWatcher implements TextWatcher {

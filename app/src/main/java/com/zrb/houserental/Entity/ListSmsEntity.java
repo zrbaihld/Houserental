@@ -193,6 +193,15 @@ public class ListSmsEntity {
             private String addition;
             private String created_at;
             private String updated_at;
+            private String sms_content;
+
+            public String getSms_content() {
+                return sms_content;
+            }
+
+            public void setSms_content(String sms_content) {
+                this.sms_content = sms_content;
+            }
 
             public int getId() {
                 return id;
