@@ -137,18 +137,8 @@ public class TenantStopRentActivity extends BaseActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         activityStoprentNoTv.setText(simpleDateFormat.format(new Date()));
 
-//        activityStoprentOuttimeTv.setText(
-//                MyTextUtil.getOutOfMoth(activityStoprentEnddayTv.getText().toString())
-//        );
 
-//        double i_needin = Integer.parseInt(MyTextUtil.getNumberFromString(activityStoprentOuttimeTv.getText().toString()));
-//        if (i_needin > 0) {
-//            double i_unit = Integer.parseInt(MyTextUtil.getNumberFromString(activityStoprentUnitTv.getText().toString()));
-//            double all = i_unit * i_needin / 30 + i_unit * i_needin % 30 / 30;
-//            activityStoprentNeedinTv.setText(String.format("￥ %s元", all));
-//        } else {
-//            activityStoprentNeedinTv.setText("￥ 0元");
-//        }
+
 
     }
 
@@ -539,6 +529,17 @@ public class TenantStopRentActivity extends BaseActivity {
                     activityStoprentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getElectric_init()));
                     activityStartrentKeyTv.setText(String.format("%s个", roomEntity.getRoom().getKeys()));
                     activityStoprentOuttimeTv.setText(String.format("%s天", roomEntity.getRoom().getDays()));
+                    double i_needin = Integer
+                            .parseInt(MyTextUtil.getNumberFromString(activityStoprentOuttimeTv.getText().toString()));
+                    if (i_needin > 0) {
+                        double i_unit = Double.parseDouble(MyTextUtil.getNumberFromString(roomEntity.getRoom().getRental()));
+                        double all = i_unit * i_needin / 30 + i_unit * i_needin % 30 / 30;
+                        activityStoprentNeedinTv.setText(String.format("￥ %s元", all));
+                    } else {
+                        activityStoprentNeedinTv.setText("￥ 0元");
+                    }
+
+
                     if (roomEntity.getRoom().getPhone() != null && roomEntity.getRoom().getPhone().size() > 0)
                         activityStoprentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getPhone().get(0)));
                     else
