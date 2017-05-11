@@ -241,7 +241,7 @@
                     android:id="@+id/activity_continuerent_advancemonths_tv"
                     style="@style/myRentDetail"
                     android:layout_toLeftOf="@id/next"
-                    android:text="请选择续租月数" />
+                    android:text="月数1" />
             </RelativeLayout>
 
 

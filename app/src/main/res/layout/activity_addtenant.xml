@@ -71,9 +71,37 @@
                 android:id="@+id/activity_addtenant_id_tv"
                 style="@style/myEditText"
                 android:layout_alignParentRight="true"
-                android:digits="1234567890xX"
                 android:hint="请输入身份证号码"
                 android:paddingRight="20dp"
+                />
+        </RelativeLayout>
+
+        <View style="@style/line_1px"></View>
+
+        <RelativeLayout
+            android:id="@+id/activity_addtenant_selectaddress"
+            style="@style/myRelativeLayout"
+            >
+
+            <TextView
+                style="@style/myRentTitle"
+                android:text="房客籍贯:"
+                />
+
+            <ImageView
+                android:id="@id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="20dp"
+                android:src="@drawable/dpgl_05"/>
+
+            <TextView
+                android:id="@+id/activity_addtenant_selectaddress_tv"
+                style="@style/myRentDetail"
+                android:layout_toLeftOf="@id/next"
+                android:text="选择籍贯"
                 />
         </RelativeLayout>
 
@@ -85,14 +113,14 @@
 
             <TextView
                 style="@style/myRentTitle"
-                android:text="房客籍贯:"
+                android:text="详细地址:"
                 />
 
             <EditText
                 android:id="@+id/activity_addtenant_adress_tv"
                 style="@style/myEditText"
                 android:layout_alignParentRight="true"
-                android:hint="请输入房客籍贯"
+                android:hint="请输入房客详细地址"
                 android:paddingRight="20dp"
                 />
         </RelativeLayout>

@@ -1,1 +1,1 @@
-include ':app', ':mybaseapp'
+include ':app', ':mybaseapp', ':library:WheelPicker', ':library:Common'

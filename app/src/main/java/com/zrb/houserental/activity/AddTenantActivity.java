@@ -16,10 +16,14 @@ import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyHttpTool;
 import com.zrb.baseapp.tools.MyLogUtils;
 import com.zrb.baseapp.tools.TextUtil;
+import com.zrb.houserental.Entity.City;
+import com.zrb.houserental.Entity.County;
 import com.zrb.houserental.Entity.FloorEntity;
+import com.zrb.houserental.Entity.Province;
 import com.zrb.houserental.Entity.ResultTenantQueryEntity;
 import com.zrb.houserental.R;
 import com.zrb.houserental.constant.URL_Constant;
+import com.zrb.houserental.dialog.AddressPickTask;
 import com.zrb.houserental.dialog.DialogUntil;
 import com.zrb.houserental.dialog.SelectFloorDialog;
 import com.zrb.houserental.util.MyTextUtil;
@@ -56,6 +60,9 @@ public class AddTenantActivity extends BaseActivity {
     TextView activityAddtenantRoomTv;
     @BindView(R.id.activity_addtenant_outtime_tv)
     TextView activityAddtenantOuttimeTv;
+    @BindView(R.id.activity_addtenant_selectaddress_tv)
+    TextView activityAddtenantSelectaddressTv;
+
 
     private List<FloorEntity> itemEntities;
     private int type = -1;//0 楼号 1房号 2性别
@@ -89,8 +96,29 @@ public class AddTenantActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            activityAddtenantNameTv.setText(savedInstanceState.getString("activityAddtenantNameTv"));
+            activityAddtenantSexTv.setText(savedInstanceState.getString("activityAddtenantSexTv"));
+            activityAddtenantIdTv.setText(savedInstanceState.getString("activityAddtenantIdTv"));
+            activityAddtenantAdressTv.setText(savedInstanceState.getString("activityAddtenantAdressTv"));
+            activityAddtenantBirthdayTv.setText(savedInstanceState.getString("activityAddtenantBirthdayTv"));
+            activityAddtenantPhoneTv.setText(savedInstanceState.getString("activityAddtenantPhoneTv"));
+            activityAddtenantFloorTv.setText(savedInstanceState.getString("activityAddtenantFloorTv"));
+            activityAddtenantRoomTv.setText(savedInstanceState.getString("activityAddtenantRoomTv"));
+            activityAddtenantOuttimeTv.setText(savedInstanceState.getString("activityAddtenantOuttimeTv"));
+            activityAddtenantSelectaddressTv.setText(savedInstanceState.getString("activityAddtenantSelectaddressTv"));
+            building_id = savedInstanceState.getString("building_id");
+            room_id = savedInstanceState.getString("room_id");
+        }
+    }
 
-    @OnClick({R.id.activity_addtenant_sex, R.id.activity_addtenant_birthday, R.id.activity_addtenant_floor, R.id.activity_addtenant_room, R.id.activity_addtenant_outtime, R.id.activity_roomquert_confirm})
+    @OnClick({R.id.activity_addtenant_sex, R.id.activity_addtenant_birthday, R.id.activity_addtenant_floor,
+            R.id.activity_addtenant_room, R.id.activity_addtenant_outtime, R.id.activity_roomquert_confirm,
+            R.id.activity_addtenant_selectaddress
+    })
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.activity_addtenant_floor:
@@ -167,21 +195,48 @@ public class AddTenantActivity extends BaseActivity {
             case R.id.activity_roomquert_confirm:
                 sendMessage();
                 break;
-
+            case R.id.activity_addtenant_selectaddress:
+                onAddressPicker();
+                break;
         }
+    }
+
+    public void onAddressPicker() {
+        AddressPickTask task = new AddressPickTask(this);
+        task.setHideProvince(false);
+        task.setHideCounty(false);
+        task.setCallback(new AddressPickTask.Callback() {
+            @Override
+            public void onAddressInitFailed() {
+                toastIfActive("数据初始化失败");
+            }
+
+            @Override
+            public void onAddressPicked(Province province, City city, County county) {
+                if (county == null) {
+                } else {
+                    activityAddtenantSelectaddressTv.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
+                }
+            }
+        });
+        task.execute("北京市", "北京市", "东城区");
     }
 
     private void sendMessage() {
         String s_name = activityAddtenantNameTv.getText().toString();
         String s_sex = activityAddtenantSexTv.getText().toString();
         String s_id = activityAddtenantIdTv.getText().toString();
-        String s_adress = activityAddtenantAdressTv.getText().toString();
+        String s_adress;
         String s_bitth = activityAddtenantBirthdayTv.getText().toString();
         String s_phone = activityAddtenantPhoneTv.getText().toString();
         String s_floor = activityAddtenantFloorTv.getText().toString();
         String s_room = activityAddtenantRoomTv.getText().toString();
         String s_outtime = activityAddtenantOuttimeTv.getText().toString();
-
+        if ("选择籍贯".equals(activityAddtenantSelectaddressTv.getText()))
+            s_adress = activityAddtenantAdressTv.getText().toString();
+        else
+            s_adress = activityAddtenantSelectaddressTv.getText().toString() +
+                    activityAddtenantAdressTv.getText().toString();
         if (TextUtil.isEmptyString(s_name)) {
             toastIfActive("未输入房客姓名");
             return;
@@ -268,7 +323,24 @@ public class AddTenantActivity extends BaseActivity {
         activityAddtenantOuttimeTv.setText("请选择日期");
         building_id = "";
         room_id = "";
+    }
 
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        MyLogUtils.e("onSaveInstanceState");
+        outState.putString("activityAddtenantNameTv", activityAddtenantNameTv.getText().toString());
+        outState.putString("activityAddtenantSexTv", activityAddtenantSexTv.getText().toString());
+        outState.putString("activityAddtenantIdTv", activityAddtenantIdTv.getText().toString());
+        outState.putString("activityAddtenantAdressTv", activityAddtenantAdressTv.getText().toString());
+        outState.putString("activityAddtenantBirthdayTv", activityAddtenantBirthdayTv.getText().toString());
+        outState.putString("activityAddtenantPhoneTv", activityAddtenantPhoneTv.getText().toString());
+        outState.putString("activityAddtenantFloorTv", activityAddtenantFloorTv.getText().toString());
+        outState.putString("activityAddtenantRoomTv", activityAddtenantRoomTv.getText().toString());
+        outState.putString("activityAddtenantOuttimeTv", activityAddtenantOuttimeTv.getText().toString());
+        outState.putString("activityAddtenantSelectaddressTv", activityAddtenantSelectaddressTv.getText().toString());
+        outState.putString("building_id", building_id);
+        outState.putString("room_id", room_id);
+        sp.edit().putInt("activity_close_type", 3).commit();
+        super.onSaveInstanceState(outState);
     }
 }

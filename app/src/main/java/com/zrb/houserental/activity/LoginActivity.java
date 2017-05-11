@@ -10,6 +10,7 @@ import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.constant.Constant_C;
 import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyHttpTool;
+import com.zrb.baseapp.tools.MyLogUtils;
 import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.LoginEntity;
 import com.zrb.houserental.R;
@@ -41,6 +42,29 @@ public class LoginActivity extends BaseActivity {
 
         activityLoginEtPhone.setText(phone);
         activityLoginEtPassword.setText(pw);
+        Intent[] intents = new Intent[2];
+        intents[0] = new Intent(this, MainActivity.class);
+        switch (sp.getInt("activity_close_type", -1)) {
+            case 0:
+                intents[1] = new Intent(this, TenantStartRentActivity.class);
+                startActivities(intents);
+                break;
+            case 1:
+                intents[1] = new Intent(this, TenantContinueRentActivity.class);
+                startActivities(intents);
+                break;
+            case 2:
+                intents[1] = new Intent(this, TenantStopRentActivity.class);
+                startActivities(intents);
+                break;
+            case 3:
+                intents[1] = new Intent(this, AddTenantActivity.class);
+                startActivities(intents);
+                break;
+            default:
+                break;
+        }
+        sp.edit().putInt("activity_close_type", -1).commit();
     }
 
     @Override

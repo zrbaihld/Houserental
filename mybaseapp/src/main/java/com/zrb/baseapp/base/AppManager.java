@@ -147,7 +147,7 @@ public class AppManager {
 			if (activity != null) {
 				try {
 					activityStack.remove(activity);
-					activity.finish();
+//					activity.finish();
 					activity = null;
 					Log.e("activity:", currentActivity()+"");
 				} catch (Exception e) {

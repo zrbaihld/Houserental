@@ -1,12 +1,13 @@
 package com.zrb.houserental.Entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/10.
  */
 
-public class RoomEntity {
+public class RoomEntity implements Serializable{
 
     /**
      * id : 1
@@ -39,7 +40,7 @@ public class RoomEntity {
         this.room = room;
     }
 
-    public static class RoomBean {
+    public static class RoomBean implements Serializable{
         private int id;
         private String name;
         private int building_id;
@@ -265,7 +266,7 @@ public class RoomEntity {
             this.lodger = lodger;
         }
 
-        public static class LodgerBean {
+        public static class LodgerBean implements Serializable{
             private int id;
             private int room_id;
             private int building_id;

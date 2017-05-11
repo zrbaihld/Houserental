@@ -1,6 +1,7 @@
 package com.zrb.houserental.activity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -128,6 +129,22 @@ public class TenantContinueRentActivity extends BaseActivity {
         activityContinuerentNoTv.setText(simpleDateFormat.format(new Date()));
 
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            activityContinuerentNowwaterTv.setText(savedInstanceState.getString("activityContinuerentNowwaterTv"));
+            activityContinuerentNowpowerTv.setText(savedInstanceState.getString("activityContinuerentNowpowerTv"));
+            activityContinuerentOtherinTv.setText(savedInstanceState.getString("activityContinuerentOtherinTv"));
+            activityContinuerentOtheroutTv.setText(savedInstanceState.getString("activityContinuerentOtheroutTv"));
+            activityContinuerentOtherphoneTv.setText(savedInstanceState.getString("activityContinuerentOtherphoneTv"));
+            activityStartrentNetworkNumTv.setText(savedInstanceState.getString("activityStartrentNetworkNumTv"));
+            activityStartrentNetworkProviderTv.setText(savedInstanceState.getString("activityStartrentNetworkProviderTv"));
+            activityContinuerentAdvancemonthsTv.setText(savedInstanceState.getString("activityContinuerentAdvancemonthsTv"));
+            setRoomMessage((RoomEntity) savedInstanceState.getSerializable("RoomEntity"));
+        }
     }
 
     @Override
@@ -386,7 +403,6 @@ public class TenantContinueRentActivity extends BaseActivity {
         if (TextUtil.isEmptyString(s_otherout)) {
             s_otherout = "0";
         }
-
 //        building_id |int| 是 | 12 | 楼号id
 //        room_id |int| 是 | 12 | 房号id
 //        number |string| 是 | 20171021| 出租编号
@@ -492,27 +508,8 @@ public class TenantContinueRentActivity extends BaseActivity {
                 roomEntity = gson.fromJson(JsonParsing.getData(json), RoomEntity.class);
                 if (roomEntity != null && roomEntity.getRoom() != null) {
                     scrollView.setVisibility(View.VISIBLE);
+                    setRoomMessage(roomEntity);
 
-                    activityContinuerentUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
-                    activityContinuerentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
-                    activityContinuerentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
-                    activityContinuerentStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_start())));
-                    activityContinuerentEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_end())));
-                    activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
-                    activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
-                    activityStartrentContractMonthsTv.setText(String.format("%s", roomEntity.getRoom().getContract_months() + "个月"));
-                    activityContinuerentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getWater_init()));
-                    activityContinuerentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getElectric_init()));
-                    activityContinuerentDepositTv.setText(String.format("%s", roomEntity.getRoom().getDeposit()));
-                    if (roomEntity.getRoom().getPhone() != null && roomEntity.getRoom().getPhone().size() > 0)
-                        activityContinuerentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getPhone().get(0)));
-                    else
-                        activityContinuerentReceverphoneTv.setText(String.format("%s", ""));
-                    if (roomEntity.getRoom().getLodger() != null) {
-                        activityContinuerentNameTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getName()));
-                    } else {
-                        activityContinuerentNameTv.setText(String.format("%s", "无房客"));
-                    }
                 } else {
 //                    activityContinuerentNameTv.setText(String.format("%s", ""));
 //                    toastIfActive("暂无房客");
@@ -543,6 +540,42 @@ public class TenantContinueRentActivity extends BaseActivity {
         }
 
         return false;
+    }
+
+    private void setRoomMessage(RoomEntity roomEntity) {
+        if (roomEntity == null)
+            return;
+        this.roomEntity = roomEntity;
+        activityContinuerentUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
+        activityContinuerentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
+        activityContinuerentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
+        activityContinuerentStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_start())));
+        activityContinuerentEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_end())));
+        activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
+        activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
+        activityStartrentContractMonthsTv.setText(String.format("%s", roomEntity.getRoom().getContract_months() + "个月"));
+        activityContinuerentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getWater_init()));
+        activityContinuerentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getElectric_init()));
+        activityContinuerentDepositTv.setText(String.format("%s", roomEntity.getRoom().getDeposit()));
+        if (roomEntity.getRoom().getPhone() != null && roomEntity.getRoom().getPhone().size() > 0)
+            activityContinuerentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getPhone().get(0)));
+        else
+            activityContinuerentReceverphoneTv.setText(String.format("%s", ""));
+        if (roomEntity.getRoom().getLodger() != null) {
+            activityContinuerentNameTv.setText(String.format("%s", roomEntity.getRoom().getLodger().getName()));
+        } else {
+            activityContinuerentNameTv.setText(String.format("%s", "无房客"));
+        }
+        activityContinuerentRoomTv.setText(String.format("%s", roomEntity.getRoom().getName()));
+
+
+        String login_response = sp.getString("Login_response", "");
+        LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
+        for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
+            if (roomEntity.getRoom().getBuilding_id() == buildingsBean.getId()) {
+                activityContinuerentFloorTv.setText(buildingsBean.getName());
+            }
+        }
     }
 
     private String getSms() {
@@ -576,4 +609,27 @@ public class TenantContinueRentActivity extends BaseActivity {
 
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        MyLogUtils.e("onSaveInstanceState");
+        outState.putString("activityContinuerentNowwaterTv", activityContinuerentNowwaterTv.getText().toString());
+        outState.putString("activityContinuerentNowpowerTv", activityContinuerentNowpowerTv.getText().toString());
+        outState.putString("activityContinuerentOtherinTv", activityContinuerentOtherinTv.getText().toString());
+        outState.putString("activityContinuerentOtheroutTv", activityContinuerentOtheroutTv.getText().toString());
+        outState.putString("activityContinuerentOtherphoneTv", activityContinuerentOtherphoneTv.getText().toString());
+        outState.putString("activityStartrentNetworkNumTv", activityStartrentNetworkNumTv.getText().toString());
+        outState.putString("activityStartrentNetworkProviderTv", activityStartrentNetworkProviderTv.getText().toString());
+        outState.putString("activityContinuerentAdvancemonthsTv", activityContinuerentAdvancemonthsTv.getText().toString());
+        sp.edit().putInt("activity_close_type", 1).commit();
+        if (roomEntity != null)
+            outState.putSerializable("RoomEntity", roomEntity);
+        super.onSaveInstanceState(outState);
+    }
+
 }

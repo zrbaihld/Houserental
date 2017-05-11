@@ -12,6 +12,7 @@ import com.zrb.baseapp.base.BaseActivity;
 import com.zrb.baseapp.constant.Constant_C;
 import com.zrb.baseapp.tools.JsonParsing;
 import com.zrb.baseapp.tools.MyHttpTool;
+import com.zrb.baseapp.tools.MyLogUtils;
 import com.zrb.baseapp.tools.TextUtil;
 import com.zrb.houserental.Entity.FloorEntity;
 import com.zrb.houserental.Entity.LoginEntity;
@@ -122,6 +123,24 @@ public class TenantStartRentActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            activityAddtenantDepositTv.setText(savedInstanceState.getString("activityAddtenantDepositTv"));
+            activityAddtenantAdvancemonthsTv.setText(savedInstanceState.getString("activityAddtenantAdvancemonthsTv"));
+            activityAddtenantRemarkTv.setText(savedInstanceState.getString("activityAddtenantRemarkTv"));
+            activityAddtenantStartdayTv.setText(savedInstanceState.getString("activityAddtenantStartdayTv"));
+            activityAddtenantEnddayTv.setText(savedInstanceState.getString("activityAddtenantEnddayTv"));
+            activityStartrentNetworkNumTv.setText(savedInstanceState.getString("activityStartrentNetworkNumTv"));
+            activityStartrentNetworkProviderTv.setText(savedInstanceState.getString("activityStartrentNetworkProviderTv"));
+            activityAddtenantKeyTv.setText(savedInstanceState.getString("activityAddtenantKeyTv"));
+            activityAddtenantWaterstartTv.setText(savedInstanceState.getString("activityAddtenantWaterstartTv"));
+            activityAddtenantPowerstartTv.setText(savedInstanceState.getString("activityAddtenantPowerstartTv"));
+            setRoomMessage((RoomEntity) savedInstanceState.getSerializable("RoomEntity"));
+        }
     }
 
 
@@ -378,27 +397,14 @@ public class TenantStartRentActivity extends BaseActivity {
         if (super.getIOAuthCallBack(type, json, isSuccess)) {
             if (type == 0)
 //                scrollView.setVisibility(View.GONE);
-            return true;
+                return true;
         }
         switch (type) {
             case 0:
                 roomEntity = gson.fromJson(JsonParsing.getData(json), RoomEntity.class);
-                if (roomEntity != null && roomEntity.getRoom() != null ) {
+                if (roomEntity != null && roomEntity.getRoom() != null) {
                     scrollView.setVisibility(View.VISIBLE);
-                    activityAddtenantUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
-                    activityAddtenantWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
-                    activityAddtenantPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
-                    activityAddtenantStatusTv.setText(String.format("%s", MyTextUtil.getStatusString(roomEntity.getRoom().getStatus())));
-                    if (!TextUtil.isEmptyString(roomEntity.getRoom().getRent_date_start())){
-                        activityAddtenantStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_start())));
-                        activityAddtenantEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_end())));
-                        activityAddtenantDepositTv.setText(String.format("%s", roomEntity.getRoom().getDeposit()));
-                        activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
-                        activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
-                        activityStartrentContractMonthsTv.setText(String.format("合同期%s个月", roomEntity.getRoom().getContract_months()));
-                    }
-                } else {
-                    toastIfActive("无房客");
+                    setRoomMessage(roomEntity);
                 }
                 break;
             case 1:
@@ -449,4 +455,47 @@ public class TenantStartRentActivity extends BaseActivity {
         );
     }
 
+    private void setRoomMessage(RoomEntity roomEntity) {
+        if (roomEntity == null)
+            return;
+        this.roomEntity = roomEntity;
+        activityAddtenantUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
+        activityAddtenantWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
+        activityAddtenantPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
+        activityAddtenantStatusTv.setText(String.format("%s", MyTextUtil.getStatusString(roomEntity.getRoom().getStatus())));
+        if (!TextUtil.isEmptyString(roomEntity.getRoom().getRent_date_start())) {
+            activityAddtenantStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_start())));
+            activityAddtenantEnddayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_end())));
+            activityAddtenantDepositTv.setText(String.format("%s", roomEntity.getRoom().getDeposit()));
+            activityStartrentNetworkNumTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_num()));
+            activityStartrentNetworkProviderTv.setText(String.format("%s", roomEntity.getRoom().getNetwork_provider()));
+            activityStartrentContractMonthsTv.setText(String.format("合同期%s个月", roomEntity.getRoom().getContract_months()));
+        }
+        String login_response = sp.getString("Login_response", "");
+        LoginEntity loginEntity = gson.fromJson(JsonParsing.getData(login_response), LoginEntity.class);
+        for (LoginEntity.AdminBean.BuildingsBean buildingsBean : loginEntity.getAdmin().getBuildings()) {
+            if (roomEntity.getRoom().getBuilding_id() == buildingsBean.getId()) {
+                activityAddtenantFloorTv.setText(buildingsBean.getName());
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        MyLogUtils.e("onSaveInstanceState");
+        outState.putString("activityAddtenantDepositTv", activityAddtenantDepositTv.getText().toString());
+        outState.putString("activityAddtenantAdvancemonthsTv", activityAddtenantAdvancemonthsTv.getText().toString());
+        outState.putString("activityAddtenantRemarkTv", activityAddtenantRemarkTv.getText().toString());
+        outState.putString("activityAddtenantStartdayTv", activityAddtenantStartdayTv.getText().toString());
+        outState.putString("activityAddtenantEnddayTv", activityAddtenantEnddayTv.getText().toString());
+        outState.putString("activityAddtenantKeyTv", activityAddtenantKeyTv.getText().toString());
+        outState.putString("activityAddtenantWaterstartTv", activityAddtenantWaterstartTv.getText().toString());
+        outState.putString("activityAddtenantPowerstartTv", activityAddtenantPowerstartTv.getText().toString());
+        outState.putString("activityStartrentNetworkNumTv", activityStartrentNetworkNumTv.getText().toString());
+        outState.putString("activityStartrentNetworkProviderTv", activityStartrentNetworkProviderTv.getText().toString());
+        sp.edit().putInt("activity_close_type", 0).commit();
+        if (roomEntity != null)
+            outState.putSerializable("RoomEntity", roomEntity);
+        super.onSaveInstanceState(outState);
+    }
 }
