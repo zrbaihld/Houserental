@@ -351,8 +351,8 @@ public class ShotMessageQuertActivity extends BaseActivity {
                         "其他应收%s元，其他应付%s元。" +
                         "收租人：%s，收租日期：%s",
                 activityShotmessagequertRoomTv.getText().toString(),
-                activityShotmessagequertStartdayTv.getText().toString().substring(0, 10).replace("-", "年").replace("-", "月") + "日",
-                activityShotmessagequertEnddayTv.getText().toString().substring(0, 10).replace("-", "年").replace("-", "月") + "日",
+                activityShotmessagequertStartdayTv.getText().toString().substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
+                activityShotmessagequertEnddayTv.getText().toString().substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
                 activityShotmessagequertAllneedinTv.getText().toString(),
                 activityShotmessagequertUnityTv.getText().toString(),
                 activityShotmessagequertWaterpriceTv.getText().toString(),
@@ -366,7 +366,7 @@ public class ShotMessageQuertActivity extends BaseActivity {
                 activityShotmessagequertOtherinTv.getText().toString(),
                 activityShotmessagequertOtheroutTv.getText().toString(),
                 activityStartrentGetmanTv.getText().toString(),
-                MyTextUtil.getSimpleDateFormat().format(new Date()).replace("-", "年").replace("-", "月") + "日"
+                MyTextUtil.getSimpleDateFormat().format(new Date()).replaceFirst("-", "年").replaceFirst("-", "月") + "日"
         );
 
 
