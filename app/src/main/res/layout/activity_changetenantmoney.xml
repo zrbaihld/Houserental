@@ -209,7 +209,7 @@
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
                     android:hint="请输入调整后的水费费率"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:paddingRight="20dp" />
             </RelativeLayout>
 
@@ -226,7 +226,7 @@
                     style="@style/myEditText"
                     android:layout_alignParentRight="true"
                     android:hint="请输入调整后的电费费率"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:paddingRight="20dp" />
             </RelativeLayout>
 
