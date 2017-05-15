@@ -547,6 +547,7 @@ public class TenantContinueRentActivity extends BaseActivity {
             return;
         this.roomEntity = roomEntity;
         activityContinuerentUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
+        activityContinuerentNeedinTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
         activityContinuerentWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
         activityContinuerentPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
         activityContinuerentStartdayTv.setText(String.format("%s", MyTextUtil.getDate(roomEntity.getRoom().getRent_date_start())));
@@ -557,6 +558,7 @@ public class TenantContinueRentActivity extends BaseActivity {
         activityContinuerentBeforewaterTv.setText(String.format("%s吨", roomEntity.getRoom().getWater_init()));
         activityContinuerentBeforewpowerTv.setText(String.format("%s度", roomEntity.getRoom().getElectric_init()));
         activityContinuerentDepositTv.setText(String.format("%s", roomEntity.getRoom().getDeposit()));
+
         if (roomEntity.getRoom().getPhone() != null && roomEntity.getRoom().getPhone().size() > 0)
             activityContinuerentReceverphoneTv.setText(String.format("%s", roomEntity.getRoom().getPhone().get(0)));
         else
@@ -588,8 +590,11 @@ public class TenantContinueRentActivity extends BaseActivity {
                         "其他应收%s元，其他应付%s元。" +
                         "收租人：%s，收租日期：%s",
                 activityContinuerentRoomTv.getText().toString(),
-                activityContinuerentStartdayTv.getText().toString().substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
                 activityContinuerentEnddayTv.getText().toString().replaceFirst("-", "年").replaceFirst("-", "月") + "日",
+                MyTextUtil.getEndDate(
+                        activityContinuerentEnddayTv.getText().toString(),
+                        MyTextUtil.getNumberFromString(activityStartrentContractMonthsTv.
+                                getText().toString())).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
                 activityContinuerentAllneedinTv.getText().toString(),
                 activityContinuerentUnitTv.getText().toString(),
                 activityContinuerentDepositTv.getText().toString(),
