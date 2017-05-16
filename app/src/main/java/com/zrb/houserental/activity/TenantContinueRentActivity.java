@@ -499,9 +499,7 @@ public class TenantContinueRentActivity extends BaseActivity {
     @Override
     public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
         if (super.getIOAuthCallBack(type, json, isSuccess)) {
-            if (type == 0)
-//                scrollView.setVisibility(View.GONE);
-                return true;
+            return true;
         }
         switch (type) {
             case 0:

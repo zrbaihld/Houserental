@@ -395,9 +395,7 @@ public class TenantStartRentActivity extends BaseActivity {
     @Override
     public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
         if (super.getIOAuthCallBack(type, json, isSuccess)) {
-            if (type == 0)
-//                scrollView.setVisibility(View.GONE);
-                return true;
+            return true;
         }
         switch (type) {
             case 0:
@@ -460,6 +458,7 @@ public class TenantStartRentActivity extends BaseActivity {
             return;
         this.roomEntity = roomEntity;
         activityAddtenantUnitTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
+        activityAddtenantAllpriceTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
         activityAddtenantWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
         activityAddtenantPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
         activityAddtenantStatusTv.setText(String.format("%s", MyTextUtil.getStatusString(roomEntity.getRoom().getStatus())));

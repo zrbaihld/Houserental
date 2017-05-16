@@ -52,6 +52,10 @@ public class MyHttpTool {
             myHttp = new MyHttpTool();
             myHttp.map = new HashMap<String, String>();
         }
+        if (!SystemUtils.isNetworkAvailable(context)) {
+            XToast.show("当前无网络");
+            return myHttp;
+        }
         myHttp.mContext = context;
         myHttp.map.clear();
         if (!TextUtil.isEmptyString(Constant_C.TOKEN))
@@ -106,6 +110,7 @@ public class MyHttpTool {
             public void onFailure(Call call, final IOException e) {
                 handler.post(dismissDialogRun);
                 MyLogUtils.d(e.getMessage() + "");
+                XToast.show(e.getMessage());
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -273,7 +278,7 @@ public class MyHttpTool {
         public void run() {
             try {
                 dialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
 

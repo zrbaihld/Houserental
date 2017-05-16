@@ -2,6 +2,8 @@ package com.zrb.houserental.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 
 import com.zrb.baseapp.tools.MyLogUtils;
@@ -155,14 +157,15 @@ public class MyTextUtil {
     }
 
     public static void sendMessage(Context context, String number, String message) {
+        if (",".equals(number.substring(0, 1))) {
+            number = number.substring(1, number.length());
+        }
+        MyLogUtils.e("number " + number);
         Uri uri = Uri.parse("smsto:" + number);
         Intent sendIntent = new Intent(Intent.ACTION_VIEW, uri);
         sendIntent.putExtra("sms_body", message);
         context.startActivity(sendIntent);
     }
-//    public static String dateToString(String date) {
-////        date.re
-//    }
 
 
     public static String getDate(String date) {

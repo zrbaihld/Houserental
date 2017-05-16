@@ -377,8 +377,6 @@ public class ShotMessageQuertActivity extends BaseActivity {
     @Override
     public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
         if (super.getIOAuthCallBack(type, json, isSuccess)) {
-            if (type == 0)
-                scrollview.setVisibility(View.GONE);
             return true;
         }
         switch (type) {
