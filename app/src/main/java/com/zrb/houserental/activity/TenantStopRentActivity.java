@@ -1,6 +1,7 @@
 package com.zrb.houserental.activity;
 
 import android.content.DialogInterface;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -89,7 +90,7 @@ public class TenantStopRentActivity extends BaseActivity {
     @BindView(R.id.activity_stoprent_otherout_tv)
     EditText activityStoprentOtheroutTv;
     @BindView(R.id.activity_stoprent_outtime_tv)
-    TextView activityStoprentOuttimeTv;
+    EditText activityStoprentOuttimeTv;
     @BindView(R.id.activity_stoprent_needin_tv)
     TextView activityStoprentNeedinTv;
     @BindView(R.id.activity_stoprent_allneedin_tv)
@@ -215,6 +216,31 @@ public class TenantStopRentActivity extends BaseActivity {
             }
         });
 
+        activityStoprentOuttimeTv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                double i_needin = Integer
+                        .parseInt(MyTextUtil.getNumberFromString(activityStoprentOuttimeTv.getText().toString()));
+                if (i_needin > 0) {
+                    double i_unit = Double.parseDouble(MyTextUtil.getNumberFromString(roomEntity.getRoom().getRental()));
+                    double all = i_unit * i_needin / 30 + i_unit * i_needin % 30 / 30;
+                    activityStoprentNeedinTv.setText(String.format("￥ %.2f元", all));
+                } else {
+                    activityStoprentNeedinTv.setText("￥ 0元");
+                }
+                totleGetPrice();
+            }
+        });
         activityStoprentOtherinTv.addTextChangedListener(new MyTextWatcher());
         activityStoprentOtheroutTv.addTextChangedListener(new MyTextWatcher());
     }
@@ -524,7 +550,7 @@ public class TenantStopRentActivity extends BaseActivity {
     @Override
     public boolean getIOAuthCallBack(int type, String json, boolean isSuccess) {
         if (super.getIOAuthCallBack(type, json, isSuccess)) {
-                return true;
+            return true;
         }
         switch (type) {
             case 0:
@@ -588,7 +614,7 @@ public class TenantStopRentActivity extends BaseActivity {
         if (i_needin > 0) {
             double i_unit = Double.parseDouble(MyTextUtil.getNumberFromString(roomEntity.getRoom().getRental()));
             double all = i_unit * i_needin / 30 + i_unit * i_needin % 30 / 30;
-            activityStoprentNeedinTv.setText(String.format("￥ %s元", all));
+            activityStoprentNeedinTv.setText(String.format("￥ %.2f元", all));
         } else {
             activityStoprentNeedinTv.setText("￥ 0元");
         }

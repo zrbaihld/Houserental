@@ -52,18 +52,17 @@ public class MyHttpTool {
             myHttp = new MyHttpTool();
             myHttp.map = new HashMap<String, String>();
         }
-        if (!SystemUtils.isNetworkAvailable(context)) {
-            XToast.show("当前无网络");
-            return myHttp;
-        }
         myHttp.mContext = context;
         myHttp.map.clear();
         if (!TextUtil.isEmptyString(Constant_C.TOKEN))
             myHttp.map.put("token", Constant_C.TOKEN);
         if (!TextUtil.isEmptyString(Constant_C.AID))
             myHttp.map.put("aid", Constant_C.AID);
-
         myHttp.handler = new Handler(context.getMainLooper());
+        if (!SystemUtils.isNetworkAvailable(context)) {
+            XToast.show("当前无网络");
+            return myHttp;
+        }
         return myHttp;
     }
 
