@@ -26,13 +26,30 @@ public class MyLogUtils {
     public static void d(String msg) {
         if (isDebug)
             if (msg != null)
-                Log.d(TAG, msg);
+                if(msg.length() > 4000) {
+                    for(int i=0;i<msg.length();i+=4000){
+                        if(i+4000<msg.length())
+                            Log.d(TAG,msg.substring(i, i+4000));
+                        else
+                            Log.d(TAG,msg.substring(i, msg.length()));
+                    }
+                } else
+                    Log.d(TAG,msg);
     }
 
     public static void e(String msg) {
         if (isDebug)
             if (msg != null)
-                Log.e(TAG, msg);
+                if(msg.length() > 4000) {
+                    for(int i=0;i<msg.length();i+=4000){
+                        if(i+4000<msg.length())
+                            Log.e(TAG,msg.substring(i, i+4000));
+                        else
+                            Log.e(TAG,msg.substring(i, msg.length()));
+                    }
+                } else
+                    Log.e(TAG,msg);
+
     }
 
     public static void v(String msg) {

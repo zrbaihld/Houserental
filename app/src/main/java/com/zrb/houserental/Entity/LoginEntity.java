@@ -288,7 +288,7 @@ public class LoginEntity {
                 private int id;
                 private String name;
                 private int building_id;
-                private int days;
+                private int days=-1;
                 private String rental;
                 private String water_rate;
                 private String electric_rate;

@@ -507,8 +507,8 @@ public class TenantStopRentActivity extends BaseActivity {
                         "其他应收%s，其他应付%s，超期租金%s，" +
                         "合计%s元 收租人：%s，收租日期：%s",
                 activityStoprentRoomTv.getText().toString(),
-                activityStoprentStartdayTv.getText().toString().substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
-                activityStoprentEnddayTv.getText().toString().substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
+                MyTextUtil.changeDate(activityStoprentStartdayTv.getText().toString()),
+                MyTextUtil.changeDate(activityStoprentEnddayTv.getText().toString()),
                 activityStoprentNowwaterTv.getText().toString() +
                         "-" + activityStoprentBeforewaterTv.getText().toString() +
                         "=" + activityStoprentUserwaterTv.getText().toString() +

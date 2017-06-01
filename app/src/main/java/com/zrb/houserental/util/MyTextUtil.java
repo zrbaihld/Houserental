@@ -177,5 +177,13 @@ public class MyTextUtil {
         }
         return "";
     }
-
+    public static String changeDate(String date) {
+        if (!TextUtil.isEmptyString(date)) {
+            if (date.length() > 10)
+                return date.substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日";
+            else
+                return "";
+        }
+        return "";
+    }
 }

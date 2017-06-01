@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -112,6 +113,11 @@ public class DialogUntil {
                                 FloorEntity floorEntity = new FloorEntity();
                                 floorEntity.setName(roomsBean.getName());
                                 floorEntity.setDays(roomsBean.getDays());
+                                if (MyTextUtil.getSimpleDateFormat().format(new Date()).equals(roomsBean.getRent_date_end()))
+                                    floorEntity.setDays(0);
+
+
+
                                 floorEntity.setId(roomsBean.getId() + "");
                                 if (type == 1) {//起租
                                     if (roomsBean.getStatus() == 0)
@@ -219,7 +225,7 @@ public class DialogUntil {
         protected void bindDataToItemView(MyViewHolder myViewHolder, FloorEntity item) {
             myViewHolder.setText(R.id.adapter_tenantquery_item_title, item.getName())
                     .setTag(R.id.adapter_tenantquery_item_title, item)
-                    .setTextColor(R.id.adapter_tenantquery_item_title, item.getDays() != 0 && (type == 9) ? 0xffff0000 : 0xff000000)
+                    .setTextColor(R.id.adapter_tenantquery_item_title, item.getDays() !=-1 && (type == 9) ? 0xffff0000 : 0xff000000)
                     .setOnClickListener(R.id.adapter_tenantquery_item_title, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

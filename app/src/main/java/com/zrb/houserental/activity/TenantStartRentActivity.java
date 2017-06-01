@@ -437,8 +437,8 @@ public class TenantStartRentActivity extends BaseActivity {
                         "电费%s元（本月电表%s，电费费率%s元/度），" +
                         "收租人：%s，收租日期：%s",
                 activityAddtenantRoomTv.getText().toString(),
-                activityAddtenantStartdayTv.getText().toString().replaceFirst("-", "年").replaceFirst("-", "月") + "日",
-                activityAddtenantEnddayTv.getText().toString().replaceFirst("-", "年").replaceFirst("-", "月") + "日",
+                MyTextUtil.changeDate(activityAddtenantStartdayTv.getText().toString()),
+                MyTextUtil.changeDate(activityAddtenantEnddayTv.getText().toString()),
                 activityAddtenantAllpriceTv.getText().toString(),
                 activityAddtenantUnitTv.getText().toString(),
                 activityAddtenantDepositTv.getText().toString(),

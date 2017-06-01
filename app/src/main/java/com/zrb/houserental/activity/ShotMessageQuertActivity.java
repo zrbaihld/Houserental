@@ -313,8 +313,8 @@ public class ShotMessageQuertActivity extends BaseActivity {
         activityShotmessagequertNowwaterTv.setText(String.format("%s吨", rentRecordsBean.getWater()));
         activityShotmessagequertUserpowerTv.setText(String.format("%s度", rentRecordsBean.getElectric() - rentRecordsBean.getPrev_electric()));
         activityShotmessagequertUserwaterTv.setText(String.format("%s吨", rentRecordsBean.getWater() - rentRecordsBean.getPrev_water()));
-        activityShotmessagequertWaterpriceTv.setText(String.format("￥ %s", (rentRecordsBean.getWater() - rentRecordsBean.getPrev_water()) * roomEntity.getRoom().getWater_rate()));
-        activityShotmessagequertPowerpriceTv.setText(String.format("￥ %s", (rentRecordsBean.getElectric() - rentRecordsBean.getPrev_electric()) * roomEntity.getRoom().getElectric_rate()));
+        activityShotmessagequertWaterpriceTv.setText(String.format("￥ %.2f元", (rentRecordsBean.getWater() - rentRecordsBean.getPrev_water()) * roomEntity.getRoom().getWater_rate()));
+        activityShotmessagequertPowerpriceTv.setText(String.format("￥ %.2f元", (rentRecordsBean.getElectric() - rentRecordsBean.getPrev_electric()) * roomEntity.getRoom().getElectric_rate()));
         activityShotmessagequertOtherinTv.setText(String.format("￥ %s", rentRecordsBean.getReceivable()));
         activityShotmessagequertOtheroutTv.setText(String.format("￥ %s", rentRecordsBean.getPayable()));
         totleGetPrice();
@@ -351,8 +351,8 @@ public class ShotMessageQuertActivity extends BaseActivity {
                         "其他应收%s元，其他应付%s元。" +
                         "收租人：%s，收租日期：%s",
                 activityShotmessagequertRoomTv.getText().toString(),
-                activityShotmessagequertStartdayTv.getText().toString().substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
-                activityShotmessagequertEnddayTv.getText().toString().substring(0, 10).replaceFirst("-", "年").replaceFirst("-", "月") + "日",
+                MyTextUtil.changeDate(activityShotmessagequertStartdayTv.getText().toString()),
+                MyTextUtil.changeDate(activityShotmessagequertEnddayTv.getText().toString()),
                 activityShotmessagequertAllneedinTv.getText().toString(),
                 activityShotmessagequertUnityTv.getText().toString(),
                 activityShotmessagequertWaterpriceTv.getText().toString(),
@@ -390,11 +390,7 @@ public class ShotMessageQuertActivity extends BaseActivity {
                     activityShotmessagequertDepositTv.setText(String.format("￥ %s", roomEntity.getRoom().getDeposit()));
                     activityShotmessagequertWaterTv.setText(String.format("￥ %s/吨", roomEntity.getRoom().getWater_rate()));
                     activityShotmessagequertPowerTv.setText(String.format("￥ %s/度", roomEntity.getRoom().getElectric_rate()));
-
-
                     activityStartrentGetmanTv.setText(loginEntity.getAdmin().getRealname());
-
-
                     activityShotmessagequertNeedinTv.setText(String.format("￥ %s", roomEntity.getRoom().getRental()));
                     if (roomEntity.getRoom().getRent_records().size() > 0) {
                         String sms = roomEntity.getRoom().getRent_records().get(0).getSms_content();

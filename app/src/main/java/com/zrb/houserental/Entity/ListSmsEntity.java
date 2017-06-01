@@ -42,8 +42,8 @@ public class ListSmsEntity {
         private String name;
         private int building_id;
         private int rental;
-        private int water_rate;
-        private int electric_rate;
+        private double water_rate;
+        private double electric_rate;
         private int status;
         private int deposit;
         private String rend_date_end;
@@ -91,19 +91,19 @@ public class ListSmsEntity {
             this.rental = rental;
         }
 
-        public int getWater_rate() {
+        public double getWater_rate() {
             return water_rate;
         }
 
-        public void setWater_rate(int water_rate) {
+        public void setWater_rate(double water_rate) {
             this.water_rate = water_rate;
         }
 
-        public int getElectric_rate() {
+        public double getElectric_rate() {
             return electric_rate;
         }
 
-        public void setElectric_rate(int electric_rate) {
+        public void setElectric_rate(double electric_rate) {
             this.electric_rate = electric_rate;
         }
 

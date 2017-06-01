@@ -588,7 +588,7 @@ public class TenantContinueRentActivity extends BaseActivity {
                         "其他应收%s元，其他应付%s元。" +
                         "收租人：%s，收租日期：%s",
                 activityContinuerentRoomTv.getText().toString(),
-                activityContinuerentEnddayTv.getText().toString().replaceFirst("-", "年").replaceFirst("-", "月") + "日",
+                MyTextUtil.changeDate(activityContinuerentEnddayTv.getText().toString()),
                 MyTextUtil.getEndDate(
                         activityContinuerentEnddayTv.getText().toString(),
                         MyTextUtil.getNumberFromString(activityStartrentContractMonthsTv.
