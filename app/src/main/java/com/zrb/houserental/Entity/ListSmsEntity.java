@@ -38,32 +38,32 @@ public class ListSmsEntity {
          * rent_records : [{"id":1,"number":"20170414","user_id":1,"room_id":"1","phone":"15633639393","type":1,"days":0,"prev_water":0,"prev_electric":0,"water":25,"electric":36,"payable":0,"receivable":0,"rent_fee":0,"total_fee":600,"start_date":"2017-04-14 00:00:00","end_date":"2017-05-14 00:00:00","remark":"新租","addition":"[1]","created_at":"2017-04-14 20:29:19","updated_at":"2017-04-14 20:29:19"},{"id":2,"number":"20170415","user_id":1,"room_id":"1","phone":"15864964619","type":2,"days":0,"prev_water":25,"prev_electric":36,"water":258,"electric":368,"payable":36,"receivable":89,"rent_fee":84219,"total_fee":84272,"start_date":"2017-05-14 00:00:00","end_date":"2017-08-14 00:00:00","remark":"续租","addition":"[1]","created_at":"2017-04-15 10:08:51","updated_at":"2017-04-15 10:08:51"}]
          */
 
-        private int id;
+        private double id;
         private String name;
-        private int building_id;
-        private int rental;
+        private double building_id;
+        private double rental;
         private double water_rate;
         private double electric_rate;
-        private int status;
-        private int deposit;
+        private double status;
+        private double deposit;
         private String rend_date_end;
         private String created_at;
         private String updated_at;
         private List<RentRecordsBean> rent_records;
 
-        public int getDeposit() {
+        public double getDeposit() {
             return deposit;
         }
 
-        public void setDeposit(int deposit) {
+        public void setDeposit(double deposit) {
             this.deposit = deposit;
         }
 
-        public int getId() {
+        public double getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(double id) {
             this.id = id;
         }
 
@@ -75,19 +75,19 @@ public class ListSmsEntity {
             this.name = name;
         }
 
-        public int getBuilding_id() {
+        public double getBuilding_id() {
             return building_id;
         }
 
-        public void setBuilding_id(int building_id) {
+        public void setBuilding_id(double building_id) {
             this.building_id = building_id;
         }
 
-        public int getRental() {
+        public double getRental() {
             return rental;
         }
 
-        public void setRental(int rental) {
+        public void setRental(double rental) {
             this.rental = rental;
         }
 
@@ -107,11 +107,11 @@ public class ListSmsEntity {
             this.electric_rate = electric_rate;
         }
 
-        public int getStatus() {
+        public double getStatus() {
             return status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(double status) {
             this.status = status;
         }
 
@@ -174,19 +174,19 @@ public class ListSmsEntity {
 
             private int id;
             private String number;
-            private int user_id;
+            private double user_id;
             private String room_id;
             private String phone;
-            private int type;
-            private int days;
-            private int prev_water;
-            private int prev_electric;
-            private int water;
-            private int electric;
-            private int payable;
-            private int receivable;
-            private int rent_fee;
-            private int total_fee;
+            private double type;
+            private double days;
+            private double prev_water;
+            private double prev_electric;
+            private double water;
+            private double electric;
+            private double payable;
+            private double receivable;
+            private double rent_fee;
+            private double total_fee;
             private String start_date;
             private String end_date;
             private String remark;
@@ -219,11 +219,11 @@ public class ListSmsEntity {
                 this.number = number;
             }
 
-            public int getUser_id() {
+            public double getUser_id() {
                 return user_id;
             }
 
-            public void setUser_id(int user_id) {
+            public void setUser_id(double user_id) {
                 this.user_id = user_id;
             }
 
@@ -243,83 +243,83 @@ public class ListSmsEntity {
                 this.phone = phone;
             }
 
-            public int getType() {
+            public double getType() {
                 return type;
             }
 
-            public void setType(int type) {
+            public void setType(double type) {
                 this.type = type;
             }
 
-            public int getDays() {
+            public double getDays() {
                 return days;
             }
 
-            public void setDays(int days) {
+            public void setDays(double days) {
                 this.days = days;
             }
 
-            public int getPrev_water() {
+            public double getPrev_water() {
                 return prev_water;
             }
 
-            public void setPrev_water(int prev_water) {
+            public void setPrev_water(double prev_water) {
                 this.prev_water = prev_water;
             }
 
-            public int getPrev_electric() {
+            public double getPrev_electric() {
                 return prev_electric;
             }
 
-            public void setPrev_electric(int prev_electric) {
+            public void setPrev_electric(double prev_electric) {
                 this.prev_electric = prev_electric;
             }
 
-            public int getWater() {
+            public double getWater() {
                 return water;
             }
 
-            public void setWater(int water) {
+            public void setWater(double water) {
                 this.water = water;
             }
 
-            public int getElectric() {
+            public double getElectric() {
                 return electric;
             }
 
-            public void setElectric(int electric) {
+            public void setElectric(double electric) {
                 this.electric = electric;
             }
 
-            public int getPayable() {
+            public double getPayable() {
                 return payable;
             }
 
-            public void setPayable(int payable) {
+            public void setPayable(double payable) {
                 this.payable = payable;
             }
 
-            public int getReceivable() {
+            public double getReceivable() {
                 return receivable;
             }
 
-            public void setReceivable(int receivable) {
+            public void setReceivable(double receivable) {
                 this.receivable = receivable;
             }
 
-            public int getRent_fee() {
+            public double getRent_fee() {
                 return rent_fee;
             }
 
-            public void setRent_fee(int rent_fee) {
+            public void setRent_fee(double rent_fee) {
                 this.rent_fee = rent_fee;
             }
 
-            public int getTotal_fee() {
+            public double getTotal_fee() {
                 return total_fee;
             }
 
-            public void setTotal_fee(int total_fee) {
+            public void setTotal_fee(double total_fee) {
                 this.total_fee = total_fee;
             }
 
